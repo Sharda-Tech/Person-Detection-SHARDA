@@ -40,7 +40,11 @@ def request_status():
 
 def write_log(detection):
     with open('log.txt', 'a') as f:
+        #write the date and time
+        f.write(time.strftime("%d/%m/%Y %H:%M:%S"))
+        f.write('\n')
         f.write("Number of Detection: " +  str(detection))
+        f.write('\n')
         f.write('Cpu Usage is' +  str(pi.get_cpu_usage()))
         f.write('\n')
         f.write('Memory Usage is ' + str( pi.get_ram_info()))
