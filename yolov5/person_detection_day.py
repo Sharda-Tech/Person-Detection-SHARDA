@@ -40,12 +40,12 @@ def request_status():
 
 def write_log(detection):
     with open('log.txt', 'a') as f:
-        f.write("Number of Detection: ",detection + '\n')
-        f.write('Cpu Usage is ', pi.get_cpu_usage())
+        f.write("Number of Detection: " +  str(detection))
+        f.write('Cpu Usage is' +  str(pi.get_cpu_usage()))
         f.write('\n')
-        f.write('Memory Usage is ', pi.get_memory_usage())
+        f.write('Memory Usage is ' + str( pi.get_ram_info()))
         f.write('\n')
-        f.write('CPU temperature is ', pi.get_cpu_temp())
+        f.write('CPU temperature is ' +  str(pi.get_cpu_temp()))
         f.write('\n')
 
 def sent_video():
