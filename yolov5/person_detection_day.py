@@ -95,7 +95,7 @@ def predict():
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     #print(gstreamer_pipeline(flip_method=0))
     #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
-    cap = cv2.VideoCapture('./person.mp4')
+    cap = cv2.VideoCapture(0)
 
     if(prev_time == 0):
 
@@ -148,31 +148,9 @@ def predict():
                         #color = Object_colors[Object_classes.index(label)]
                         frame = cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (255,0,0), 2) 
                         frame = cv2.putText(frame, f'{label} ({str(score)})', (xmin,ymin), cv2.FONT_HERSHEY_SIMPLEX , 0.75, (0,255,255), 1, cv2.LINE_AA)
-                        print(frames_counter)
-                        print("Number of person detected:", number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
-                        if(number_of_person_detected > previous_number_of_person_detected):
-                            print("New Person Detected")
-                            video_sent_status = False
-                            frames_counter = 0
-
-
-
-                        if(video_sent_status == False):
-                            if(frames_counter < 600):
-                                frames_counter = frames_counter + 1
-                                frames.append(frame)
-                            elif(frames_counter >= 600):
-                                #write a list of frames in a video
-                                out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (frame.shape[1],frame.shape[0]))
-                                for i in range(len(frames)):
-                                    out.write(frames[i])
-                                out.release()
-                                video_sent_status = sent_video()
-                                if video_sent_status == True:
-                                    print("Video sent")
-                                frames = []
-
-                        previous_number_of_person_detected = number_of_person_detected
+                        
+                        
+                    
 
                     elif(number_of_frames_not_detected < not_detected_frames_thresh):
                         number_of_frames_not_detected = number_of_frames_not_detected + 1
