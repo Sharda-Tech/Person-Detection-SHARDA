@@ -4,6 +4,8 @@ from elements.yolo import OBJ_DETECTION
 from email_sender import send_email
 import requests
 import time
+from pyembedded.raspberry_pi_tools.raspberrypi import PI
+pi = PI()
 
 
 
@@ -36,6 +38,15 @@ def request_status():
 
   return 'true'
 
+def write_log(detection):
+    with open('log.txt', 'a') as f:
+        f.write("Number of Detection: ",detection + '\n')
+        f.write('Cpu Usage is ', pi.get_cpu_usage())
+        f.write('\n')
+        f.write('Memory Usage is ', pi.get_memory_usage())
+        f.write('\n')
+        f.write('CPU temperature is ', pi.get_cpu_temp())
+        f.write('\n')
 
 def sent_video():
     url = "http://as99.zvastica.solutions/appapi/submitviolence"
@@ -58,7 +69,7 @@ def predict():
 
     prev_time = 0
     new_time = time.time()
-    
+    record_time = time.time()
 
     video_sent_status = False
     number_of_person_detected = 0
@@ -171,6 +182,10 @@ def predict():
                         frames = []
                         number_of_person_detected = 0
                         previous_number_of_person_detected = 0
+
+            if(time.time() - record_time >= 1):
+                record_time = time.time()
+                write_log(number_of_person_detected)
 
             cv2.imshow("CSI Camera", frame)
             keyCode = cv2.waitKey(30)
