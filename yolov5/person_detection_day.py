@@ -7,13 +7,47 @@ import time
 from pyembedded.raspberry_pi_tools.raspberrypi import PI
 pi = PI()
 
+def register():
+    myserial = "10000000d524b261"
+    url = "http://as99.zvastica.solutions/appapi/adddevicebyhardware"
+
+    #payload="{\n   \n \"hardwar_id\" :\"devicde_serial_no\"\n      \n        \n}"
+    payload = "{ \n \n \"hardwar_id\" : \"" + myserial + "\" \n \n \n}"
+    print(payload)
+    headers = {
+    'Content-Type': 'application/json',
+    'Cookie': 'ci_session=jsunnmfv9mlfgs7cbcu0nlt8rg2op8up'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    #print(response.text)
+
+    #split string using ','
+    str = response.text.split(',')
+    for i in str:
+        #print(i)
+        k = i.split(':')
+        if(k[0] == '{"success"'):
+            #print("Device is already registered")
+            return "Device is already registered"
+
+        if(k[0] == '{"device_id"'):
+            #print("Device is not registered")
+            #print(k[1])
+            #save the device id in a text file
+            device_id = k[1]
+            with open('device_id.txt', 'w') as f:
+                f.write(device_id)
+                f.close()
+            return "Device is not registered"
 
 
-
-def request_status():
+def request_status(device_id):
   url = "http://as99.zvastica.solutions/appapi/checkdevicestatus"
 
-  payload = "{\n    \"device_id\":\"2\"\n }"
+  #payload = "{\n    \"device_id\":\"2\"\n }"
+  payload = "{ \n \n \"device_id\" : \"" + device_id + "\" \n \n \n}"
   headers = {
     'Content-Type': 'application/json'
   }
@@ -30,13 +64,13 @@ def request_status():
 
   str = response.text.split(',')
 
-  print(str[1])
+  #print(str[1])
 
   status = str[1].split(':')
 
-  print(status[1])
+  #print(status[1])
 
-  return 'true'
+  return status
 
 def write_log(detection):
     with open('log.txt', 'a') as f:
@@ -100,10 +134,24 @@ def predict():
     #print(gstreamer_pipeline(flip_method=0))
     #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
     cap = cv2.VideoCapture(0)
+    registration_status = register()
+    if(registration_status == "Device is already registered"):
+        print("Device is already registered")
+        #read the device id from the text file
+        with open('device_id.txt', 'r') as f:
+            device_id = f.read()
+            f.close()
+
+    elif(registration_status == "Device is not registered"):
+        print("Device is not registered")
+        #read the device id from the text file
+        with open('device_id.txt', 'r') as f:
+            device_id = f.read()
+            f.close()
 
     if(prev_time == 0):
 
-        status_of_device = request_status()
+        status_of_device = request_status(device_id)
         #status_of_device = 'false'
 
         prev_time = new_time
@@ -124,7 +172,7 @@ def predict():
 
             if((new_time - prev_time) >= 10):
 
-                status_of_device = request_status()
+                status_of_device = request_status(device_id)
                 print(status_of_device)
                 #status_of_device = 'true'
 
