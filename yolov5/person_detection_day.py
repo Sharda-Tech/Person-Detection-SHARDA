@@ -7,6 +7,23 @@ import time
 from pyembedded.raspberry_pi_tools.raspberrypi import PI
 pi = PI()
 
+
+
+def getserial():
+  # Extract serial from cpuinfo file
+  cpuserial = "0000000000000000"
+  try:
+    f = open('/proc/cpuinfo','r')
+    for line in f:
+      if line[0:6]=='Serial':
+        cpuserial = line[10:26]
+    f.close()
+  except:
+    cpuserial = "ERROR000000000"
+ 
+  return cpuserial
+
+
 def register():
     myserial = "10000000d524b261"
     url = "http://as99.zvastica.solutions/appapi/adddevicebyhardware"
