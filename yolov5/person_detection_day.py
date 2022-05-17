@@ -24,8 +24,8 @@ def getserial():
   return cpuserial
 
 
-def register():
-    myserial = "10000000d524b261"
+def register(serial):
+    myserial =  serial
     url = "http://as99.zvastica.solutions/appapi/adddevicebyhardware"
 
     #payload="{\n   \n \"hardwar_id\" :\"devicde_serial_no\"\n      \n        \n}"
@@ -145,13 +145,14 @@ def predict():
                     'hair drier', 'toothbrush' ]
 
     #Object_colors = list(np.random.rand(80,3)*255)
-    Object_detector = OBJ_DETECTION('./yolov5n-fp16.tflite', Object_classes)
+    Object_detector = OBJ_DETECTION('/home/pi/Person-Detection/yolov5/yolov5n-int8.tflite', Object_classes)
     # Return true if line segments AB and CD intersect
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     #print(gstreamer_pipeline(flip_method=0))
     #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
     cap = cv2.VideoCapture(0)
-    registration_status = register()
+    serial =  getserial()
+    registration_status = register(serial)
     if(registration_status == "Device is already registered"):
         print("Device is already registered")
         #read the device id from the text file
@@ -234,12 +235,12 @@ def predict():
                 record_time = time.time()
                 write_log(number_of_person_detected)
 
-            cv2.imshow("CSI Camera", frame)
-            keyCode = cv2.waitKey(30)
-            if keyCode == ord('q'):
-                break      
-        cap.release()
-        cv2.destroyAllWindows()
+            #cv2.imshow("CSI Camera", frame)
+            #keyCode = cv2.waitKey(30)
+            #if keyCode == ord('q'):
+            #    break      
+        #cap.release()
+        #cv2.destroyAllWindows()
 
     else:
         print("Unable to open camera")
