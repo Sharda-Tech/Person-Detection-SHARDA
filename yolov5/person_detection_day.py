@@ -206,7 +206,31 @@ def predict():
                     frame = cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (255,0,0), 2) 
                     frame = cv2.putText(frame, f'{label} ({str(score)})', (xmin,ymin), cv2.FONT_HERSHEY_SIMPLEX , 0.75, (0,255,255), 1, cv2.LINE_AA)
                     
-                    
+                    print(frames_counter)
+                    print("Number of person detected:", number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
+                    if(number_of_person_detected > previous_number_of_person_detected):
+                        print("New Person Detected")
+                        video_sent_status = False
+                        frames_counter = 0
+
+
+
+                    if(video_sent_status == False):
+                        if(frames_counter < 600):
+                            frames_counter = frames_counter + 1
+                            frames.append(frame)
+                        elif(frames_counter >= 600):
+                            #write a list of frames in a video
+                            out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (frame.shape[1],frame.shape[0]))
+                            for i in range(len(frames)):
+                                out.write(frames[i])
+                            out.release()
+                            video_sent_status = sent_video(device_id)
+                            if video_sent_status == True:
+                                print("Video sent")
+                            frames = []
+
+                    previous_number_of_person_detected = number_of_person_detected
                 
 
                 elif(number_of_frames_not_detected < not_detected_frames_thresh):
