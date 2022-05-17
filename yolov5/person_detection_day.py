@@ -165,7 +165,7 @@ def predict():
         new_time = time.time()
 
 
-    if cap.isOpened():
+    while cap.isOpened():
 
 
         
