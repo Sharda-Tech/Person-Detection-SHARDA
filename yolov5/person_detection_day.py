@@ -24,8 +24,8 @@ def getserial():
   return cpuserial
 
 
-def register():
-    myserial = "10000000d524b261"
+def register(serial):
+    myserial =  serial
     url = "http://as99.zvastica.solutions/appapi/adddevicebyhardware"
 
     #payload="{\n   \n \"hardwar_id\" :\"devicde_serial_no\"\n      \n        \n}"
@@ -141,7 +141,7 @@ def predict():
                     'hair drier', 'toothbrush' ]
 
     #Object_colors = list(np.random.rand(80,3)*255)
-    Object_detector = OBJ_DETECTION('./yolov5n-fp16.tflite', Object_classes)
+    Object_detector = OBJ_DETECTION('/home/pi/Person-Detection/yolov5/yolov5n-int8.tflite', Object_classes)
     # Return true if line segments AB and CD intersect
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     #print(gstreamer_pipeline(flip_method=0))
@@ -167,67 +167,67 @@ def predict():
 
 
         
-        window_handle = cv2.namedWindow("CSI Camera", cv2.WINDOW_AUTOSIZE)
+        #window_handle = cv2.namedWindow("CSI Camera", cv2.WINDOW_AUTOSIZE)
         # Window
-        while cv2.getWindowProperty("CSI Camera", 0) >= 0 :
-            ret, frame = cap.read()
+        #while cv2.getWindowProperty("CSI Camera", 0) >= 0 :
+        ret, frame = cap.read()
+        new_time = time.time()
+        #print("Previous Time", prev_time)
+        #print("New Time", new_time)
+
+        if((new_time - prev_time) >= 10):
+
+            status_of_device = request_status(device_id)
+            print(status_of_device)
+            #status_of_device = 'true'
+
+            prev_time = new_time
             new_time = time.time()
-            #print("Previous Time", prev_time)
-            #print("New Time", new_time)
 
-            if((new_time - prev_time) >= 10):
-
-                status_of_device = request_status(device_id)
-                print(status_of_device)
-                #status_of_device = 'true'
-
-                prev_time = new_time
-                new_time = time.time()
-
-            if ret and status_of_device == 'true':
-                # detection process
-                objs = Object_detector.detect(frame)
-                dets = []
-                # plotting
-                number_of_person_detected = 0
-                for obj in objs:
-                    # print(obj)
-                    label = obj['label']
-                    if((label == 'person')):
-                        number_of_frames_not_detected = 0
-                        number_of_person_detected += 1
-                        #print(label)
-                        score = obj['score']
-                        [(xmin,ymin),(xmax,ymax)] = obj['bbox']
-                        #print(xmin,ymin,xmax,ymax)
-                        (x, y) = (xmin, ymin)
-                        (w, h) = ((xmax-xmin),(ymax-ymin))
-                        #color = Object_colors[Object_classes.index(label)]
-                        frame = cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (255,0,0), 2) 
-                        frame = cv2.putText(frame, f'{label} ({str(score)})', (xmin,ymin), cv2.FONT_HERSHEY_SIMPLEX , 0.75, (0,255,255), 1, cv2.LINE_AA)
-                        
-                        
+        if ret and status_of_device == 'true':
+            # detection process
+            objs = Object_detector.detect(frame)
+            dets = []
+            # plotting
+            number_of_person_detected = 0
+            for obj in objs:
+                # print(obj)
+                label = obj['label']
+                if((label == 'person')):
+                    number_of_frames_not_detected = 0
+                    number_of_person_detected += 1
+                    #print(label)
+                    score = obj['score']
+                    [(xmin,ymin),(xmax,ymax)] = obj['bbox']
+                    #print(xmin,ymin,xmax,ymax)
+                    (x, y) = (xmin, ymin)
+                    (w, h) = ((xmax-xmin),(ymax-ymin))
+                    #color = Object_colors[Object_classes.index(label)]
+                    frame = cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (255,0,0), 2) 
+                    frame = cv2.putText(frame, f'{label} ({str(score)})', (xmin,ymin), cv2.FONT_HERSHEY_SIMPLEX , 0.75, (0,255,255), 1, cv2.LINE_AA)
                     
+                    
+                
 
-                    elif(number_of_frames_not_detected < not_detected_frames_thresh):
-                        number_of_frames_not_detected = number_of_frames_not_detected + 1
-                    elif(number_of_frames_not_detected >= not_detected_frames_thresh):
-                        video_sent_status = False
-                        frames_counter = 0
-                        frames = []
-                        number_of_person_detected = 0
-                        previous_number_of_person_detected = 0
+                elif(number_of_frames_not_detected < not_detected_frames_thresh):
+                    number_of_frames_not_detected = number_of_frames_not_detected + 1
+                elif(number_of_frames_not_detected >= not_detected_frames_thresh):
+                    video_sent_status = False
+                    frames_counter = 0
+                    frames = []
+                    number_of_person_detected = 0
+                    previous_number_of_person_detected = 0
 
-            if(time.time() - record_time >= 1):
-                record_time = time.time()
-                write_log(number_of_person_detected)
+        if(time.time() - record_time >= 1):
+            record_time = time.time()
+            write_log(number_of_person_detected)
 
-            cv2.imshow("CSI Camera", frame)
-            keyCode = cv2.waitKey(30)
-            if keyCode == ord('q'):
-                break      
-        cap.release()
-        cv2.destroyAllWindows()
+            #cv2.imshow("CSI Camera", frame)
+            #keyCode = cv2.waitKey(30)
+            #if keyCode == ord('q'):
+            #    break      
+        #cap.release()
+        #cv2.destroyAllWindows()
 
     else:
         print("Unable to open camera")

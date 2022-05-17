@@ -10,7 +10,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 class OBJ_DETECTION():
     def __init__(self, model_path, classes):
         dnn=False
-        data = 'data/coco128.yaml'
+        data = '/home/pi/Person-Detection/yolov5/data/coco128.yaml'
         half=False
         self.classes = classes
         #self.yolo_model = attempt_load(weights=model_path, map_location=device)
