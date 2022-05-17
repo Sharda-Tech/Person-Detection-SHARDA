@@ -202,16 +202,6 @@ def predict():
                 if((label == 'person')):
                     number_of_frames_not_detected = 0
                     number_of_person_detected +=1
-
-                    if(number_of_person_detected > meta_of_number_of_person_detected['Number']):
-                        meta_of_number_of_person_detected['Number'] = number_of_person_detected
-                        meta_of_number_of_person_detected[frame_number] = 1
-
-
-                    if(number_of_person_detected == meta_of_number_of_person_detected['Number']):
-                        meta_of_number_of_person_detected[frame_number] += 1
-                        
-
                     #print(label)
                     score = obj['score']
                     [(xmin,ymin),(xmax,ymax)] = obj['bbox']
@@ -221,46 +211,66 @@ def predict():
                     #color = Object_colors[Object_classes.index(label)]
                     frame = cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (255,0,0), 2) 
                     frame = cv2.putText(frame, f'{label} ({str(score)})', (xmin,ymin), cv2.FONT_HERSHEY_SIMPLEX , 0.75, (0,255,255), 1, cv2.LINE_AA)
-                    
-                    print(frames_counter)
-                    print("Number of person detected:", number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
-                    if((meta_of_number_of_person_detected['Number'] > previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected[frame_number] > 10):
-                        print("New Person Detected")
-                        previous_number_of_person_detected['Number'] = number_of_person_detected['Number']
-                        previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
-                        if(video_sent_status == True):
-                            video_sent_status = False
-                            frames_counter = 0
 
 
-
-                    if(video_sent_status == False):
-                        if(frames_counter < 600):
-                            frames_counter = frames_counter + 1
-                            frames.append(frame)
-                        elif(frames_counter >= 600):
-                            #write a list of frames in a video
-                            out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (frame.shape[1],frame.shape[0]))
-                            for i in range(len(frames)):
-                                out.write(frames[i])
-                            out.release()
-                            video_sent_status = sent_video(device_id)
-                            if video_sent_status == True:
-                                print("Video sent")
-                            frames = []
-
-
-                    #previous_number_of_person_detected = number_of_person_detected
                 
 
-                elif(number_of_frames_not_detected < not_detected_frames_thresh):
+
+
+            
+            if(number_of_person_detected > meta_of_number_of_person_detected['Number'] or number_of_person_detected < meta_of_number_of_person_detected['Number']):
+                meta_of_number_of_person_detected['Number'] = number_of_person_detected
+                meta_of_number_of_person_detected['frame_number'] = 1
+
+
+            if(number_of_person_detected == meta_of_number_of_person_detected['Number']):
+                meta_of_number_of_person_detected['frame_number'] += 1
+            
+            print("Frames Counter", frames_counter)
+            print("Number of person detected:", meta_of_number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
+            if((meta_of_number_of_person_detected['Number'] > previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
+                print("New Person Detected")
+                previous_number_of_person_detected['Number'] = meta_of_number_of_person_detected['Number']
+                #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
+                if(video_sent_status == True):
+                    video_sent_status = False
+                    frames_counter = 0
+
+
+            elif((meta_of_number_of_person_detected['Number'] < previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
+                print("Person Detected Reduced")
+                previous_number_of_person_detected['Number'] = meta_of_number_of_person_detected['Number']
+                #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
+                if(video_sent_status == True):
+                    video_sent_status = False
+                    frames_counter = 0
+
+
+            if(video_sent_status == False and previous_number_of_person_detected['Number'] > 0):
+                if(frames_counter < 600):
+                    frames_counter = frames_counter + 1
+                    frames.append(frame)
+                elif(frames_counter >= 600):
+                    #write a list of frames in a video
+                    out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (frame.shape[1],frame.shape[0]))
+                    for i in range(len(frames)):
+                        out.write(frames[i])
+                    out.release()
+                    video_sent_status = sent_video(device_id)
+                    if video_sent_status == True:
+                        print("Video sent")
+                    frames = []
+
+            print("Number of Frames not detected" , number_of_frames_not_detected)
+            if(number_of_frames_not_detected < not_detected_frames_thresh and number_of_person_detected == 0):
                     number_of_frames_not_detected = number_of_frames_not_detected + 1
-                elif(number_of_frames_not_detected >= not_detected_frames_thresh):
+            elif(number_of_frames_not_detected >= not_detected_frames_thresh and number_of_person_detected == 0):
                     video_sent_status = False
                     frames_counter = 0
                     frames = []
                     number_of_person_detected = 0
-                    previous_number_of_person_detected = 0
+                    previous_number_of_person_detected['Number'] = 0
+
 
         if(time.time() - record_time >= 1):
             record_time = time.time()
