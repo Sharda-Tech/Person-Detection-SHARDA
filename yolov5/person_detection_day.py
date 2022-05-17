@@ -60,7 +60,7 @@ def request_status(device_id):
   url = "http://as99.zvastica.solutions/appapi/checkdevicestatus"
 
   #payload = "{\n    \"device_id\":\"2\"\n }"
-  payload = "{ \n \n \"device_id\" : \"" + device_id + "\" \n \n \n}"
+  payload = "{ \n \n \"device_id\" : " + device_id + " \n \n \n}"
   headers = {
     'Content-Type': 'application/json'
   }
@@ -99,10 +99,11 @@ def write_log(detection):
         f.write('CPU temperature is ' +  str(pi.get_cpu_temp()))
         f.write('\n')
 
-def sent_video():
+def sent_video(device_id):
     url = "http://as99.zvastica.solutions/appapi/submitviolence"
 
-    payload = {'device_id': '1234'}
+    payload = {'device_id': device_id}
+
     files = [
     ('file', open('./output.avi','rb'))
     ]
