@@ -127,6 +127,7 @@ def predict():
     number_of_person_detected = 0
     previous_number_of_person_detected = {}
     previous_number_of_person_detected = {'Number' : 0 , 'Time' : time.time()}
+    meta_of_number_of_person_detected = {'Number' : 0 , frame_number : 0}
     frames_counter = 0
     frames = []
     not_detected_frames_thresh = 10
@@ -192,15 +193,25 @@ def predict():
             objs = Object_detector.detect(frame)
             dets = []
             # plotting
-            number_of_person_detected = {}
+            
+            number_of_person_detected = 0
 
             for obj in objs:
                 # print(obj)
                 label = obj['label']
                 if((label == 'person')):
                     number_of_frames_not_detected = 0
-                    number_of_person_detected['Number'] = number_of_person_detected.get('Number', 0) + 1
-                    number_of_person_detected['Time'] = time.time()
+                    number_of_person_detected +=1
+
+                    if(number_of_person_detected > meta_of_number_of_person_detected['Number']):
+                        meta_of_number_of_person_detected['Number'] = number_of_person_detected
+                        meta_of_number_of_person_detected[frame_number] = 1
+
+
+                    if(number_of_person_detected == meta_of_number_of_person_detected['Number']):
+                        meta_of_number_of_person_detected[frame_number] += 1
+                        
+
                     #print(label)
                     score = obj['score']
                     [(xmin,ymin),(xmax,ymax)] = obj['bbox']
@@ -213,7 +224,7 @@ def predict():
                     
                     print(frames_counter)
                     print("Number of person detected:", number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
-                    if((number_of_person_detected['Number'] > previous_number_of_person_detected['Number']) and (number_of_person_detected['Time'] - previous_number_of_person_detected['Time']) <= 5):
+                    if((meta_of_number_of_person_detected['Number'] > previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected[frame_number] > 10):
                         print("New Person Detected")
                         previous_number_of_person_detected['Number'] = number_of_person_detected['Number']
                         previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
