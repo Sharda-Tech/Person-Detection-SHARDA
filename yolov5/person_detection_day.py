@@ -26,6 +26,7 @@ def getserial():
 
 def register(serial):
     myserial =  serial
+    #myserial = "0000000000000001"
     url = "http://as99.zvastica.solutions/appapi/adddevicebyhardware"
 
     #payload="{\n   \n \"hardwar_id\" :\"devicde_serial_no\"\n      \n        \n}"
@@ -83,7 +84,7 @@ def request_status(device_id):
 
   #print(status[1])
 
-  return status
+  return status[1]
 
 def write_log(detection):
     with open('log.txt', 'a') as f:
@@ -101,9 +102,11 @@ def write_log(detection):
 
 def sent_video(device_id):
     url = "http://as99.zvastica.solutions/appapi/submitviolence"
-
+    #payload = {'device_id': '1234'
+    device_id = device_id.replace("\"", "")
     payload = {'device_id': device_id}
-
+    #payload = "{\'device_id\': " + device_id + "00" + "}"
+    print(payload)
     files = [
     ('file', open('./output.avi','rb'))
     ]
@@ -247,15 +250,16 @@ def predict():
 
 
             if(video_sent_status == False and previous_number_of_person_detected['Number'] > 0):
-                if(frames_counter < 600):
+                if(frames_counter < 100):
                     frames_counter = frames_counter + 1
                     frames.append(frame)
-                elif(frames_counter >= 600):
+                elif(frames_counter >= 100):
                     #write a list of frames in a video
                     out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (frame.shape[1],frame.shape[0]))
                     for i in range(len(frames)):
                         out.write(frames[i])
                     out.release()
+                    print(device_id)
                     video_sent_status = sent_video(device_id)
                     if video_sent_status == True:
                         print("Video sent")
@@ -276,15 +280,13 @@ def predict():
             record_time = time.time()
             write_log(number_of_person_detected)
 
-            #cv2.imshow("CSI Camera", frame)
-            #keyCode = cv2.waitKey(30)
-            #if keyCode == ord('q'):
-            #    break      
-        #cap.release()
-        #cv2.destroyAllWindows()
+        cv2.imshow("CSI Camera", frame)
+        keyCode = cv2.waitKey(30)
+        if keyCode == ord('q'):
+                break      
+    cap.release()
+    cv2.destroyAllWindows()
 
-    else:
-        print("Unable to open camera")
 
 
 if __name__ == "__main__":
