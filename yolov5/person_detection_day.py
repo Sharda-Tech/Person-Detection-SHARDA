@@ -125,7 +125,8 @@ def predict():
 
     video_sent_status = False
     number_of_person_detected = 0
-    previous_number_of_person_detected = 0
+    previous_number_of_person_detected = {}
+    previous_number_of_person_detected = {'Number' : 0 , 'Time' : time.time()}
     frames_counter = 0
     frames = []
     not_detected_frames_thresh = 10
@@ -191,13 +192,15 @@ def predict():
             objs = Object_detector.detect(frame)
             dets = []
             # plotting
-            number_of_person_detected = 0
+            number_of_person_detected = {}
+
             for obj in objs:
                 # print(obj)
                 label = obj['label']
                 if((label == 'person')):
                     number_of_frames_not_detected = 0
-                    number_of_person_detected += 1
+                    number_of_person_detected['Number'] = number_of_person_detected.get('Number', 0) + 1
+                    number_of_person_detected['Time'] = time.time()
                     #print(label)
                     score = obj['score']
                     [(xmin,ymin),(xmax,ymax)] = obj['bbox']
@@ -210,10 +213,13 @@ def predict():
                     
                     print(frames_counter)
                     print("Number of person detected:", number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
-                    if(number_of_person_detected > previous_number_of_person_detected):
+                    if((number_of_person_detected['Number'] > previous_number_of_person_detected['Number']) and (number_of_person_detected['Time'] - previous_number_of_person_detected['Time']) <= 5):
                         print("New Person Detected")
-                        video_sent_status = False
-                        frames_counter = 0
+                        previous_number_of_person_detected['Number'] = number_of_person_detected['Number']
+                        previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
+                        if(video_sent_status == True):
+                            video_sent_status = False
+                            frames_counter = 0
 
 
 
@@ -232,7 +238,8 @@ def predict():
                                 print("Video sent")
                             frames = []
 
-                    previous_number_of_person_detected = number_of_person_detected
+
+                    #previous_number_of_person_detected = number_of_person_detected
                 
 
                 elif(number_of_frames_not_detected < not_detected_frames_thresh):
