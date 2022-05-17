@@ -148,7 +148,7 @@ def predict():
     #print(gstreamer_pipeline(flip_method=0))
     #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
     cap = cv2.VideoCapture(0)
-    serial = get_serial()
+    serial = getserial()
     registration_status = register(serial)
     if(registration_status == "Device id written to file"):
         #read the device id from the text file
