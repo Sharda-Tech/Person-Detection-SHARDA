@@ -37,7 +37,7 @@ Object_detector = OBJ_DETECTION('./yolov5n-fp16.tflite', Object_classes)
 # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
 #print(gstreamer_pipeline(flip_method=0))
 #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
-cap = cv2.VideoCapture('./person.mp4')
+cap = cv2.VideoCapture(0)
 #serial = getserial()
 #registration_status = register(serial)
 #if(registration_status == "Device id written to file"):
@@ -90,10 +90,6 @@ while cap.isOpened():
             if((label == 'person')):
                 number_of_frames_not_detected = 0
                 number_of_person_detected +=1
-
-                
-                    
-
                 #print(label)
                 score = obj['score']
                 [(xmin,ymin),(xmax,ymax)] = obj['bbox']
@@ -105,16 +101,11 @@ while cap.isOpened():
                 frame = cv2.putText(frame, f'{label} ({str(score)})', (xmin,ymin), cv2.FONT_HERSHEY_SIMPLEX , 0.75, (0,255,255), 1, cv2.LINE_AA)
 
 
-            elif(number_of_frames_not_detected < not_detected_frames_thresh):
-                number_of_frames_not_detected = number_of_frames_not_detected + 1
-            elif(number_of_frames_not_detected >= not_detected_frames_thresh):
-                video_sent_status = False
-                frames_counter = 0
-                frames = []
-                number_of_person_detected = 0
-                previous_number_of_person_detected = 0
+            
 
 
+
+        
         if(number_of_person_detected > meta_of_number_of_person_detected['Number'] or number_of_person_detected < meta_of_number_of_person_detected['Number']):
             meta_of_number_of_person_detected['Number'] = number_of_person_detected
             meta_of_number_of_person_detected['frame_number'] = 1
@@ -127,15 +118,23 @@ while cap.isOpened():
         print("Number of person detected:", meta_of_number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
         if((meta_of_number_of_person_detected['Number'] > previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
             print("New Person Detected")
-            previous_number_of_person_detected['Number'] = number_of_person_detected['Number']
-            previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
+            previous_number_of_person_detected['Number'] = meta_of_number_of_person_detected['Number']
+            #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
             if(video_sent_status == True):
                 video_sent_status = False
                 frames_counter = 0
 
 
+        elif((meta_of_number_of_person_detected['Number'] < previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
+            print("Person Detected Reduced")
+            previous_number_of_person_detected['Number'] = meta_of_number_of_person_detected['Number']
+            #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
+            if(video_sent_status == True):
+                video_sent_status = False
+                frames_counter = 0
 
-        if(video_sent_status == False):
+
+        if(video_sent_status == False and previous_number_of_person_detected['Number'] > 0):
             if(frames_counter < 600):
                 frames_counter = frames_counter + 1
                 frames.append(frame)
@@ -145,10 +144,20 @@ while cap.isOpened():
                 for i in range(len(frames)):
                     out.write(frames[i])
                 out.release()
-                video_sent_status = sent_video(device_id)
+                video_sent_status = True
                 if video_sent_status == True:
                     print("Video sent")
                 frames = []
+
+        print("Number of Frames not detected" , number_of_frames_not_detected)
+        if(number_of_frames_not_detected < not_detected_frames_thresh and number_of_person_detected == 0):
+                number_of_frames_not_detected = number_of_frames_not_detected + 1
+        elif(number_of_frames_not_detected >= not_detected_frames_thresh and number_of_person_detected == 0):
+                video_sent_status = False
+                frames_counter = 0
+                frames = []
+                number_of_person_detected = 0
+                previous_number_of_person_detected['Number'] = 0
 
 
             #previous_number_of_person_detected = number_of_person_detected
