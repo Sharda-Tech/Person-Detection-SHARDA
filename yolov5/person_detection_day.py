@@ -38,26 +38,22 @@ def register():
 
     response = requests.request("POST", url, headers=headers, data=payload)
 
-    #print(response.text)
+    print(response.text)
 
     #split string using ','
     str = response.text.split(',')
     for i in str:
         #print(i)
-        k = i.split(':')
-        if(k[0] == '{"success"'):
-            #print("Device is already registered")
-            return "Device is already registered"
-
+        k = i.split(':')   
         if(k[0] == '{"device_id"'):
             #print("Device is not registered")
-            #print(k[1])
+            print("Device id is", k[1])
             #save the device id in a text file
             device_id = k[1]
             with open('device_id.txt', 'w') as f:
                 f.write(device_id)
                 f.close()
-            return "Device is not registered"
+            return "Device id written to file"
 
 
 def request_status(device_id):
@@ -152,15 +148,7 @@ def predict():
     #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
     cap = cv2.VideoCapture(0)
     registration_status = register()
-    if(registration_status == "Device is already registered"):
-        print("Device is already registered")
-        #read the device id from the text file
-        with open('device_id.txt', 'r') as f:
-            device_id = f.read()
-            f.close()
-
-    elif(registration_status == "Device is not registered"):
-        print("Device is not registered")
+    if(registration_status == "Device id written to file"):
         #read the device id from the text file
         with open('device_id.txt', 'r') as f:
             device_id = f.read()
