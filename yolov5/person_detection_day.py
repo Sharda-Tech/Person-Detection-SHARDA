@@ -127,7 +127,7 @@ def predict():
     number_of_person_detected = 0
     previous_number_of_person_detected = {}
     previous_number_of_person_detected = {'Number' : 0 , 'Time' : time.time()}
-    meta_of_number_of_person_detected = {'Number' : 0 , frame_number : 0}
+    meta_of_number_of_person_detected = {'Number' : 0 , 'frame_number' : 0}
     frames_counter = 0
     frames = []
     not_detected_frames_thresh = 10
