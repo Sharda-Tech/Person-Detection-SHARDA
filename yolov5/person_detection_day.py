@@ -25,8 +25,8 @@ def getserial():
 
 
 def register(serial):
-    myserial =  serial
-    #myserial = "0000000000000001"
+    #myserial =  serial
+    myserial = "0013"
     url = "http://as99.zvastica.solutions/appapi/adddevicebyhardware"
 
     #payload="{\n   \n \"hardwar_id\" :\"devicde_serial_no\"\n      \n        \n}"
@@ -255,7 +255,8 @@ def predict():
                     frames.append(frame)
                 elif(frames_counter >= 100):
                     #write a list of frames in a video
-                    out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (frame.shape[1],frame.shape[0]))
+                    #out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (frame.shape[1],frame.shape[0]))
+                    out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc(*'mp4v'), 60, (frame.shape[1],frame.shape[0]))
                     for i in range(len(frames)):
                         out.write(frames[i])
                     out.release()
