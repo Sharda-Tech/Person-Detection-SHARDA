@@ -37,7 +37,7 @@ Object_detector = OBJ_DETECTION('./yolov5n-fp16.tflite', Object_classes)
 # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
 #print(gstreamer_pipeline(flip_method=0))
 #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('./person.mp4')
 #serial = getserial()
 #registration_status = register(serial)
 #if(registration_status == "Device id written to file"):
@@ -104,7 +104,17 @@ while cap.isOpened():
             
 
 
-
+        frames_counter = frames_counter + 1
+        frames.append(frame)
+        if(frames_counter < 100):
+            frames_counter = frames_counter + 1
+            frames.append(frame)
+        elif(frames_counter >= 100):
+            #write a list of frames in a video
+            out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc(*'mp4v'), 60, (frame.shape[1],frame.shape[0]))
+            for i in range(len(frames)):
+                out.write(frames[i])
+            out.release()
         
         if(number_of_person_detected > meta_of_number_of_person_detected['Number'] or number_of_person_detected < meta_of_number_of_person_detected['Number']):
             meta_of_number_of_person_detected['Number'] = number_of_person_detected
@@ -122,7 +132,7 @@ while cap.isOpened():
             #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
             if(video_sent_status == True):
                 video_sent_status = False
-                frames_counter = 0
+                #frames_counter = 0
 
 
         elif((meta_of_number_of_person_detected['Number'] < previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
@@ -135,12 +145,12 @@ while cap.isOpened():
 
 
         if(video_sent_status == False and previous_number_of_person_detected['Number'] > 0):
-            if(frames_counter < 600):
+            if(frames_counter < 100):
                 frames_counter = frames_counter + 1
                 frames.append(frame)
-            elif(frames_counter >= 600):
+            elif(frames_counter >= 100):
                 #write a list of frames in a video
-                out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (frame.shape[1],frame.shape[0]))
+                out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc(*'h264'), 60, (frame.shape[1],frame.shape[0]))
                 for i in range(len(frames)):
                     out.write(frames[i])
                 out.release()

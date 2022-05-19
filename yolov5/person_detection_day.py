@@ -108,7 +108,7 @@ def sent_video(device_id):
     #payload = "{\'device_id\': " + device_id + "00" + "}"
     print(payload)
     files = [
-    ('file', open('./output.avi','rb'))
+    ('file', open('./output.mp4','rb'))
     ]
     headers = {
     'Cookie': 'ci_session=sn7n11lsss9vdlrej79sq6s1o0c5mm3r'
@@ -255,7 +255,7 @@ def predict():
                     frames.append(frame)
                 elif(frames_counter >= 100):
                     #write a list of frames in a video
-                    out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (frame.shape[1],frame.shape[0]))
+                    out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc(*'h264'), 60, (frame.shape[1],frame.shape[0]))
                     for i in range(len(frames)):
                         out.write(frames[i])
                     out.release()
