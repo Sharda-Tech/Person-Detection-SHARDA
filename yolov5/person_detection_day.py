@@ -153,6 +153,16 @@ def predict():
     with open('./is_cached.txt', 'r') as f:
         is_cached = f.read()
         f.close()
+
+
+    if is_cached == '':
+        is_cached = 'false'
+        #write is_cached to file
+        with open('./is_cached.txt', 'w') as f:
+            f.write(is_cached)
+            f.close()
+
+    
     Object_classes = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light',
                     'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow',
                     'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee',
@@ -205,6 +215,7 @@ def predict():
                 with open('./is_cached.txt', 'w') as f:
                     f.write(str(is_cached))
                     f.close()
+
 
         else:
             print("not connected")
