@@ -156,7 +156,7 @@ def predict():
 
 
     if is_cached == '':
-        is_cached = 'false'
+        is_cached = False
         #write is_cached to file
         with open('./is_cached.txt', 'w') as f:
             f.write(is_cached)
