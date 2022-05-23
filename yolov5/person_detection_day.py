@@ -7,7 +7,7 @@ import time
 from pyembedded.raspberry_pi_tools.raspberrypi import PI
 pi = PI()
 from check_internet_connectivity import is_connected
-
+import os
 
 
 def getserial():
