@@ -295,8 +295,8 @@ def predict():
                     if(cache == False):
                         #write a list of frames in a video
                         current_file_number = 0
-                        output_file_save_name = 'output_' + str(current_file_number) + '.mp4'
-                        out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'h264'), 60, (frame.shape[1],frame.shape[0]))
+                        output_file_save_name = './output/output_' + str(current_file_number) + '.mp4'
+                        out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 60, (frame.shape[1],frame.shape[0]))
                         for i in range(len(frames)):
                             out.write(frames[i])
                         out.release()
@@ -315,8 +315,8 @@ def predict():
                                 if(int(file_number) > current_file_number):
                                     current_file_number = int(file_number)
 
-                        output_file_save_name = "output_" + str(current_file_number + 1) + ".mp4"
-                        out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'h264'), 60, (frame.shape[1],frame.shape[0]))
+                        output_file_save_name = "./output/output_" + str(current_file_number + 1) + ".mp4"
+                        out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 60, (frame.shape[1],frame.shape[0]))
                         for i in range(len(frames)):
                             out.write(frames[i])
                         out.release()
