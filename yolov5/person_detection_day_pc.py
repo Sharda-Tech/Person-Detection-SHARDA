@@ -4,6 +4,7 @@ from elements.yolo_pc import OBJ_DETECTION
 from email_sender import send_email
 import requests
 import time
+from check_internet_connectivity import is_connected
 #from pyembedded.raspberry_pi_tools.raspberrypi import PI
 #pi = PI()
 
@@ -57,7 +58,14 @@ if(prev_time == 0):
 
 while cap.isOpened():
 
+    REMOTE_SERVER = "www.google.com"
+    if is_connected(REMOTE_SERVER):
+        print("connected")
+        cache = False
 
+    else:
+        print("not connected")
+        cache = True
     
     #window_handle = cv2.namedWindow("CSI Camera", cv2.WINDOW_AUTOSIZE)
     # Window
@@ -145,6 +153,18 @@ while cap.isOpened():
 
 
         if(video_sent_status == False and previous_number_of_person_detected['Number'] > 0):
+
+            if is_connected(REMOTE_SERVER):
+                print("connected")
+                cache = False
+
+            else:
+                print("not connected")
+                cache = True
+
+            
+
+
             if(frames_counter < 100):
                 frames_counter = frames_counter + 1
                 frames.append(frame)

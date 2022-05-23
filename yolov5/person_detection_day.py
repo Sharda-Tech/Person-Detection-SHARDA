@@ -6,6 +6,7 @@ import requests
 import time
 from pyembedded.raspberry_pi_tools.raspberrypi import PI
 pi = PI()
+from check_internet_connectivity import is_connected
 
 
 
@@ -101,22 +102,34 @@ def write_log(detection):
         f.write('\n')
 
 def sent_video(device_id):
-    url = "http://as99.zvastica.solutions/appapi/submitviolence"
-    #payload = {'device_id': '1234'
-    device_id = device_id.replace("\"", "")
-    payload = {'device_id': device_id}
-    #payload = "{\'device_id\': " + device_id + "00" + "}"
-    print(payload)
-    files = [
-    ('file', open('./output.mp4','rb'))
-    ]
-    headers = {
-    'Cookie': 'ci_session=sn7n11lsss9vdlrej79sq6s1o0c5mm3r'
-    }
 
-    response = requests.request("POST", url, headers=headers, data = payload, files = files)
+    for file in os.listdir('./output'):
 
-    print(response.text.encode('utf8'))
+        file_path = os.path.join('./output', file)
+
+        url = "http://as99.zvastica.solutions/appapi/submitviolence"
+        #payload = {'device_id': '1234'
+        device_id = device_id.replace("\"", "")
+        payload = {'device_id': device_id}
+        #payload = "{\'device_id\': " + device_id + "00" + "}"
+        print(payload)
+        files = [
+        ('file', open( file_path ,'rb'))
+        ]
+        headers = {
+        'Cookie': 'ci_session=sn7n11lsss9vdlrej79sq6s1o0c5mm3r'
+        }
+
+        response = requests.request("POST", url, headers=headers, data = payload, files = files)
+
+        print(response.text.encode('utf8'))
+
+
+    #remove contents of output folder
+    for file in os.listdir('./output'):
+        file_path = os.path.join('./output', file)
+        os.remove(file_path)
+    
 
     return True
 
@@ -172,7 +185,14 @@ def predict():
 
     while cap.isOpened():
 
+        REMOTE_SERVER = "www.google.com"
+        if is_connected(REMOTE_SERVER):
+            print("connected")
+            cache = False
 
+        else:
+            print("not connected")
+            cache = True
         
         #window_handle = cv2.namedWindow("CSI Camera", cv2.WINDOW_AUTOSIZE)
         # Window
@@ -254,21 +274,48 @@ def predict():
                     frames_counter = frames_counter + 1
                     frames.append(frame)
                 elif(frames_counter >= 100):
-                    #write a list of frames in a video
-<<<<<<< HEAD
-                    out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc(*'h264'), 60, (frame.shape[1],frame.shape[0]))
-=======
-                    #out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc('M','J','P','G'), 60, (frame.shape[1],frame.shape[0]))
-                    out = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc(*'mp4v'), 60, (frame.shape[1],frame.shape[0]))
->>>>>>> cb86775a7df0dcadd5c8bcc9f5e9992d1cef1a37
-                    for i in range(len(frames)):
-                        out.write(frames[i])
-                    out.release()
-                    print(device_id)
-                    video_sent_status = sent_video(device_id)
-                    if video_sent_status == True:
-                        print("Video sent")
-                    frames = []
+                    REMOTE_SERVER = "www.google.com"
+                if is_connected(REMOTE_SERVER):
+                    print("connected")
+                    cache = False
+
+                else:
+                    print("not connected")
+                    cache = True
+                    if(cache == False):
+                        #write a list of frames in a video
+                        current_file_number = 0
+                        output_file_save_name = 'output_' + str(current_file_number) + '.mp4'
+                        out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'h264'), 60, (frame.shape[1],frame.shape[0]))
+                        for i in range(len(frames)):
+                            out.write(frames[i])
+                        out.release()
+                        print(device_id)
+                        video_sent_status = sent_video(device_id)
+                        if video_sent_status == True:
+                            print("Video sent")
+                        frames = []
+
+                    if(cache == True):
+                        current_file_number = 0
+                        #find the folders in the cache folder
+                        for file in os.listdir('./output'):
+                            if file.endswith(".mp4"):
+                                file_number = file.split("_")[1]
+                                if(int(file_number) > current_file_number):
+                                    current_file_number = int(file_number)
+
+                        output_file_save_name = "output_" + str(current_file_number + 1) + ".mp4"
+                        out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'h264'), 60, (frame.shape[1],frame.shape[0]))
+                        for i in range(len(frames)):
+                            out.write(frames[i])
+                        out.release()
+                        print(device_id)
+                        video_sent_status = sent_video(device_id)
+                        if video_sent_status == True:
+                            print("Video sent")
+                        frames = []
+
 
             print("Number of Frames not detected" , number_of_frames_not_detected)
             if(number_of_frames_not_detected < not_detected_frames_thresh and number_of_person_detected == 0):
