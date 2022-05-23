@@ -149,8 +149,10 @@ def predict():
     not_detected_frames_thresh = 10
     number_of_frames_not_detected = 0
 
-    is_cached = False
-
+    #read is_cached from file
+    with open('./is_cached.txt', 'r') as f:
+        is_cached = f.read()
+        f.close()
     Object_classes = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light',
                     'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow',
                     'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee',
@@ -199,6 +201,10 @@ def predict():
                 print(device_id)
                 sent_video(device_id)
                 is_cached = False
+                #write is_cached to file
+                with open('./is_cached.txt', 'w') as f:
+                    f.write(str(is_cached))
+                    f.close()
 
         else:
             print("not connected")
@@ -322,6 +328,9 @@ def predict():
                         out.release()
                         print(device_id)
                         is_cached = True
+                        #write is_cached to a file
+                        with open('./is_cached.txt', 'w') as f:
+                            f.write(str(is_cached))
                         frames = []
 
 
