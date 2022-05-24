@@ -151,7 +151,8 @@ def predict():
 
     #read is_cached from file
     with open('./is_cached.txt', 'r') as f:
-        is_cached = f.read()
+        is_cached = bool(f.read())
+        print(type(bool(is_cached)))
         f.close()
 
 
@@ -300,7 +301,8 @@ def predict():
                 if(frames_counter < 100):
                     frames_counter = frames_counter + 1
                     frames.append(frame)
-                elif(frames_counter >= 100):
+                elif(frames_counter == 100):
+                    frames_counter = frames_counter + 1
                     REMOTE_SERVER = "www.google.com"
                     if is_connected(REMOTE_SERVER):
                         print("connected")
@@ -329,6 +331,8 @@ def predict():
                         for file in os.listdir('./output'):
                             if file.endswith(".mp4"):
                                 file_number = file.split("_")[1]
+                                file_number = file_number.split(".")[0]
+
                                 if(int(file_number) > current_file_number):
                                     current_file_number = int(file_number)
 
