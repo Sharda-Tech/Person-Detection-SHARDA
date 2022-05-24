@@ -152,7 +152,7 @@ def predict():
     #read is_cached from file
     with open('./is_cached.txt', 'r') as f:
         is_cached = bool(f.read())
-        print(type(bool(is_cached)))
+        #print(type(bool(is_cached)))
         f.close()
 
 
