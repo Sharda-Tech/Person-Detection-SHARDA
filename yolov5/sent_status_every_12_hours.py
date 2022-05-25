@@ -9,7 +9,7 @@ def send_request_every_12_hours(device_id):
 
     #payload = "{ \n \n \"device_id\" : " + device_id + " \n \n \n}"
     #status = "true"
-    payload="{\n   \n \"device_id\" :\"" + device_id + "\",\n \"status\" :\"1\"\n      \n        \n}"
+    payload="{\n   \n \"device_id\" :" + device_id + ",\n \"status\" :\"1\"\n      \n        \n}"
     #payload="{\n   \n \"device_id\" :\"1\",\n \"status\":\"1\"\n      \n        \n}"
     print(payload)
     headers = {
@@ -52,12 +52,12 @@ def check_if_12_hours(device_id):
     with open('current_time.txt', 'w') as f:
         f.write(str(current_time))
 
-    if(current_time - start_time > 43200):
+    if(current_time - start_time > 432000):
+        print("Sent  Device Status")
         send_request_every_12_hours(device_id)
         start_time = time.time()
         with open('time.txt', 'w') as f:
             f.write(str(start_time))
-
 
 
 if __name__ == "__main__":

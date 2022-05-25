@@ -8,6 +8,7 @@ from pyembedded.raspberry_pi_tools.raspberrypi import PI
 pi = PI()
 from check_internet_connectivity import is_connected
 from sent_status_every_12_hours import check_if_12_hours
+from logger import log_data
 import os
 
 
@@ -160,7 +161,7 @@ def predict():
     with open('./is_cached.txt', 'r') as f:
         is_cached = f.read()
         #print(type(bool(is_cached)))
-        if(is_cached == "True"):
+        if("True" in is_cached):
             is_cached = True
 
         else:
@@ -212,7 +213,7 @@ def predict():
 
     while cap.isOpened():
 
-
+        log_data(device_id)
         check_if_12_hours(device_id)
         REMOTE_SERVER = "www.google.com"
         if is_connected(REMOTE_SERVER):

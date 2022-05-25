@@ -8,7 +8,7 @@ def log_sent(device_id, status):
 
     #payload="{\n   \n \"device_id\" :\"" + device_id + "\",\n \"status\" :\"1\"\n      \n        \n}"
 
-    payload = "{\n   \n \"device_id\" :\"" + device_id + "\",\n \"event\" :\"" + status + "\"\n      \n        \n}"
+    payload = "{\n   \n \"device_id\" :" + device_id + ",\n \"event\" :\"" + status + "\"\n      \n        \n}"
     #payload="{\n   \n \"device_id\" :\"1\",\n \"event\":\"sdsddsd1\"\n      \n        \n}"
 
     print(payload)
@@ -44,7 +44,7 @@ def log_data(device_id):
     if(time_string != ""):
         time_read_from_file = float(time_string)
     if(current_time - time_read_from_file > 300):
-
+        print("Device Stopped")
         #change time_read_from_file to date/time
         time_read_from_file = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time_read_from_file))
         #change current_time to date/time
@@ -54,15 +54,17 @@ def log_data(device_id):
 
     #read is_cached.txt file
     with open("is_cached.txt", "r") as f:
-        is_cached =  (f.read())
-
+        is_cached =  f.read()
         #change True in string to boolean
-        if(is_cached == "True"):
+        #print(is_cached)
+        if("True" in is_cached):
+            print("Cache hai")
             is_cached = True
 
         else:
             is_cached = False
     if(is_cached == True):
+        print("Connectivity Issue")
         if(type(time_read_from_file) == float):
             current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(current_time))
         status = "Pi Connectivity was disrupted and was resumed at " + str(current_time)
