@@ -7,6 +7,7 @@ import time
 from pyembedded.raspberry_pi_tools.raspberrypi import PI
 pi = PI()
 from check_internet_connectivity import is_connected
+from sent_status_every_12_hours import check_if_12_hours
 import os
 
 
@@ -149,10 +150,21 @@ def predict():
     not_detected_frames_thresh = 10
     number_of_frames_not_detected = 0
 
+    #if is_cache does not exist, create it
+    if not os.path.exists('is_cache.txt'):
+        with open('is_cache.txt', 'w') as f:
+            f.write('')
+            f.close()
+    
     #read is_cached from file
     with open('./is_cached.txt', 'r') as f:
-        is_cached = bool(f.read())
+        is_cached = f.read()
         #print(type(bool(is_cached)))
+        if(is_cached == "True"):
+            is_cached = True
+
+        else:
+            is_cached = False
         f.close()
 
 
@@ -201,7 +213,7 @@ def predict():
     while cap.isOpened():
 
 
-
+        check_if_12_hours(device_id)
         REMOTE_SERVER = "www.google.com"
         if is_connected(REMOTE_SERVER):
             print("connected")
