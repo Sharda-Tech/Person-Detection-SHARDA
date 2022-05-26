@@ -52,7 +52,7 @@ def check_if_12_hours(device_id):
     with open('current_time.txt', 'w') as f:
         f.write(str(current_time))
 
-    if(current_time - start_time > 432000):
+    if(current_time - start_time > 43200):
         print("Sent  Device Status")
         send_request_every_12_hours(device_id)
         start_time = time.time()

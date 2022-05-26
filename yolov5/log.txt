@@ -30482,3 +30482,1258 @@ Number of Detection: 0
 Cpu Usage is15.8
 Memory Usage is ['1842656', '631360', '358572']
 CPU temperature is 51.121
+26/05/2022 12:02:28
+Number of Detection: 1
+Cpu Usage is9.2
+Memory Usage is ['1842656', '578696', '62664']
+CPU temperature is 48.199
+26/05/2022 12:02:31
+Number of Detection: 1
+Cpu Usage is13.3
+Memory Usage is ['1842656', '585676', '76880']
+CPU temperature is 47.225
+26/05/2022 12:02:32
+Number of Detection: 2
+Cpu Usage is36.9
+Memory Usage is ['1842656', '589824', '72080']
+CPU temperature is 48.199
+26/05/2022 12:02:33
+Number of Detection: 1
+Cpu Usage is47.0
+Memory Usage is ['1842656', '591576', '101348']
+CPU temperature is 48.199
+26/05/2022 12:02:34
+Number of Detection: 1
+Cpu Usage is60.7
+Memory Usage is ['1842656', '586276', '114368']
+CPU temperature is 50.634
+26/05/2022 12:02:35
+Number of Detection: 1
+Cpu Usage is38.2
+Memory Usage is ['1842656', '589128', '112384']
+CPU temperature is 49.173
+26/05/2022 12:02:36
+Number of Detection: 1
+Cpu Usage is35.6
+Memory Usage is ['1842656', '589552', '134116']
+CPU temperature is 50.634
+26/05/2022 12:02:38
+Number of Detection: 1
+Cpu Usage is26.9
+Memory Usage is ['1842656', '589108', '139788']
+CPU temperature is 49.66
+26/05/2022 12:02:39
+Number of Detection: 1
+Cpu Usage is39.0
+Memory Usage is ['1842656', '590036', '139968']
+CPU temperature is 50.147
+26/05/2022 12:02:40
+Number of Detection: 1
+Cpu Usage is35.0
+Memory Usage is ['1842656', '590380', '139608']
+CPU temperature is 49.66
+26/05/2022 12:02:41
+Number of Detection: 2
+Cpu Usage is39.6
+Memory Usage is ['1842656', '593156', '135800']
+CPU temperature is 50.147
+26/05/2022 12:02:42
+Number of Detection: 2
+Cpu Usage is37.5
+Memory Usage is ['1842656', '594652', '134288']
+CPU temperature is 51.121
+26/05/2022 12:02:43
+Number of Detection: 3
+Cpu Usage is35.6
+Memory Usage is ['1842656', '598120', '131852']
+CPU temperature is 50.147
+26/05/2022 12:02:44
+Number of Detection: 2
+Cpu Usage is37.9
+Memory Usage is ['1842656', '602564', '127392']
+CPU temperature is 50.634
+26/05/2022 12:02:45
+Number of Detection: 3
+Cpu Usage is34.4
+Memory Usage is ['1842656', '605480', '123444']
+CPU temperature is 51.608
+26/05/2022 12:02:46
+Number of Detection: 3
+Cpu Usage is37.1
+Memory Usage is ['1842656', '609984', '118928']
+CPU temperature is 51.121
+26/05/2022 12:02:48
+Number of Detection: 3
+Cpu Usage is32.1
+Memory Usage is ['1842656', '614668', '114236']
+CPU temperature is 51.121
+26/05/2022 12:02:49
+Number of Detection: 3
+Cpu Usage is34.4
+Memory Usage is ['1842656', '620744', '109184']
+CPU temperature is 52.582
+26/05/2022 12:02:50
+Number of Detection: 1
+Cpu Usage is40.9
+Memory Usage is ['1842656', '627440', '98864']
+CPU temperature is 51.608
+26/05/2022 12:02:51
+Number of Detection: 2
+Cpu Usage is39.1
+Memory Usage is ['1842656', '632796', '89384']
+CPU temperature is 51.608
+26/05/2022 12:02:52
+Number of Detection: 2
+Cpu Usage is28.2
+Memory Usage is ['1842656', '632892', '97196']
+CPU temperature is 50.147
+26/05/2022 12:02:53
+Number of Detection: 3
+Cpu Usage is22.1
+Memory Usage is ['1842656', '635228', '100344']
+CPU temperature is 51.121
+26/05/2022 12:02:55
+Number of Detection: 3
+Cpu Usage is24.8
+Memory Usage is ['1842656', '641992', '93720']
+CPU temperature is 51.121
+26/05/2022 12:02:56
+Number of Detection: 2
+Cpu Usage is35.7
+Memory Usage is ['1842656', '646460', '88224']
+CPU temperature is 51.608
+26/05/2022 12:02:57
+Number of Detection: 2
+Cpu Usage is36.5
+Memory Usage is ['1842656', '652856', '82552']
+CPU temperature is 51.608
+26/05/2022 12:02:58
+Number of Detection: 2
+Cpu Usage is24.0
+Memory Usage is ['1842656', '654604', '79276']
+CPU temperature is 51.608
+26/05/2022 12:02:59
+Number of Detection: 2
+Cpu Usage is40.9
+Memory Usage is ['1842656', '660560', '73332']
+CPU temperature is 51.608
+26/05/2022 12:03:00
+Number of Detection: 2
+Cpu Usage is35.3
+Memory Usage is ['1842656', '663924', '75488']
+CPU temperature is 51.121
+26/05/2022 12:03:01
+Number of Detection: 2
+Cpu Usage is40.3
+Memory Usage is ['1842656', '667376', '72064']
+CPU temperature is 51.121
+26/05/2022 12:03:03
+Number of Detection: 3
+Cpu Usage is34.4
+Memory Usage is ['1842656', '671760', '72104']
+CPU temperature is 52.095
+26/05/2022 12:03:04
+Number of Detection: 3
+Cpu Usage is36.6
+Memory Usage is ['1842656', '674696', '70176']
+CPU temperature is 51.121
+26/05/2022 12:03:05
+Number of Detection: 2
+Cpu Usage is36.5
+Memory Usage is ['1842656', '681372', '66636']
+CPU temperature is 51.608
+26/05/2022 12:03:06
+Number of Detection: 2
+Cpu Usage is36.8
+Memory Usage is ['1842656', '685068', '73252']
+CPU temperature is 51.121
+26/05/2022 12:03:08
+Number of Detection: 2
+Cpu Usage is28.4
+Memory Usage is ['1842656', '691476', '71564']
+CPU temperature is 51.121
+26/05/2022 12:03:09
+Number of Detection: 2
+Cpu Usage is15.9
+Memory Usage is ['1842656', '689832', '79892']
+CPU temperature is 51.121
+26/05/2022 12:03:11
+Number of Detection: 2
+Cpu Usage is16.6
+Memory Usage is ['1842656', '690888', '79948']
+CPU temperature is 50.634
+26/05/2022 12:03:12
+Number of Detection: 2
+Cpu Usage is22.9
+Memory Usage is ['1842656', '690000', '82532']
+CPU temperature is 50.147
+26/05/2022 12:03:13
+Number of Detection: 2
+Cpu Usage is22.2
+Memory Usage is ['1842656', '689016', '83572']
+CPU temperature is 49.66
+26/05/2022 12:03:14
+Number of Detection: 2
+Cpu Usage is17.5
+Memory Usage is ['1842656', '690264', '83856']
+CPU temperature is 50.634
+26/05/2022 12:03:16
+Number of Detection: 2
+Cpu Usage is16.0
+Memory Usage is ['1842656', '689656', '83956']
+CPU temperature is 49.66
+26/05/2022 12:03:18
+Number of Detection: 3
+Cpu Usage is15.6
+Memory Usage is ['1842656', '689396', '82204']
+CPU temperature is 50.634
+26/05/2022 12:03:19
+Number of Detection: 2
+Cpu Usage is10.9
+Memory Usage is ['1842656', '689892', '81700']
+CPU temperature is 49.173
+26/05/2022 12:03:20
+Number of Detection: 2
+Cpu Usage is21.4
+Memory Usage is ['1842656', '691948', '81652']
+CPU temperature is 49.66
+26/05/2022 12:03:22
+Number of Detection: 2
+Cpu Usage is18.2
+Memory Usage is ['1842656', '691580', '81000']
+CPU temperature is 51.121
+26/05/2022 12:03:23
+Number of Detection: 2
+Cpu Usage is21.5
+Memory Usage is ['1842656', '691872', '80704']
+CPU temperature is 49.66
+26/05/2022 12:03:24
+Number of Detection: 2
+Cpu Usage is20.8
+Memory Usage is ['1842656', '692560', '81040']
+CPU temperature is 50.634
+26/05/2022 12:03:25
+Number of Detection: 3
+Cpu Usage is18.4
+Memory Usage is ['1842656', '691464', '79588']
+CPU temperature is 50.147
+26/05/2022 12:03:27
+Number of Detection: 2
+Cpu Usage is16.3
+Memory Usage is ['1842656', '692500', '78564']
+CPU temperature is 50.147
+26/05/2022 12:03:28
+Number of Detection: 2
+Cpu Usage is22.5
+Memory Usage is ['1842656', '690772', '80788']
+CPU temperature is 49.66
+26/05/2022 12:03:29
+Number of Detection: 2
+Cpu Usage is19.9
+Memory Usage is ['1842656', '690656', '80424']
+CPU temperature is 50.634
+26/05/2022 12:03:31
+Number of Detection: 2
+Cpu Usage is16.1
+Memory Usage is ['1842656', '692448', '80584']
+CPU temperature is 49.173
+26/05/2022 12:03:32
+Number of Detection: 2
+Cpu Usage is19.1
+Memory Usage is ['1842656', '692080', '78976']
+CPU temperature is 49.66
+26/05/2022 12:03:33
+Number of Detection: 2
+Cpu Usage is22.7
+Memory Usage is ['1842656', '686160', '88996']
+CPU temperature is 49.173
+26/05/2022 12:03:35
+Number of Detection: 2
+Cpu Usage is16.1
+Memory Usage is ['1842656', '689884', '85784']
+CPU temperature is 50.147
+26/05/2022 12:03:37
+Number of Detection: 2
+Cpu Usage is14.3
+Memory Usage is ['1842656', '691200', '83964']
+CPU temperature is 48.686
+26/05/2022 12:03:38
+Number of Detection: 2
+Cpu Usage is15.7
+Memory Usage is ['1842656', '688860', '86796']
+CPU temperature is 49.173
+26/05/2022 12:03:40
+Number of Detection: 2
+Cpu Usage is13.2
+Memory Usage is ['1842656', '688460', '86604']
+CPU temperature is 50.147
+26/05/2022 12:03:41
+Number of Detection: 2
+Cpu Usage is23.1
+Memory Usage is ['1842656', '689952', '84112']
+CPU temperature is 49.173
+26/05/2022 12:03:42
+Number of Detection: 3
+Cpu Usage is14.2
+Memory Usage is ['1842656', '689680', '84364']
+CPU temperature is 49.66
+26/05/2022 12:03:43
+Number of Detection: 2
+Cpu Usage is19.3
+Memory Usage is ['1842656', '690556', '87120']
+CPU temperature is 48.686
+26/05/2022 12:03:45
+Number of Detection: 2
+Cpu Usage is15.5
+Memory Usage is ['1842656', '687948', '87196']
+CPU temperature is 49.66
+26/05/2022 12:03:46
+Number of Detection: 2
+Cpu Usage is19.9
+Memory Usage is ['1842656', '690212', '85436']
+CPU temperature is 49.173
+26/05/2022 12:03:47
+Number of Detection: 2
+Cpu Usage is16.5
+Memory Usage is ['1842656', '689920', '85220']
+CPU temperature is 50.147
+26/05/2022 12:03:49
+Number of Detection: 2
+Cpu Usage is25.0
+Memory Usage is ['1842656', '689912', '85212']
+CPU temperature is 49.66
+26/05/2022 12:03:50
+Number of Detection: 2
+Cpu Usage is12.0
+Memory Usage is ['1842656', '691400', '85744']
+CPU temperature is 48.686
+26/05/2022 12:03:52
+Number of Detection: 2
+Cpu Usage is13.5
+Memory Usage is ['1842656', '690400', '83708']
+CPU temperature is 50.634
+26/05/2022 12:03:53
+Number of Detection: 3
+Cpu Usage is11.5
+Memory Usage is ['1842656', '690864', '84776']
+CPU temperature is 49.173
+26/05/2022 12:03:55
+Number of Detection: 2
+Cpu Usage is14.3
+Memory Usage is ['1842656', '689852', '85264']
+CPU temperature is 48.686
+26/05/2022 12:03:57
+Number of Detection: 2
+Cpu Usage is15.5
+Memory Usage is ['1842656', '689856', '88268']
+CPU temperature is 49.66
+26/05/2022 12:03:58
+Number of Detection: 2
+Cpu Usage is22.5
+Memory Usage is ['1842656', '690028', '87628']
+CPU temperature is 49.66
+26/05/2022 12:04:00
+Number of Detection: 2
+Cpu Usage is13.0
+Memory Usage is ['1842656', '690764', '84852']
+CPU temperature is 48.199
+26/05/2022 12:04:02
+Number of Detection: 2
+Cpu Usage is17.0
+Memory Usage is ['1842656', '690976', '83628']
+CPU temperature is 49.173
+26/05/2022 12:04:03
+Number of Detection: 2
+Cpu Usage is14.3
+Memory Usage is ['1842656', '690196', '83896']
+CPU temperature is 50.634
+26/05/2022 12:04:05
+Number of Detection: 2
+Cpu Usage is17.9
+Memory Usage is ['1842656', '691696', '83904']
+CPU temperature is 49.66
+26/05/2022 12:04:06
+Number of Detection: 3
+Cpu Usage is17.5
+Memory Usage is ['1842656', '691648', '83452']
+CPU temperature is 49.66
+26/05/2022 12:04:08
+Number of Detection: 2
+Cpu Usage is17.5
+Memory Usage is ['1842656', '690824', '84276']
+CPU temperature is 50.634
+26/05/2022 12:04:09
+Number of Detection: 2
+Cpu Usage is23.0
+Memory Usage is ['1842656', '691076', '84536']
+CPU temperature is 49.66
+26/05/2022 12:04:10
+Number of Detection: 2
+Cpu Usage is15.8
+Memory Usage is ['1842656', '691024', '84076']
+CPU temperature is 49.66
+26/05/2022 12:04:11
+Number of Detection: 2
+Cpu Usage is23.0
+Memory Usage is ['1842656', '690980', '84600']
+CPU temperature is 49.173
+26/05/2022 12:04:13
+Number of Detection: 2
+Cpu Usage is15.0
+Memory Usage is ['1842656', '691192', '86432']
+CPU temperature is 50.147
+26/05/2022 12:04:14
+Number of Detection: 2
+Cpu Usage is24.7
+Memory Usage is ['1842656', '689608', '85476']
+CPU temperature is 50.147
+26/05/2022 12:04:15
+Number of Detection: 2
+Cpu Usage is23.4
+Memory Usage is ['1842656', '691364', '83716']
+CPU temperature is 49.173
+26/05/2022 12:04:16
+Number of Detection: 2
+Cpu Usage is22.5
+Memory Usage is ['1842656', '690536', '84532']
+CPU temperature is 49.173
+26/05/2022 12:04:18
+Number of Detection: 2
+Cpu Usage is17.3
+Memory Usage is ['1842656', '692016', '83476']
+CPU temperature is 49.66
+26/05/2022 12:04:19
+Number of Detection: 2
+Cpu Usage is18.7
+Memory Usage is ['1842656', '691160', '82800']
+CPU temperature is 50.634
+26/05/2022 12:04:21
+Number of Detection: 2
+Cpu Usage is14.5
+Memory Usage is ['1842656', '689728', '85852']
+CPU temperature is 49.173
+26/05/2022 12:04:22
+Number of Detection: 2
+Cpu Usage is17.4
+Memory Usage is ['1842656', '690740', '86856']
+CPU temperature is 49.66
+26/05/2022 12:04:24
+Number of Detection: 1
+Cpu Usage is14.4
+Memory Usage is ['1842656', '690752', '86840']
+CPU temperature is 50.147
+26/05/2022 12:04:25
+Number of Detection: 2
+Cpu Usage is21.5
+Memory Usage is ['1842656', '689496', '88604']
+CPU temperature is 50.634
+26/05/2022 12:04:27
+Number of Detection: 2
+Cpu Usage is21.5
+Memory Usage is ['1842656', '689420', '84136']
+CPU temperature is 49.66
+26/05/2022 12:04:28
+Number of Detection: 2
+Cpu Usage is17.8
+Memory Usage is ['1842656', '691772', '82284']
+CPU temperature is 49.66
+26/05/2022 12:04:30
+Number of Detection: 2
+Cpu Usage is20.4
+Memory Usage is ['1842656', '690948', '82816']
+CPU temperature is 50.634
+26/05/2022 12:04:31
+Number of Detection: 2
+Cpu Usage is13.3
+Memory Usage is ['1842656', '691680', '83580']
+CPU temperature is 50.634
+26/05/2022 12:04:32
+Number of Detection: 2
+Cpu Usage is25.2
+Memory Usage is ['1842656', '690964', '84340']
+CPU temperature is 49.66
+26/05/2022 12:04:33
+Number of Detection: 2
+Cpu Usage is16.9
+Memory Usage is ['1842656', '692448', '84888']
+CPU temperature is 49.66
+26/05/2022 12:04:35
+Number of Detection: 2
+Cpu Usage is23.6
+Memory Usage is ['1842656', '692428', '84888']
+CPU temperature is 50.634
+26/05/2022 12:04:36
+Number of Detection: 2
+Cpu Usage is24.5
+Memory Usage is ['1842656', '691428', '87912']
+CPU temperature is 50.147
+26/05/2022 12:04:37
+Number of Detection: 2
+Cpu Usage is14.2
+Memory Usage is ['1842656', '691988', '87352']
+CPU temperature is 49.173
+26/05/2022 12:04:39
+Number of Detection: 2
+Cpu Usage is22.8
+Memory Usage is ['1842656', '690184', '91168']
+CPU temperature is 49.173
+26/05/2022 12:04:40
+Number of Detection: 2
+Cpu Usage is23.8
+Memory Usage is ['1842656', '691080', '87224']
+CPU temperature is 49.66
+26/05/2022 12:04:41
+Number of Detection: 2
+Cpu Usage is20.6
+Memory Usage is ['1842656', '691140', '88692']
+CPU temperature is 49.66
+26/05/2022 12:04:42
+Number of Detection: 2
+Cpu Usage is18.2
+Memory Usage is ['1842656', '689844', '92012']
+CPU temperature is 50.634
+26/05/2022 12:04:44
+Number of Detection: 2
+Cpu Usage is19.7
+Memory Usage is ['1842656', '691356', '90504']
+CPU temperature is 49.66
+26/05/2022 12:04:45
+Number of Detection: 2
+Cpu Usage is21.5
+Memory Usage is ['1842656', '689104', '90236']
+CPU temperature is 48.686
+26/05/2022 12:04:47
+Number of Detection: 2
+Cpu Usage is19.6
+Memory Usage is ['1842656', '689208', '89032']
+CPU temperature is 49.66
+26/05/2022 12:04:48
+Number of Detection: 2
+Cpu Usage is18.7
+Memory Usage is ['1842656', '689940', '89800']
+CPU temperature is 50.634
+26/05/2022 12:04:49
+Number of Detection: 2
+Cpu Usage is23.9
+Memory Usage is ['1842656', '689712', '89544']
+CPU temperature is 50.147
+26/05/2022 12:04:51
+Number of Detection: 2
+Cpu Usage is19.9
+Memory Usage is ['1842656', '689656', '89596']
+CPU temperature is 49.173
+26/05/2022 12:04:53
+Number of Detection: 2
+Cpu Usage is12.1
+Memory Usage is ['1842656', '690420', '88840']
+CPU temperature is 50.634
+26/05/2022 12:04:54
+Number of Detection: 2
+Cpu Usage is18.2
+Memory Usage is ['1842656', '690668', '88592']
+CPU temperature is 49.66
+26/05/2022 12:04:56
+Number of Detection: 2
+Cpu Usage is16.2
+Memory Usage is ['1842656', '692428', '87336']
+CPU temperature is 49.173
+26/05/2022 12:04:57
+Number of Detection: 2
+Cpu Usage is24.2
+Memory Usage is ['1842656', '692648', '85572']
+CPU temperature is 50.634
+26/05/2022 12:04:58
+Number of Detection: 2
+Cpu Usage is19.5
+Memory Usage is ['1842656', '692404', '85816']
+CPU temperature is 50.634
+26/05/2022 12:05:00
+Number of Detection: 2
+Cpu Usage is17.9
+Memory Usage is ['1842656', '690840', '88404']
+CPU temperature is 50.634
+26/05/2022 12:05:01
+Number of Detection: 2
+Cpu Usage is17.0
+Memory Usage is ['1842656', '689860', '89384']
+CPU temperature is 50.634
+26/05/2022 12:05:03
+Number of Detection: 2
+Cpu Usage is18.5
+Memory Usage is ['1842656', '689464', '90200']
+CPU temperature is 49.66
+26/05/2022 12:05:05
+Number of Detection: 2
+Cpu Usage is14.8
+Memory Usage is ['1842656', '690424', '88720']
+CPU temperature is 50.147
+26/05/2022 12:05:06
+Number of Detection: 2
+Cpu Usage is17.5
+Memory Usage is ['1842656', '691504', '89732']
+CPU temperature is 49.66
+26/05/2022 12:05:08
+Number of Detection: 2
+Cpu Usage is17.9
+Memory Usage is ['1842656', '691376', '89288']
+CPU temperature is 50.147
+26/05/2022 12:05:09
+Number of Detection: 2
+Cpu Usage is17.6
+Memory Usage is ['1842656', '692184', '89568']
+CPU temperature is 50.147
+26/05/2022 12:05:10
+Number of Detection: 2
+Cpu Usage is18.4
+Memory Usage is ['1842656', '692152', '89600']
+CPU temperature is 49.173
+26/05/2022 12:05:13
+Number of Detection: 2
+Cpu Usage is13.1
+Memory Usage is ['1842656', '691360', '87368']
+CPU temperature is 50.147
+26/05/2022 12:05:14
+Number of Detection: 2
+Cpu Usage is23.7
+Memory Usage is ['1842656', '690360', '88880']
+CPU temperature is 49.66
+26/05/2022 12:05:15
+Number of Detection: 2
+Cpu Usage is18.1
+Memory Usage is ['1842656', '692056', '86668']
+CPU temperature is 50.147
+26/05/2022 12:05:16
+Number of Detection: 2
+Cpu Usage is27.4
+Memory Usage is ['1842656', '691988', '85656']
+CPU temperature is 49.66
+26/05/2022 12:05:17
+Number of Detection: 2
+Cpu Usage is24.6
+Memory Usage is ['1842656', '690496', '87148']
+CPU temperature is 50.634
+26/05/2022 12:05:19
+Number of Detection: 2
+Cpu Usage is18.4
+Memory Usage is ['1842656', '691824', '86876']
+CPU temperature is 50.634
+26/05/2022 12:05:20
+Number of Detection: 2
+Cpu Usage is17.5
+Memory Usage is ['1842656', '689512', '89724']
+CPU temperature is 50.147
+26/05/2022 12:05:22
+Number of Detection: 2
+Cpu Usage is18.7
+Memory Usage is ['1842656', '690276', '90972']
+CPU temperature is 50.147
+26/05/2022 12:05:23
+Number of Detection: 2
+Cpu Usage is20.6
+Memory Usage is ['1842656', '690856', '88288']
+CPU temperature is 50.147
+26/05/2022 12:05:24
+Number of Detection: 2
+Cpu Usage is24.5
+Memory Usage is ['1842656', '691076', '86288']
+CPU temperature is 50.147
+26/05/2022 12:07:14
+Number of Detection: 2
+Cpu Usage is17.1
+Memory Usage is ['1842656', '578220', '156544']
+CPU temperature is 47.712
+26/05/2022 12:07:15
+Number of Detection: 2
+Cpu Usage is35.0
+Memory Usage is ['1842656', '584460', '144648']
+CPU temperature is 49.173
+26/05/2022 12:07:16
+Number of Detection: 2
+Cpu Usage is32.7
+Memory Usage is ['1842656', '586680', '141812']
+CPU temperature is 50.147
+26/05/2022 12:07:17
+Number of Detection: 2
+Cpu Usage is18.1
+Memory Usage is ['1842656', '588896', '140484']
+CPU temperature is 49.66
+26/05/2022 12:07:19
+Number of Detection: 2
+Cpu Usage is34.5
+Memory Usage is ['1842656', '589564', '137456']
+CPU temperature is 49.173
+26/05/2022 12:07:20
+Number of Detection: 2
+Cpu Usage is30.4
+Memory Usage is ['1842656', '588660', '138364']
+CPU temperature is 50.634
+26/05/2022 12:07:21
+Number of Detection: 2
+Cpu Usage is29.4
+Memory Usage is ['1842656', '598472', '129552']
+CPU temperature is 50.147
+26/05/2022 12:07:22
+Number of Detection: 2
+Cpu Usage is28.5
+Memory Usage is ['1842656', '601696', '127728']
+CPU temperature is 50.147
+26/05/2022 12:07:23
+Number of Detection: 2
+Cpu Usage is30.8
+Memory Usage is ['1842656', '607656', '121768']
+CPU temperature is 51.121
+26/05/2022 12:07:24
+Number of Detection: 2
+Cpu Usage is31.0
+Memory Usage is ['1842656', '609568', '118832']
+CPU temperature is 50.147
+26/05/2022 12:07:25
+Number of Detection: 2
+Cpu Usage is31.7
+Memory Usage is ['1842656', '610996', '117388']
+CPU temperature is 49.66
+26/05/2022 12:07:26
+Number of Detection: 2
+Cpu Usage is32.0
+Memory Usage is ['1842656', '620324', '108560']
+CPU temperature is 51.121
+26/05/2022 12:07:27
+Number of Detection: 2
+Cpu Usage is21.3
+Memory Usage is ['1842656', '623796', '105072']
+CPU temperature is 50.147
+26/05/2022 12:07:28
+Number of Detection: 2
+Cpu Usage is29.3
+Memory Usage is ['1842656', '627200', '101652']
+CPU temperature is 52.095
+26/05/2022 12:07:29
+Number of Detection: 2
+Cpu Usage is31.2
+Memory Usage is ['1842656', '632208', '96644']
+CPU temperature is 51.121
+26/05/2022 12:07:31
+Number of Detection: 2
+Cpu Usage is25.5
+Memory Usage is ['1842656', '635544', '92280']
+CPU temperature is 50.634
+26/05/2022 12:07:32
+Number of Detection: 2
+Cpu Usage is31.9
+Memory Usage is ['1842656', '634544', '92760']
+CPU temperature is 51.121
+26/05/2022 12:07:33
+Number of Detection: 2
+Cpu Usage is30.7
+Memory Usage is ['1842656', '644792', '82504']
+CPU temperature is 50.634
+26/05/2022 12:07:34
+Number of Detection: 2
+Cpu Usage is31.6
+Memory Usage is ['1842656', '648604', '79716']
+CPU temperature is 52.095
+26/05/2022 12:07:35
+Number of Detection: 2
+Cpu Usage is31.3
+Memory Usage is ['1842656', '646356', '81956']
+CPU temperature is 52.095
+26/05/2022 12:07:36
+Number of Detection: 2
+Cpu Usage is33.5
+Memory Usage is ['1842656', '657868', '70432']
+CPU temperature is 50.634
+26/05/2022 12:07:38
+Number of Detection: 2
+Cpu Usage is23.6
+Memory Usage is ['1842656', '659624', '71052']
+CPU temperature is 51.121
+26/05/2022 12:07:39
+Number of Detection: 1
+Cpu Usage is31.3
+Memory Usage is ['1842656', '664752', '72016']
+CPU temperature is 51.121
+26/05/2022 12:07:40
+Number of Detection: 2
+Cpu Usage is32.3
+Memory Usage is ['1842656', '670360', '67912']
+CPU temperature is 52.095
+26/05/2022 12:07:41
+Number of Detection: 2
+Cpu Usage is33.4
+Memory Usage is ['1842656', '675556', '62200']
+CPU temperature is 51.608
+26/05/2022 12:07:42
+Number of Detection: 2
+Cpu Usage is32.4
+Memory Usage is ['1842656', '673724', '64032']
+CPU temperature is 51.608
+26/05/2022 12:07:43
+Number of Detection: 1
+Cpu Usage is34.0
+Memory Usage is ['1842656', '684120', '54980']
+CPU temperature is 52.095
+26/05/2022 12:07:44
+Number of Detection: 2
+Cpu Usage is32.0
+Memory Usage is ['1842656', '685836', '54704']
+CPU temperature is 52.582
+26/05/2022 12:07:46
+Number of Detection: 2
+Cpu Usage is35.7
+Memory Usage is ['1842656', '679456', '66788']
+CPU temperature is 51.608
+26/05/2022 12:07:47
+Number of Detection: 2
+Cpu Usage is31.9
+Memory Usage is ['1842656', '679668', '66560']
+CPU temperature is 51.608
+26/05/2022 12:07:48
+Number of Detection: 2
+Cpu Usage is25.9
+Memory Usage is ['1842656', '681528', '67224']
+CPU temperature is 52.582
+26/05/2022 12:07:49
+Number of Detection: 2
+Cpu Usage is28.3
+Memory Usage is ['1842656', '681908', '66836']
+CPU temperature is 51.608
+26/05/2022 12:07:50
+Number of Detection: 2
+Cpu Usage is31.0
+Memory Usage is ['1842656', '681596', '66164']
+CPU temperature is 51.608
+26/05/2022 12:07:51
+Number of Detection: 2
+Cpu Usage is31.0
+Memory Usage is ['1842656', '681336', '66416']
+CPU temperature is 51.121
+26/05/2022 12:07:52
+Number of Detection: 2
+Cpu Usage is24.6
+Memory Usage is ['1842656', '681260', '66492']
+CPU temperature is 51.608
+26/05/2022 12:07:53
+Number of Detection: 2
+Cpu Usage is23.5
+Memory Usage is ['1842656', '681804', '71072']
+CPU temperature is 51.121
+26/05/2022 12:07:54
+Number of Detection: 2
+Cpu Usage is19.5
+Memory Usage is ['1842656', '681336', '72104']
+CPU temperature is 51.608
+26/05/2022 12:07:55
+Number of Detection: 2
+Cpu Usage is27.1
+Memory Usage is ['1842656', '681364', '71580']
+CPU temperature is 52.095
+26/05/2022 12:07:56
+Number of Detection: 2
+Cpu Usage is34.0
+Memory Usage is ['1842656', '679472', '72420']
+CPU temperature is 52.095
+26/05/2022 12:07:58
+Number of Detection: 2
+Cpu Usage is20.3
+Memory Usage is ['1842656', '678944', '72952']
+CPU temperature is 51.121
+26/05/2022 12:07:59
+Number of Detection: 2
+Cpu Usage is30.2
+Memory Usage is ['1842656', '680184', '72712']
+CPU temperature is 51.608
+26/05/2022 12:08:00
+Number of Detection: 2
+Cpu Usage is31.4
+Memory Usage is ['1842656', '679264', '73664']
+CPU temperature is 51.608
+26/05/2022 12:08:01
+Number of Detection: 2
+Cpu Usage is33.5
+Memory Usage is ['1842656', '679456', '73464']
+CPU temperature is 51.121
+26/05/2022 12:08:02
+Number of Detection: 2
+Cpu Usage is30.5
+Memory Usage is ['1842656', '677684', '75236']
+CPU temperature is 51.608
+26/05/2022 12:08:03
+Number of Detection: 2
+Cpu Usage is30.0
+Memory Usage is ['1842656', '677364', '74540']
+CPU temperature is 52.582
+26/05/2022 12:08:04
+Number of Detection: 2
+Cpu Usage is29.9
+Memory Usage is ['1842656', '677332', '74540']
+CPU temperature is 52.095
+26/05/2022 12:08:06
+Number of Detection: 2
+Cpu Usage is37.6
+Memory Usage is ['1842656', '677108', '69268']
+CPU temperature is 52.095
+26/05/2022 12:08:07
+Number of Detection: 2
+Cpu Usage is48.6
+Memory Usage is ['1842656', '677400', '84220']
+CPU temperature is 51.608
+26/05/2022 12:08:08
+Number of Detection: 2
+Cpu Usage is25.3
+Memory Usage is ['1842656', '681252', '87632']
+CPU temperature is 51.608
+26/05/2022 12:08:09
+Number of Detection: 2
+Cpu Usage is33.6
+Memory Usage is ['1842656', '681720', '94380']
+CPU temperature is 52.582
+26/05/2022 12:08:10
+Number of Detection: 2
+Cpu Usage is33.5
+Memory Usage is ['1842656', '677704', '103384']
+CPU temperature is 52.582
+26/05/2022 12:08:11
+Number of Detection: 2
+Cpu Usage is37.4
+Memory Usage is ['1842656', '679652', '101484']
+CPU temperature is 52.582
+26/05/2022 12:08:12
+Number of Detection: 2
+Cpu Usage is42.0
+Memory Usage is ['1842656', '680056', '101472']
+CPU temperature is 52.095
+26/05/2022 12:08:13
+Number of Detection: 2
+Cpu Usage is36.3
+Memory Usage is ['1842656', '677200', '94240']
+CPU temperature is 52.582
+26/05/2022 12:08:14
+Number of Detection: 2
+Cpu Usage is48.7
+Memory Usage is ['1842656', '677660', '92088']
+CPU temperature is 52.095
+26/05/2022 12:08:16
+Number of Detection: 2
+Cpu Usage is33.7
+Memory Usage is ['1842656', '678812', '93064']
+CPU temperature is 53.069
+26/05/2022 12:08:17
+Number of Detection: 1
+Cpu Usage is34.7
+Memory Usage is ['1842656', '680304', '104356']
+CPU temperature is 52.582
+26/05/2022 12:08:18
+Number of Detection: 2
+Cpu Usage is21.0
+Memory Usage is ['1842656', '679364', '106672']
+CPU temperature is 52.095
+26/05/2022 12:08:19
+Number of Detection: 2
+Cpu Usage is32.2
+Memory Usage is ['1842656', '679808', '106168']
+CPU temperature is 51.121
+26/05/2022 12:08:20
+Number of Detection: 2
+Cpu Usage is32.0
+Memory Usage is ['1842656', '678236', '107740']
+CPU temperature is 52.095
+26/05/2022 12:08:21
+Number of Detection: 2
+Cpu Usage is32.1
+Memory Usage is ['1842656', '679980', '104972']
+CPU temperature is 52.582
+26/05/2022 12:08:22
+Number of Detection: 2
+Cpu Usage is34.0
+Memory Usage is ['1842656', '679216', '105732']
+CPU temperature is 52.582
+26/05/2022 12:08:23
+Number of Detection: 1
+Cpu Usage is31.6
+Memory Usage is ['1842656', '679988', '104952']
+CPU temperature is 52.582
+26/05/2022 12:08:24
+Number of Detection: 2
+Cpu Usage is31.9
+Memory Usage is ['1842656', '679188', '106772']
+CPU temperature is 51.608
+26/05/2022 12:08:25
+Number of Detection: 3
+Cpu Usage is31.4
+Memory Usage is ['1842656', '679184', '106784']
+CPU temperature is 52.582
+26/05/2022 12:08:26
+Number of Detection: 1
+Cpu Usage is32.6
+Memory Usage is ['1842656', '679960', '106016']
+CPU temperature is 52.095
+26/05/2022 12:08:28
+Number of Detection: 2
+Cpu Usage is29.9
+Memory Usage is ['1842656', '678844', '106780']
+CPU temperature is 53.069
+26/05/2022 12:08:29
+Number of Detection: 2
+Cpu Usage is34.0
+Memory Usage is ['1842656', '679268', '106384']
+CPU temperature is 52.582
+26/05/2022 12:08:30
+Number of Detection: 2
+Cpu Usage is32.3
+Memory Usage is ['1842656', '679504', '107168']
+CPU temperature is 53.069
+26/05/2022 12:08:31
+Number of Detection: 2
+Cpu Usage is31.7
+Memory Usage is ['1842656', '680484', '106188']
+CPU temperature is 53.069
+26/05/2022 12:08:32
+Number of Detection: 2
+Cpu Usage is33.7
+Memory Usage is ['1842656', '681540', '105128']
+CPU temperature is 52.582
+26/05/2022 12:08:34
+Number of Detection: 3
+Cpu Usage is31.6
+Memory Usage is ['1842656', '681208', '104444']
+CPU temperature is 52.095
+26/05/2022 12:08:35
+Number of Detection: 2
+Cpu Usage is32.8
+Memory Usage is ['1842656', '679900', '105748']
+CPU temperature is 52.095
+26/05/2022 12:08:36
+Number of Detection: 2
+Cpu Usage is30.4
+Memory Usage is ['1842656', '678636', '107012']
+CPU temperature is 51.608
+26/05/2022 12:08:37
+Number of Detection: 2
+Cpu Usage is33.9
+Memory Usage is ['1842656', '680376', '106288']
+CPU temperature is 53.069
+26/05/2022 12:08:38
+Number of Detection: 2
+Cpu Usage is24.5
+Memory Usage is ['1842656', '679920', '106756']
+CPU temperature is 52.095
+26/05/2022 12:08:39
+Number of Detection: 3
+Cpu Usage is30.9
+Memory Usage is ['1842656', '680060', '106604']
+CPU temperature is 53.069
+26/05/2022 12:08:40
+Number of Detection: 3
+Cpu Usage is30.8
+Memory Usage is ['1842656', '678548', '107080']
+CPU temperature is 52.095
+26/05/2022 12:08:42
+Number of Detection: 2
+Cpu Usage is34.7
+Memory Usage is ['1842656', '678752', '106884']
+CPU temperature is 52.095
+26/05/2022 12:08:43
+Number of Detection: 3
+Cpu Usage is34.2
+Memory Usage is ['1842656', '679260', '107400']
+CPU temperature is 52.095
+26/05/2022 12:08:44
+Number of Detection: 2
+Cpu Usage is33.5
+Memory Usage is ['1842656', '677300', '109360']
+CPU temperature is 51.608
+26/05/2022 12:08:45
+Number of Detection: 2
+Cpu Usage is34.2
+Memory Usage is ['1842656', '676980', '109672']
+CPU temperature is 52.582
+26/05/2022 12:08:46
+Number of Detection: 2
+Cpu Usage is33.7
+Memory Usage is ['1842656', '677720', '107908']
+CPU temperature is 53.069
+26/05/2022 12:08:47
+Number of Detection: 2
+Cpu Usage is32.9
+Memory Usage is ['1842656', '678024', '107604']
+CPU temperature is 52.582
+26/05/2022 12:08:48
+Number of Detection: 2
+Cpu Usage is34.9
+Memory Usage is ['1842656', '677464', '108164']
+CPU temperature is 52.095
+26/05/2022 12:08:49
+Number of Detection: 2
+Cpu Usage is24.9
+Memory Usage is ['1842656', '679248', '107408']
+CPU temperature is 52.095
+26/05/2022 12:08:50
+Number of Detection: 2
+Cpu Usage is31.9
+Memory Usage is ['1842656', '679944', '107192']
+CPU temperature is 52.582
+26/05/2022 12:08:51
+Number of Detection: 3
+Cpu Usage is31.0
+Memory Usage is ['1842656', '680008', '106636']
+CPU temperature is 53.069
+26/05/2022 12:08:52
+Number of Detection: 3
+Cpu Usage is21.9
+Memory Usage is ['1842656', '680916', '104700']
+CPU temperature is 52.582
+26/05/2022 12:09:36
+Number of Detection: 2
+Cpu Usage is14.5
+Memory Usage is ['1842656', '578064', '341524']
+CPU temperature is 48.686
+26/05/2022 12:09:37
+Number of Detection: 2
+Cpu Usage is50.6
+Memory Usage is ['1842656', '585312', '324668']
+CPU temperature is 50.147
+26/05/2022 12:14:37
+Number of Detection: 2
+Cpu Usage is28.0
+Memory Usage is ['1842656', '581816', '331472']
+CPU temperature is 48.686
+26/05/2022 12:14:39
+Number of Detection: 2
+Cpu Usage is34.1
+Memory Usage is ['1842656', '580396', '330192']
+CPU temperature is 50.147
+26/05/2022 12:14:40
+Number of Detection: 2
+Cpu Usage is36.6
+Memory Usage is ['1842656', '589332', '322132']
+CPU temperature is 50.147
+26/05/2022 12:14:42
+Number of Detection: 2
+Cpu Usage is25.4
+Memory Usage is ['1842656', '591588', '323832']
+CPU temperature is 49.173
+26/05/2022 12:14:43
+Number of Detection: 2
+Cpu Usage is36.0
+Memory Usage is ['1842656', '583452', '334352']
+CPU temperature is 51.121
+26/05/2022 12:14:44
+Number of Detection: 2
+Cpu Usage is33.2
+Memory Usage is ['1842656', '591844', '329144']
+CPU temperature is 50.147
+26/05/2022 12:14:45
+Number of Detection: 2
+Cpu Usage is37.0
+Memory Usage is ['1842656', '590456', '329992']
+CPU temperature is 50.634
+26/05/2022 12:14:47
+Number of Detection: 2
+Cpu Usage is36.7
+Memory Usage is ['1842656', '596772', '324704']
+CPU temperature is 51.608
+26/05/2022 12:14:48
+Number of Detection: 2
+Cpu Usage is31.0
+Memory Usage is ['1842656', '607344', '314108']
+CPU temperature is 51.608
+26/05/2022 12:14:49
+Number of Detection: 2
+Cpu Usage is36.2
+Memory Usage is ['1842656', '606736', '313696']
+CPU temperature is 51.608
+26/05/2022 12:14:50
+Number of Detection: 2
+Cpu Usage is34.7
+Memory Usage is ['1842656', '611844', '308592']
+CPU temperature is 51.608
+26/05/2022 12:14:52
+Number of Detection: 1
+Cpu Usage is27.2
+Memory Usage is ['1842656', '615308', '305124']
+CPU temperature is 50.147
+26/05/2022 12:14:53
+Number of Detection: 2
+Cpu Usage is25.4
+Memory Usage is ['1842656', '613312', '308120']
+CPU temperature is 51.608
+26/05/2022 12:14:54
+Number of Detection: 2
+Cpu Usage is29.2
+Memory Usage is ['1842656', '621560', '299868']
+CPU temperature is 50.634
+26/05/2022 12:14:55
+Number of Detection: 2
+Cpu Usage is28.8
+Memory Usage is ['1842656', '624732', '295696']
+CPU temperature is 50.634
+26/05/2022 12:14:56
+Number of Detection: 2
+Cpu Usage is33.1
+Memory Usage is ['1842656', '628644', '291752']
+CPU temperature is 51.608
+26/05/2022 12:14:58
+Number of Detection: 2
+Cpu Usage is33.4
+Memory Usage is ['1842656', '632528', '287864']
+CPU temperature is 51.121
+26/05/2022 12:14:59
+Number of Detection: 2
+Cpu Usage is21.3
+Memory Usage is ['1842656', '633612', '287804']
+CPU temperature is 50.634
+26/05/2022 12:18:03
+Number of Detection: 2
+Cpu Usage is19.3
+Memory Usage is ['1842656', '575468', '355468']
+CPU temperature is 46.738
+26/05/2022 12:18:04
+Number of Detection: 2
+Cpu Usage is36.7
+Memory Usage is ['1842656', '576196', '353304']
+CPU temperature is 48.686
+26/05/2022 12:18:05
+Number of Detection: 2
+Cpu Usage is37.1
+Memory Usage is ['1842656', '586192', '343268']
+CPU temperature is 47.712
+26/05/2022 12:18:07
+Number of Detection: 3
+Cpu Usage is36.1
+Memory Usage is ['1842656', '580064', '351748']
+CPU temperature is 49.173
+26/05/2022 12:18:08
+Number of Detection: 2
+Cpu Usage is16.1
+Memory Usage is ['1842656', '585752', '346012']
+CPU temperature is 48.686
+26/05/2022 12:18:09
+Number of Detection: 2
+Cpu Usage is37.4
+Memory Usage is ['1842656', '589260', '344128']
+CPU temperature is 49.66
+26/05/2022 12:18:10
+Number of Detection: 2
+Cpu Usage is34.9
+Memory Usage is ['1842656', '590476', '347152']
+CPU temperature is 50.147
+26/05/2022 12:18:11
+Number of Detection: 2
+Cpu Usage is37.4
+Memory Usage is ['1842656', '601308', '336384']
+CPU temperature is 51.608
+26/05/2022 12:18:34
+Number of Detection: 2
+Cpu Usage is20.1
+Memory Usage is ['1842656', '576392', '370172']
+CPU temperature is 48.199
+26/05/2022 12:18:36
+Number of Detection: 2
+Cpu Usage is40.9
+Memory Usage is ['1842656', '582988', '354960']
+CPU temperature is 48.686
+26/05/2022 12:18:37
+Number of Detection: 2
+Cpu Usage is40.5
+Memory Usage is ['1842656', '587276', '349696']
+CPU temperature is 49.173

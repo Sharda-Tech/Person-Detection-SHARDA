@@ -212,13 +212,13 @@ def predict():
 
 
     while cap.isOpened():
-
-        log_data(device_id)
-        check_if_12_hours(device_id)
+        
         REMOTE_SERVER = "www.google.com"
         if is_connected(REMOTE_SERVER):
             print("connected")
             cache = False
+            log_data(device_id)
+            check_if_12_hours(device_id)
 
             if( is_cached == True):
                 print("Cached")
