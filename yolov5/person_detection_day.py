@@ -28,8 +28,8 @@ def getserial():
 
 
 def register(serial):
-    #myserial =  serial
-    myserial = "0013"
+    myserial =  serial
+    #myserial = "0013"
     url = "http://as99.zvastica.solutions/appapi/adddevicebyhardware"
 
     #payload="{\n   \n \"hardwar_id\" :\"devicde_serial_no\"\n      \n        \n}"
@@ -212,14 +212,17 @@ def predict():
 
 
     while cap.isOpened():
-
-        log_data(device_id)
-        check_if_12_hours(device_id)
+        
         REMOTE_SERVER = "www.google.com"
         if is_connected(REMOTE_SERVER):
             print("connected")
             cache = False
-
+            with open('./is_cache.txt','w') as f:
+                f.write(str(cache))
+                f.close
+            log_data(device_id)
+            check_if_12_hours(device_id)
+        
             if( is_cached == True):
                 print("Cached")
                 print(device_id)
@@ -234,6 +237,9 @@ def predict():
         else:
             print("not connected")
             cache = True
+            with open('./is_cache.txt', 'w') as f:
+                f.write(str(cache))
+                f.close()
         
         #window_handle = cv2.namedWindow("CSI Camera", cv2.WINDOW_AUTOSIZE)
         # Window
@@ -320,10 +326,16 @@ def predict():
                     if is_connected(REMOTE_SERVER):
                         print("connected")
                         cache = False
+                        with open('./is_cache.txt', 'w') as f:
+                            f.write(str(cache))
+                            f.close()
 
                     else:
                         print("not connected")
                         cache = True
+                        with open('./is_cache.txt', 'w') as f:
+                            f.write(str(cache))
+                            f.close()
                     if(cache == False):
                         #write a list of frames in a video
                         current_file_number = 0
