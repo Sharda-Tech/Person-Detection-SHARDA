@@ -1,9 +1,13 @@
-from pygame import mixer
-sound = mixer.Sound('./alarm.wav')
+import pygame
+import time
+pygame.mixer.init()
+speaker_volume  = 1
+pygame.mixer.music.set_volume(speaker_volume)
+sound = pygame.mixer.music.load('./alarm.wav')
 
 
 def play_sound(duration):
-    sound.play()
+    mixer.music.play()
     time.sleep(duration)
 
 if __name__ == 'main':
