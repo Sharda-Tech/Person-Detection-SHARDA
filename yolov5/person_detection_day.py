@@ -10,6 +10,7 @@ from check_internet_connectivity import is_connected
 from sent_status_every_12_hours import check_if_12_hours
 from logger import log_data
 import os
+from sound import play_sound
 
 
 def getserial():
@@ -346,6 +347,8 @@ def predict():
                         out.release()
                         print(device_id)
                         video_sent_status = sent_video(device_id)
+                        #play sound
+                        play_sound(10)
                         if video_sent_status == True:
                             print("Video sent")
                         frames = []
@@ -363,6 +366,7 @@ def predict():
 
                         output_file_save_name = "./output/output_" + str(current_file_number + 1) + ".mp4"
                         out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 60, (frame.shape[1],frame.shape[0]))
+                        play_sound(10)
                         for i in range(len(frames)):
                             out.write(frames[i])
                         out.release()
