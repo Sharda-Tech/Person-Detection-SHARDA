@@ -10,6 +10,6 @@ def play_sound(duration):
     mixer.music.play()
     time.sleep(duration)
 
-if __name__ == 'main':
+if __name__ == "__main__":
     play_sound(2)
 
