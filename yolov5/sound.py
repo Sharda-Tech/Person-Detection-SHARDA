@@ -3,7 +3,7 @@ import time
 pygame.mixer.init()
 speaker_volume  = 1
 pygame.mixer.music.set_volume(speaker_volume)
-pygame.mixer.music.load('./alarm.wav')
+pygame.mixer.music.load('./siren.wav')
 
 
 def play_sound(duration):
@@ -11,5 +11,5 @@ def play_sound(duration):
     time.sleep(duration)
 
 if __name__ == "__main__":
-    play_sound(10)
+    play_sound(40)
 

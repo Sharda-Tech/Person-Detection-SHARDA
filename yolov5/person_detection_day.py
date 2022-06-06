@@ -318,6 +318,9 @@ def predict():
 
 
             if(video_sent_status == False and previous_number_of_person_detected['Number'] > 0):
+                if(frames_counter == 30):
+                    #play sound
+                    play_sound(40)
                 if(frames_counter < 100):
                     frames_counter = frames_counter + 1
                     frames.append(frame)
@@ -347,8 +350,6 @@ def predict():
                         out.release()
                         print(device_id)
                         video_sent_status = sent_video(device_id)
-                        #play sound
-                        play_sound(10)
                         if video_sent_status == True:
                             print("Video sent")
                         frames = []
@@ -366,7 +367,6 @@ def predict():
 
                         output_file_save_name = "./output/output_" + str(current_file_number + 1) + ".mp4"
                         out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 60, (frame.shape[1],frame.shape[0]))
-                        play_sound(10)
                         for i in range(len(frames)):
                             out.write(frames[i])
                         out.release()
