@@ -383,7 +383,7 @@ def predict():
                     number_of_frames_not_detected = number_of_frames_not_detected + 1
             elif(number_of_frames_not_detected >= not_detected_frames_thresh and number_of_person_detected == 0):
                     video_sent_status = False
-                    if(frames_counter > 30):
+                    if(frames_counter >= 30):
                         frames_counter = frames_counter + 1
                         REMOTE_SERVER = "www.google.com"
                         if is_connected(REMOTE_SERVER):
