@@ -383,6 +383,58 @@ def predict():
                     number_of_frames_not_detected = number_of_frames_not_detected + 1
             elif(number_of_frames_not_detected >= not_detected_frames_thresh and number_of_person_detected == 0):
                     video_sent_status = False
+                    if(frames_counter > 30):
+                        frames_counter = frames_counter + 1
+                        REMOTE_SERVER = "www.google.com"
+                        if is_connected(REMOTE_SERVER):
+                            print("connected")
+                            cache = False
+                            with open('./is_cache.txt', 'w') as f:
+                                f.write(str(cache))
+                                f.close()
+
+                        else:
+                            print("not connected")
+                            cache = True
+                            with open('./is_cache.txt', 'w') as f:
+                                f.write(str(cache))
+                                f.close()
+                        if(cache == False):
+                            #write a list of frames in a video
+                            current_file_number = 0
+                            output_file_save_name = './output/output_' + str(current_file_number) + '.mp4'
+                            out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 60, (frame.shape[1],frame.shape[0]))
+                            for i in range(len(frames)):
+                                out.write(frames[i])
+                            out.release()
+                            print(device_id)
+                            video_sent_status = sent_video(device_id)
+                            if video_sent_status == True:
+                                print("Video sent")
+                            frames = []
+
+                        if(cache == True):
+                            current_file_number = 0
+                            #find the folders in the cache folder
+                            for file in os.listdir('./output'):
+                                if file.endswith(".mp4"):
+                                    file_number = file.split("_")[1]
+                                    file_number = file_number.split(".")[0]
+
+                                    if(int(file_number) > current_file_number):
+                                        current_file_number = int(file_number)
+
+                            output_file_save_name = "./output/output_" + str(current_file_number + 1) + ".mp4"
+                            out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 60, (frame.shape[1],frame.shape[0]))
+                            for i in range(len(frames)):
+                                out.write(frames[i])
+                            out.release()
+                            print(device_id)
+                            is_cached = True
+                            #write is_cached to a file
+                            with open('./is_cached.txt', 'w') as f:
+                                f.write(str(is_cached))
+                            
                     frames_counter = 0
                     frames = []
                     number_of_person_detected = 0
