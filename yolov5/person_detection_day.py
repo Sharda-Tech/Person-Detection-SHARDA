@@ -196,7 +196,13 @@ def predict():
     #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
     cap = cv2.VideoCapture(0)
     serial = getserial()
-    registration_status = register(serial)
+    REMOTE_SERVER = "www.google.com"
+    if is_connected(REMOTE_SERVER):
+        registration_status = register(serial)
+        
+    else:
+        registration_status == "Device id written to file"
+        
     if(registration_status == "Device id written to file"):
         #read the device id from the text file
         with open('device_id.txt', 'r') as f:
@@ -251,8 +257,8 @@ def predict():
         #print("New Time", new_time)
 
         if((new_time - prev_time) >= 10):
-
-            status_of_device = request_status(device_id)
+            if is_connected(REMOTE_SERVER):
+                status_of_device = request_status(device_id)
             print(status_of_device)
             #status_of_device = 'true'
 
