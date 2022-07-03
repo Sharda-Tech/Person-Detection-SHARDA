@@ -33,7 +33,7 @@ def check_if_12_hours(device_id):
             f.write("")
 
     #read time.txt
-    with open("time.txt", "r") as f:
+    with open("/home/pi/Person-Detection/yolov5/time.txt", "r") as f:
         time_string = f.read()
 
     if(time_string == ""):
