@@ -91,7 +91,7 @@ def request_status(device_id):
   return status[1]
 
 def write_log(detection):
-    with open('log.txt', 'a') as f:
+    with open('/home/pi/Person-Detection/yolov5/log.txt', 'a') as f:
         #write the date and time
         f.write(time.strftime("%d/%m/%Y %H:%M:%S"))
         f.write('\n')
@@ -106,9 +106,9 @@ def write_log(detection):
 
 def sent_video(device_id):
 
-    for file in os.listdir('./output'):
+    for file in os.listdir('/home/pi/Person-Detection/yolov5//output'):
 
-        file_path = os.path.join('./output', file)
+        file_path = os.path.join('/home/pi/Person-Detection/yolov5//output', file)
 
         url = "http://as99.zvastica.solutions/appapi/submitviolence"
         #payload = {'device_id': '1234'
@@ -129,8 +129,8 @@ def sent_video(device_id):
 
 
     #remove contents of output folder
-    for file in os.listdir('./output'):
-        file_path = os.path.join('./output', file)
+    for file in os.listdir('/home/pi/Person-Detection/yolov5//output'):
+        file_path = os.path.join('/home/pi/Person-Detection/yolov5//output', file)
         os.remove(file_path)
     
 
@@ -153,13 +153,13 @@ def predict():
     number_of_frames_not_detected = 0
 
     #if is_cache does not exist, create it
-    if not os.path.exists('is_cache.txt'):
-        with open('is_cache.txt', 'w') as f:
+    if not os.path.exists('/home/pi/Person-Detection/yolov5/is_cache.txt'):
+        with open('/home/pi/Person-Detection/yolov5/is_cache.txt', 'w') as f:
             f.write('')
             f.close()
     
     #read is_cached from file
-    with open('./is_cached.txt', 'r') as f:
+    with open('/home/pi/Person-Detection/yolov5//is_cached.txt', 'r') as f:
         is_cached = f.read()
         #print(type(bool(is_cached)))
         if("True" in is_cached):
@@ -173,7 +173,7 @@ def predict():
     if is_cached == '':
         is_cached = False
         #write is_cached to file
-        with open('./is_cached.txt', 'w') as f:
+        with open('/home/pi/Person-Detection/yolov5//is_cached.txt', 'w') as f:
             f.write(str(is_cached))
             f.close()
 
@@ -205,7 +205,7 @@ def predict():
         
     if(registration_status == "Device id written to file"):
         #read the device id from the text file
-        with open('device_id.txt', 'r') as f:
+        with open('/home/pi/Person-Detection/yolov5/device_id.txt', 'r') as f:
             device_id = f.read()
             f.close()
 
@@ -224,7 +224,7 @@ def predict():
         if is_connected(REMOTE_SERVER):
             print("connected")
             cache = False
-            with open('./is_cache.txt','w') as f:
+            with open('/home/pi/Person-Detection/yolov5//is_cache.txt','w') as f:
                 f.write(str(cache))
                 f.close
             log_data(device_id)
@@ -236,7 +236,7 @@ def predict():
                 sent_video(device_id)
                 is_cached = False
                 #write is_cached to file
-                with open('./is_cached.txt', 'w') as f:
+                with open('/home/pi/Person-Detection/yolov5//is_cached.txt', 'w') as f:
                     f.write(str(is_cached))
                     f.close()
 
@@ -244,7 +244,7 @@ def predict():
         else:
             print("not connected")
             cache = True
-            with open('./is_cache.txt', 'w') as f:
+            with open('/home/pi/Person-Detection/yolov5//is_cache.txt', 'w') as f:
                 f.write(str(cache))
                 f.close()
         
@@ -336,20 +336,20 @@ def predict():
                     if is_connected(REMOTE_SERVER):
                         print("connected")
                         cache = False
-                        with open('./is_cache.txt', 'w') as f:
+                        with open('/home/pi/Person-Detection/yolov5//is_cache.txt', 'w') as f:
                             f.write(str(cache))
                             f.close()
 
                     else:
                         print("not connected")
                         cache = True
-                        with open('./is_cache.txt', 'w') as f:
+                        with open('/home/pi/Person-Detection/yolov5//is_cache.txt', 'w') as f:
                             f.write(str(cache))
                             f.close()
                     if(cache == False):
                         #write a list of frames in a video
                         current_file_number = 0
-                        output_file_save_name = './output/output_' + str(current_file_number) + '.mp4'
+                        output_file_save_name = '/home/pi/Person-Detection/yolov5/output/output_' + str(current_file_number) + '.mp4'
                         out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 60, (frame.shape[1],frame.shape[0]))
                         for i in range(len(frames)):
                             out.write(frames[i])
@@ -363,7 +363,7 @@ def predict():
                     if(cache == True):
                         current_file_number = 0
                         #find the folders in the cache folder
-                        for file in os.listdir('./output'):
+                        for file in os.listdir('/home/pi/Person-Detection/yolov5/output'):
                             if file.endswith(".mp4"):
                                 file_number = file.split("_")[1]
                                 file_number = file_number.split(".")[0]
@@ -371,7 +371,7 @@ def predict():
                                 if(int(file_number) > current_file_number):
                                     current_file_number = int(file_number)
 
-                        output_file_save_name = "./output/output_" + str(current_file_number + 1) + ".mp4"
+                        output_file_save_name = "/home/pi/Person-Detection/yolov5/output/output_" + str(current_file_number + 1) + ".mp4"
                         out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 60, (frame.shape[1],frame.shape[0]))
                         for i in range(len(frames)):
                             out.write(frames[i])
@@ -379,7 +379,7 @@ def predict():
                         print(device_id)
                         is_cached = True
                         #write is_cached to a file
-                        with open('./is_cached.txt', 'w') as f:
+                        with open('/home/pi/Person-Detection/yolov5/is_cached.txt', 'w') as f:
                             f.write(str(is_cached))
                         frames = []
 
@@ -395,20 +395,20 @@ def predict():
                         if is_connected(REMOTE_SERVER):
                             print("connected")
                             cache = False
-                            with open('./is_cache.txt', 'w') as f:
+                            with open('/home/pi/Person-Detection/yolov5/is_cache.txt', 'w') as f:
                                 f.write(str(cache))
                                 f.close()
 
                         else:
                             print("not connected")
                             cache = True
-                            with open('./is_cache.txt', 'w') as f:
+                            with open('/home/pi/Person-Detection/yolov5/is_cache.txt', 'w') as f:
                                 f.write(str(cache))
                                 f.close()
                         if(cache == False):
                             #write a list of frames in a video
                             current_file_number = 0
-                            output_file_save_name = './output/output_' + str(current_file_number) + '.mp4'
+                            output_file_save_name = '/home/pi/Person-Detection/yolov5/output/output_' + str(current_file_number) + '.mp4'
                             out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 60, (frame.shape[1],frame.shape[0]))
                             for i in range(len(frames)):
                                 out.write(frames[i])
@@ -422,7 +422,7 @@ def predict():
                         if(cache == True):
                             current_file_number = 0
                             #find the folders in the cache folder
-                            for file in os.listdir('./output'):
+                            for file in os.listdir('/home/pi/Person-Detection/yolov5/output'):
                                 if file.endswith(".mp4"):
                                     file_number = file.split("_")[1]
                                     file_number = file_number.split(".")[0]
@@ -430,7 +430,7 @@ def predict():
                                     if(int(file_number) > current_file_number):
                                         current_file_number = int(file_number)
 
-                            output_file_save_name = "./output/output_" + str(current_file_number + 1) + ".mp4"
+                            output_file_save_name = "/home/pi/Person-Detection/yolov5/output/output_" + str(current_file_number + 1) + ".mp4"
                             out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 60, (frame.shape[1],frame.shape[0]))
                             for i in range(len(frames)):
                                 out.write(frames[i])
@@ -438,7 +438,7 @@ def predict():
                             print(device_id)
                             is_cached = True
                             #write is_cached to a file
-                            with open('./is_cached.txt', 'w') as f:
+                            with open('/home/pi/Person-Detection/yolov5/is_cached.txt', 'w') as f:
                                 f.write(str(is_cached))
                             
                     frames_counter = 0

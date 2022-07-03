@@ -25,11 +25,11 @@ def send_request_every_12_hours(device_id):
 def check_if_12_hours(device_id):
 
     #if time.txt is not present, create it
-    if not os.path.exists("time.txt"):
-        with open("time.txt", "w") as f:
+    if not os.path.exists("/home/pi/Person-Detection/yolov5/time.txt"):
+        with open("/home/pi/Person-Detection/yolov5/time.txt", "w") as f:
             f.write("")
-    if not os.path.exists("current_time.txt"):
-        with open("current_time.txt", "w") as f:
+    if not os.path.exists("/home/pi/Person-Detection/yolov5/current_time.txt"):
+        with open("/home/pi/Person-Detection/yolov5/current_time.txt", "w") as f:
             f.write("")
 
     #read time.txt
@@ -38,7 +38,7 @@ def check_if_12_hours(device_id):
 
     if(time_string == ""):
         start_time = time.time()
-        with open('time.txt', 'w') as f:
+        with open('/home/pi/Person-Detection/yolov5/time.txt', 'w') as f:
             f.write(str(start_time))
 
     else:
@@ -49,14 +49,14 @@ def check_if_12_hours(device_id):
 
     current_time = time.time()
     #write current time to a file
-    with open('current_time.txt', 'w') as f:
+    with open('/home/pi/Person-Detection/yolov5/current_time.txt', 'w') as f:
         f.write(str(current_time))
 
     if(current_time - start_time > 43200):
         print("Sent  Device Status")
         send_request_every_12_hours(device_id)
         start_time = time.time()
-        with open('time.txt', 'w') as f:
+        with open('/home/pi/Person-Detection/yolov5/time.txt', 'w') as f:
             f.write(str(start_time))
 
 

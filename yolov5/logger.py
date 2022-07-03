@@ -26,18 +26,18 @@ def log_data(device_id):
     
     current_time = time.time()
     #create current time file if it doesn't exist
-    if not os.path.exists("current_time.txt"):
-        with open("current_time.txt", "w") as f:
+    if not os.path.exists("/home/pi/Person-Detection/yolov5/current_time.txt"):
+        with open("/home/pi/Person-Detection/yolov5/current_time.txt", "w") as f:
             f.write("")
 
 
     #read current time file
-    with open("current_time.txt", "r") as f:
+    with open("/home/pi/Person-Detection/yolov5/current_time.txt", "r") as f:
         time_string = f.read()
 
     if(time_string == ""):
         current_time = time.time()
-        with open('current_time.txt', 'w') as f:
+        with open('/home/pi/Person-Detection/yolov5/current_time.txt', 'w') as f:
             f.write(str(current_time))
 
 
@@ -53,7 +53,7 @@ def log_data(device_id):
         log_sent(device_id, status)
 
     #read is_cached.txt file
-    with open("is_cached.txt", "r") as f:
+    with open("/home/pi/Person-Detection/yolov5/is_cached.txt", "r") as f:
         is_cached =  f.read()
         #change True in string to boolean
         #print(is_cached)
