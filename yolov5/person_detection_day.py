@@ -62,7 +62,7 @@ def register(serial):
 
 
 def request_status(device_id):
-  url = "http://as99.zvastica.solutions/appapi/checkdevicestatus"
+  url = "http://as99.zvastica.solutions/appapi/checkdevicestatusbyhw"
 
   #payload = "{\n    \"device_id\":\"2\"\n }"
   payload = "{ \n \n \"device_id\" : " + device_id + " \n \n \n}"
@@ -445,12 +445,12 @@ def predict():
             record_time = time.time()
             write_log(number_of_person_detected)
 
-        cv2.imshow("CSI Camera", frame)
-        keyCode = cv2.waitKey(30)
-        if keyCode == ord('q'):
-                break      
-    cap.release()
-    cv2.destroyAllWindows()
+        #cv2.imshow("CSI Camera", frame)
+        #keyCode = cv2.waitKey(30)
+        #if keyCode == ord('q'):
+        #        break      
+    #cap.release()
+    #cv2.destroyAllWindows()
 
 
 

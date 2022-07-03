@@ -3,7 +3,7 @@ import time
 pygame.mixer.init()
 speaker_volume  = 1
 pygame.mixer.music.set_volume(speaker_volume)
-pygame.mixer.music.load('./siren.wav')
+pygame.mixer.music.load('/home/pi/Person-Detection/yolov5/siren.wav')
 
 
 def play_sound(duration):
