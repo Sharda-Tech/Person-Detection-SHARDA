@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import os
+os.chmod(0o777)
 from elements.yolo import OBJ_DETECTION
 from email_sender import send_email
 import requests
@@ -9,7 +11,6 @@ pi = PI()
 from check_internet_connectivity import is_connected
 from sent_status_every_12_hours import check_if_12_hours
 from logger import log_data
-import os
 from sound import play_sound
 
 
@@ -256,7 +257,7 @@ def predict():
         #print("Previous Time", prev_time)
         #print("New Time", new_time)
 
-        if((new_time - prev_time) >= 10):
+        if((new_time - prev_time) >= 4):
             if is_connected(REMOTE_SERVER):
                 status_of_device = request_status(device_id)
             print(status_of_device)
@@ -454,7 +455,7 @@ def predict():
         #cv2.imshow("CSI Camera", frame)
         #keyCode = cv2.waitKey(30)
         #if keyCode == ord('q'):
-        #        break      
+                #break      
     #cap.release()
     #cv2.destroyAllWindows()
 

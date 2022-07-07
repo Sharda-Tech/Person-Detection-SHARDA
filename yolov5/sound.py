@@ -1,3 +1,6 @@
+import os
+#os.environ["XDG_RUNTIME_DIR"]="/run/pi/1000"
+#os.environ["PULSE_RUNTIME_PATH"]="/run/pi/1000/pulse/"
 import pygame
 import time
 pygame.mixer.init()
@@ -11,5 +14,6 @@ def play_sound(duration):
     time.sleep(duration)
 
 if __name__ == "__main__":
-    play_sound(40)
+    while(True):
+        play_sound(40)
 
