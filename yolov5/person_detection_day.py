@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 import os
-os.chmod(0o777)
 from elements.yolo import OBJ_DETECTION
 from email_sender import send_email
 import requests
@@ -152,6 +151,8 @@ def predict():
     frames = []
     not_detected_frames_thresh = 10
     number_of_frames_not_detected = 0
+
+    
 
     #if is_cache does not exist, create it
     if not os.path.exists('/home/pi/Person-Detection/yolov5/is_cache.txt'):
