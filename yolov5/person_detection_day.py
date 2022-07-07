@@ -55,7 +55,7 @@ def register(serial):
             print("Device id is", k[1])
             #save the device id in a text file
             device_id = k[1]
-            with open('device_id.txt', 'w') as f:
+            with open('/home/pi/Person-Detection/yolov5/device_id.txt', 'w') as f:
                 f.write(device_id)
                 f.close()
             return "Device id written to file"
@@ -152,7 +152,7 @@ def predict():
     not_detected_frames_thresh = 10
     number_of_frames_not_detected = 0
 
-    
+
 
     #if is_cache does not exist, create it
     if not os.path.exists('/home/pi/Person-Detection/yolov5/is_cache.txt'):
