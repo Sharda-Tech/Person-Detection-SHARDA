@@ -11,9 +11,9 @@ def is_connected(hostname):
     s.close()
     return True
   except:
-     pass
-  return False
+    return False
 
 
 if __name__ == "__main__":
-  print("connected: %s" % is_connected(REMOTE_SERVER))
+  while(True):
+    print("connected: %s" % is_connected(REMOTE_SERVER))

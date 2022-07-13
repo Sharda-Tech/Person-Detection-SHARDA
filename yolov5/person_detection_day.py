@@ -260,7 +260,14 @@ def predict():
 
         if((new_time - prev_time) >= 4):
             if is_connected(REMOTE_SERVER):
-                status_of_device = request_status(device_id)
+                original_status = status_of_device
+                try:
+                    y = request_status(device_id)
+
+                except:
+                    y = original_status
+
+                status_of_device = y
             print(status_of_device)
             #status_of_device = 'true'
 
