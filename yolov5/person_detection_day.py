@@ -468,12 +468,12 @@ def predict():
             record_time = time.time()
             write_log(number_of_person_detected)
 
-        cv2.imshow("CSI Camera", frame)
-        keyCode = cv2.waitKey(30)
-        if keyCode == ord('q'):
-                break      
-    cap.release()
-    cv2.destroyAllWindows()
+        #cv2.imshow("CSI Camera", frame)
+        #keyCode = cv2.waitKey(30)
+        #if keyCode == ord('q'):
+                #break      
+    #cap.release()
+    #cv2.destroyAllWindows()
 
 
 
