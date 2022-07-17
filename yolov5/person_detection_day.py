@@ -203,7 +203,7 @@ def predict():
         registration_status = register(serial)
         
     else:
-        registration_status == "Device id written to file"
+        registration_status = "Device id written to file"
         
     if(registration_status == "Device id written to file"):
         #read the device id from the text file
