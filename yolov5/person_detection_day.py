@@ -221,13 +221,13 @@ def predict():
                     y = request_status(device_id)
 
                 except:
-                    y = false
+                    y = 'false'
 
                 status_of_device = y
 
         else:
 
-            status_of_device = false
+            status_of_device = 'false'
 
         prev_time = new_time
         new_time = time.time()
