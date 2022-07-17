@@ -213,8 +213,17 @@ def predict():
 
     if(prev_time == 0):
 
-        status_of_device = request_status(device_id)
-        #status_of_device = 'false'
+        # status_of_device = request_status(device_id)
+        # #status_of_device = 'false'
+
+        if is_connected(REMOTE_SERVER):
+                try:
+                    y = request_status(device_id)
+
+                except:
+                    y = False
+
+                status_of_device = y
 
         prev_time = new_time
         new_time = time.time()
