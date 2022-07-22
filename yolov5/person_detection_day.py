@@ -243,7 +243,7 @@ def predict():
                 f.write(str(cache))
                 f.close
             log_data(device_id)
-            check_if_12_hours(device_id)
+            #check_if_12_hours(device_id)
         
             if( is_cached == True):
                 print("Cached")
