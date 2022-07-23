@@ -54,7 +54,7 @@ def check_if_12_hours(device_id):
 
     if(current_time - start_time > 43200):
         print("Sent  Device Status")
-        send_request_every_12_hours(device_id)
+        #send_request_every_12_hours(device_id)
         start_time = time.time()
         with open('/home/pi/Person-Detection/yolov5/time.txt', 'w') as f:
             f.write(str(start_time))

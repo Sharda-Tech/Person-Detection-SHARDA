@@ -242,8 +242,14 @@ def predict():
             with open('/home/pi/Person-Detection/yolov5//is_cache.txt','w') as f:
                 f.write(str(cache))
                 f.close
-            log_data(device_id)
-            #check_if_12_hours(device_id)
+            try:
+
+                log_data(device_id)
+                check_if_12_hours(device_id)
+
+            except:
+
+                pass
         
             if( is_cached == True):
                 print("Cached")
