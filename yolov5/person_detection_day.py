@@ -11,6 +11,7 @@ from check_internet_connectivity import is_connected
 from sent_status_every_12_hours import check_if_12_hours
 from logger import log_data
 from sound import play_sound
+import func_timeout
 
 
 def getserial():
@@ -104,28 +105,70 @@ def write_log(detection):
         f.write('CPU temperature is ' +  str(pi.get_cpu_temp()))
         f.write('\n')
 
+
+
+def send_video_file(file_path):
+
+    url = "http://as99.zvastica.solutions/appapi/submitviolence"
+    #payload = {'device_id': '1234'
+    device_id = device_id.replace("\"", "")
+    payload = {'device_id': device_id}
+    #payload = "{\'device_id\': " + device_id + "00" + "}"
+    print(payload)
+    files = [
+    ('file', open( file_path ,'rb'))
+    ]
+    headers = {
+    'Cookie': 'ci_session=sn7n11lsss9vdlrej79sq6s1o0c5mm3r'
+    }
+
+    response = requests.request("POST", url, headers=headers, data = payload, files = files)
+
+    print(response.text.encode('utf8'))
+
+
 def sent_video(device_id):
 
+    max_wait = 60
+
     for file in os.listdir('/home/pi/Person-Detection/yolov5//output'):
+        
 
         file_path = os.path.join('/home/pi/Person-Detection/yolov5//output', file)
 
-        url = "http://as99.zvastica.solutions/appapi/submitviolence"
-        #payload = {'device_id': '1234'
-        device_id = device_id.replace("\"", "")
-        payload = {'device_id': device_id}
-        #payload = "{\'device_id\': " + device_id + "00" + "}"
-        print(payload)
-        files = [
-        ('file', open( file_path ,'rb'))
-        ]
-        headers = {
-        'Cookie': 'ci_session=sn7n11lsss9vdlrej79sq6s1o0c5mm3r'
-        }
 
-        response = requests.request("POST", url, headers=headers, data = payload, files = files)
+        try:
+            #response = request("POST", url, headers=headers, data = payload, files = files)
+            func_timeout.func_timeout(max_wait, send_video_file, args = [file_path])
+            print("Video sent", file_path)
+            os.remove(file_path)
+        except func_timeout.FunctionTimedOut:
+            print("Timeout")
+            return False
 
-        print(response.text.encode('utf8'))
+    #check if output dir is empty
+    if not os.listdir('/home/pi/Person-Detection/yolov5//output'):
+        print("No files to send")
+        return True
+            
+        
+
+        # url = "http://as99.zvastica.solutions/appapi/submitviolence"
+        # #payload = {'device_id': '1234'
+        # device_id = device_id.replace("\"", "")
+        # payload = {'device_id': device_id}
+        # #payload = "{\'device_id\': " + device_id + "00" + "}"
+        # print(payload)
+        # files = [
+        # ('file', open( file_path ,'rb'))
+        # ]
+        # headers = {
+        # 'Cookie': 'ci_session=sn7n11lsss9vdlrej79sq6s1o0c5mm3r'
+        # }
+
+        # response = requests.request("POST", url, headers=headers, data = payload, files = files)
+
+        # print(response.text.encode('utf8'))
 
 
     #remove contents of output folder
@@ -254,8 +297,9 @@ def predict():
             if( is_cached == True):
                 print("Cached")
                 print(device_id)
-                sent_video(device_id)
-                is_cached = False
+                video_sent_status = sent_video(device_id)
+                if(video_sent_status == True):
+                    is_cached = False
                 #write is_cached to file
                 with open('/home/pi/Person-Detection/yolov5//is_cached.txt', 'w') as f:
                     f.write(str(is_cached))

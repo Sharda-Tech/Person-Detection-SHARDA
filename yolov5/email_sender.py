@@ -7,7 +7,7 @@ def send_email(mess):
     server.ehlo()
     server.starttls()
     server.ehlo()
-    server.login('sh.dee2022@gmail.com', 'deepaksh2022')
+    server.login('sh.dee2022@gmail.com', 'G@ur@v@127')
     subject = "Count for TIPPER, TRUCK & TRACTOR"
     msg = f"Subject: {subject}\n\n\n{mess}"
     server.sendmail('sh.dee2022@gmail.com', 'gauravbarua614@gmail.com', msg)
