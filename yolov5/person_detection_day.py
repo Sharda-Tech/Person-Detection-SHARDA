@@ -107,7 +107,7 @@ def write_log(detection):
 
 
 
-def send_video_file(file_path):
+def send_video_file(device_id,file_path):
 
     url = "http://as99.zvastica.solutions/appapi/submitviolence"
     #payload = {'device_id': '1234'
@@ -146,7 +146,7 @@ def sent_video(device_id):
 
         try:
             #response = request("POST", url, headers=headers, data = payload, files = files)
-            y = func_timeout.func_timeout(max_wait, send_video_file, args = [file_path])
+            y = func_timeout.func_timeout(max_wait, send_video_file, args = [device_id,file_path])
             if (y == True):
                 print("Video sent")
                 os.remove(file_path)
