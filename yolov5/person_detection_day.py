@@ -122,10 +122,17 @@ def send_video_file(file_path):
     'Cookie': 'ci_session=sn7n11lsss9vdlrej79sq6s1o0c5mm3r'
     }
 
-    response = requests.request("POST", url, headers=headers, data = payload, files = files)
+    try:
 
-    print(response.text.encode('utf8'))
+        response = requests.request("POST", url, headers=headers, data = payload, files = files)
+        print(response.text.encode('utf8'))
+        
+        return True
 
+    except:
+        return False
+
+    
 
 def sent_video(device_id):
 
@@ -139,9 +146,14 @@ def sent_video(device_id):
 
         try:
             #response = request("POST", url, headers=headers, data = payload, files = files)
-            func_timeout.func_timeout(max_wait, send_video_file, args = [file_path])
-            print("Video sent", file_path)
-            os.remove(file_path)
+            y = func_timeout.func_timeout(max_wait, send_video_file, args = [file_path])
+            if (y == True):
+                print("Video sent")
+                os.remove(file_path)
+                return True
+            else:
+                print("Video not sent")
+                return False
         except func_timeout.FunctionTimedOut:
             print("Timeout")
             return False
