@@ -150,7 +150,6 @@ def sent_video(device_id):
             if (y == True):
                 print("Video sent")
                 os.remove(file_path)
-                return True
             else:
                 print("Video not sent")
                 return False
