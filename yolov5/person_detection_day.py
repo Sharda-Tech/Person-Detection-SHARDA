@@ -295,10 +295,10 @@ def predict():
         f.close()
 
         if(lines[0] == True):
-            status_of_device = true
+            status_of_device = 'true'
 
         else:
-            status_of_device = false
+            status_of_device = 'false'
         
         print("Status of Device",status_of_device)
         REMOTE_SERVER = "www.google.com"
