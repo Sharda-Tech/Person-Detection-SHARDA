@@ -300,6 +300,7 @@ def predict():
         else:
             status_of_device = false
         
+        print("Status of Device",status_of_device)
         REMOTE_SERVER = "www.google.com"
         if is_connected(REMOTE_SERVER):
             print("connected")
