@@ -265,29 +265,40 @@ def predict():
             device_id = f.read()
             f.close()
 
-    if(prev_time == 0):
+    # if(prev_time == 0):
 
-        # status_of_device = request_status(device_id)
-        # #status_of_device = 'false'
+    #     # status_of_device = request_status(device_id)
+    #     # #status_of_device = 'false'
 
-        if is_connected(REMOTE_SERVER):
-                try:
-                    y = request_status(device_id)
+    #     if is_connected(REMOTE_SERVER):
+    #             try:
+    #                 y = request_status(device_id)
 
-                except:
-                    y = 'false'
+    #             except:
+    #                 y = 'false'
 
-                status_of_device = y
+    #             status_of_device = y
 
-        else:
+    #     else:
 
-            status_of_device = 'false'
+    #         status_of_device = 'false'
 
-        prev_time = new_time
-        new_time = time.time()
+    #     prev_time = new_time
+    #     new_time = time.time()
 
 
     while cap.isOpened():
+
+        with open('./device_status.txt') as f:
+            lines = f.readlines()
+            #print(lines)
+        f.close()
+
+        if(lines[0] == True):
+            status_of_device = true
+
+        else:
+            status_of_device = false
         
         REMOTE_SERVER = "www.google.com"
         if is_connected(REMOTE_SERVER):
@@ -332,21 +343,21 @@ def predict():
         #print("Previous Time", prev_time)
         #print("New Time", new_time)
 
-        if((new_time - prev_time) >= 4):
-            if is_connected(REMOTE_SERVER):
-                original_status = status_of_device
-                try:
-                    y = request_status(device_id)
+        # if((new_time - prev_time) >= 4):
+        #     if is_connected(REMOTE_SERVER):
+        #         original_status = status_of_device
+        #         try:
+        #             y = request_status(device_id)
 
-                except:
-                    y = original_status
+        #         except:
+        #             y = original_status
 
-                status_of_device = y
-            print(status_of_device)
-            #status_of_device = 'true'
+        #         status_of_device = y
+        #     print(status_of_device)
+        #     #status_of_device = 'true'
 
-            prev_time = new_time
-            new_time = time.time()
+        #     prev_time = new_time
+        #     new_time = time.time()
 
         if ret and status_of_device == 'true':
             # detection process
