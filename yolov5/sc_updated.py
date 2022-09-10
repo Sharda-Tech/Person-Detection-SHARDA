@@ -1,6 +1,6 @@
 import socketio
 import requests
-from person_detection_day import getserial
+#from person_detection_day import getserial
 sio = socketio.Client()
 
 
@@ -31,9 +31,9 @@ def register(serial):
         k = i.split(':')   
         if(k[0] == '{"device_id"'):
             #print("Device is not registered")
-            print("Device id is", k[1])
+            print("Device id is", k[1][1:-1])
             #save the device id in a text file
-            device_id = k[1]
+            device_id = k[1][1:-1]
             return device_id
 
 
@@ -62,14 +62,15 @@ if __name__ == "__main__":
         except:
             print("Retrying")
             continue
-    serial = getserial()
-    #serial = "1112233"
+    #serial = getserial()
+    serial = "1112233"
     try:
         device_id = register(serial)
     except:
         print("Do Not Know the ID please connect to the Internet")
         with open('/home/pi/Person-Detection/yolov5/device_id.txt', 'r') as f:
             device_id = f.read()
+            device_id = device_id[1:-1]
             f.close()
     id = serial
     name = device_id
