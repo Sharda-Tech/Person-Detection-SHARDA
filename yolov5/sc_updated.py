@@ -6,7 +6,7 @@ sio = socketio.Client()
 
 class connect():
     def __init__(self):
-        serial = getserial()
+        self.serial = getserial()
         try:
             self.device_id = self.register()
         except:
