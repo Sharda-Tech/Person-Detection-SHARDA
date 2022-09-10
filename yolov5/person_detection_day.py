@@ -293,8 +293,8 @@ def predict():
             lines = f.readlines()
             #print(lines)
         f.close()
-
-        if(lines[0] == True):
+        #print("Type of lines[0]",type(lines[0]))
+        if(lines[0] == "True"):
             status_of_device = 'true'
 
         else:
