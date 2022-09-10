@@ -1,12 +1,12 @@
 import socketio
 import requests
-#from person_detection_day import getserial
+from person_detection_day import getserial
 sio = socketio.Client()
 
 
 class connect():
     def __init__(self):
-        self.serial = "1112233"
+        serial = getserial()
         try:
             self.device_id = self.register()
         except:
