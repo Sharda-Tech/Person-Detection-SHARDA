@@ -289,7 +289,7 @@ def predict():
 
     while cap.isOpened():
 
-        with open('./device_status.txt') as f:
+        with open('/home/pi/Person-Detection/yolov5/device_status.txt') as f:
             lines = f.readlines()
             #print(lines)
         f.close()
