@@ -2,10 +2,12 @@ import socketio
 import requests
 from person_detection_day import getserial
 sio = socketio.Client()
+import time
 
 
 class connect():
     def __init__(self):
+        #self.serial = '1122'
         self.serial = getserial()
         try:
             self.device_id = self.register()
@@ -62,7 +64,13 @@ class connect():
     #@sio.on('connect')
     def reg_client(self):
         print("Id is ", self.id, "Name is", self.name)
-        sio.emit('storeClientInfo', {'customId': self.id, 'name': self.name})
+        try:
+            y = sio.emit('storeClientInfo', {'customId': self.id, 'name': self.name})
+            print(y)
+        except:
+            pass
+            
+        
         print('Done')
 
 
@@ -72,12 +80,20 @@ if __name__ == "__main__":
 
     while (True):
         try:
-            sio.connect('http://156.67.216.28:8800/')
-            break
-        except:
-            print("Retrying")
-            continue
+            k = sio.connect('http://156.67.216.28:8800/')
+            cc = connect()
+            cc.reg_client()
+            #break
+        except Exception as e:
+            pass
+            #print(e)
+            
     #serial = getserial()
-    cc = connect()
-    cc.reg_client()
+    # cc = connect()
+    # prev_time = 0
+    # while(True):
+    #     current_time = time.time()
+    #     if(current_time - prev_time > 10):
+    #         cc.reg_client()
+    #         prev_time = current_time
 
