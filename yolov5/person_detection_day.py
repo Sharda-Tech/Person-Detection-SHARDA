@@ -471,7 +471,7 @@ def predict():
                         out.release()
                         #print(device_id)
                         video_sent_status = sent_video(device_id)
-                        if video_sent_status == True:
+                        #if video_sent_status == True:
                             #print("Video sent")
                         frames = []
 
@@ -530,7 +530,7 @@ def predict():
                             out.release()
                             #print(device_id)
                             video_sent_status = sent_video(device_id)
-                            if video_sent_status == True:
+                            #if video_sent_status == True:
                                 #print("Video sent")
                             frames = []
 
