@@ -85,6 +85,10 @@ if __name__ == "__main__":
             cc.reg_client()
             #break
         except Exception as e:
+            if e == 'Already connected':
+                print("Running Through")
+                cc = connect()
+                cc.reg_client()
             pass
             #print(e)
             
