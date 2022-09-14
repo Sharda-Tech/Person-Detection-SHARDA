@@ -92,19 +92,31 @@ def request_status(device_id):
   return status[1]
 
 def write_log(detection):
-    with open('/home/pi/Person-Detection/yolov5/log.txt', 'a') as f:
-        #write the date and time
-        f.write(time.strftime("%d/%m/%Y %H:%M:%S"))
-        f.write('\n')
-        f.write("Number of Detection: " +  str(detection))
-        f.write('\n')
-        f.write('Cpu Usage is' +  str(pi.get_cpu_usage()))
-        f.write('\n')
-        f.write('Memory Usage is ' + str( pi.get_ram_info()))
-        f.write('\n')
-        f.write('CPU temperature is ' +  str(pi.get_cpu_temp()))
-        f.write('\n')
-
+    
+    try:
+    
+        file_path = '/home/pi/Person-Detection/yolov5/log.txt'
+        #get file size
+        fileSize = os.path.getsize(file_path)
+        filesize_GB =  (fileSize/(1024*1024*1024))
+        if filesize_GB > 1:
+            #remove label.txt
+            os.remove(file_path)
+        with open('/home/pi/Person-Detection/yolov5/log.txt', 'a') as f:
+            #write the date and time
+            f.write(time.strftime("%d/%m/%Y %H:%M:%S"))
+            f.write('\n')
+            f.write("Number of Detection: " +  str(detection))
+            f.write('\n')
+            f.write('Cpu Usage is' +  str(pi.get_cpu_usage()))
+            f.write('\n')
+            f.write('Memory Usage is ' + str( pi.get_ram_info()))
+            f.write('\n')
+            f.write('CPU temperature is ' +  str(pi.get_cpu_temp()))
+            f.write('\n')
+            
+    except:
+        pass
 
 
 def send_video_file(device_id,file_path):
