@@ -36,7 +36,7 @@ def register(serial):
 
     #payload="{\n   \n \"hardwar_id\" :\"devicde_serial_no\"\n      \n        \n}"
     payload = "{ \n \n \"hardwar_id\" : \"" + myserial + "\" \n \n \n}"
-    print(payload)
+    #print(payload)
     headers = {
     'Content-Type': 'application/json',
     'Cookie': 'ci_session=jsunnmfv9mlfgs7cbcu0nlt8rg2op8up'
@@ -44,16 +44,16 @@ def register(serial):
 
     response = requests.request("POST", url, headers=headers, data=payload)
 
-    print(response.text)
+    #print(response.text)
 
     #split string using ','
     str = response.text.split(',')
     for i in str:
-        #print(i)
+        ##print(i)
         k = i.split(':')   
         if(k[0] == '{"device_id"'):
-            #print("Device is not registered")
-            print("Device id is", k[1])
+            ##print("Device is not registered")
+            #print("Device id is", k[1])
             #save the device id in a text file
             device_id = k[1]
             with open('/home/pi/Person-Detection/yolov5/device_id.txt', 'w') as f:
@@ -73,21 +73,21 @@ def request_status(device_id):
 
   response = requests.request("POST", url, headers=headers, data = payload)
 
-  #print(response.text.encode('utf8'))
+  ##print(response.text.encode('utf8'))
 
   #convert byte to string
 
-  print(response.text)
+  #print(response.text)
 
   #split string using ','
 
   str = response.text.split(',')
 
-  #print(str[1])
+  ##print(str[1])
 
   status = str[1].split(':')
 
-  #print(status[1])
+  ##print(status[1])
 
   return status[1]
 
@@ -126,7 +126,7 @@ def send_video_file(device_id,file_path):
     device_id = device_id.replace("\"", "")
     payload = {'device_id': device_id}
     #payload = "{\'device_id\': " + device_id + "00" + "}"
-    print(payload)
+    #print(payload)
     files = [
     ('file', open( file_path ,'rb'))
     ]
@@ -137,7 +137,7 @@ def send_video_file(device_id,file_path):
     try:
 
         response = requests.request("POST", url, headers=headers, data = payload, files = files)
-        print(response.text.encode('utf8'))
+        #print(response.text.encode('utf8'))
         
         return True
 
@@ -160,18 +160,18 @@ def sent_video(device_id):
             #response = request("POST", url, headers=headers, data = payload, files = files)
             y = func_timeout.func_timeout(max_wait, send_video_file, args = [device_id,file_path])
             if (y == True):
-                print("Video sent")
+                #print("Video sent")
                 os.remove(file_path)
             else:
-                print("Video not sent")
+                #print("Video not sent")
                 return False
         except func_timeout.FunctionTimedOut:
-            print("Timeout")
+            #print("Timeout")
             return False
 
     #check if output dir is empty
     if not os.listdir('/home/pi/Person-Detection/yolov5//output'):
-        print("No files to send")
+        #print("No files to send")
         return True
             
         
@@ -181,7 +181,7 @@ def sent_video(device_id):
         # device_id = device_id.replace("\"", "")
         # payload = {'device_id': device_id}
         # #payload = "{\'device_id\': " + device_id + "00" + "}"
-        # print(payload)
+        # #print(payload)
         # files = [
         # ('file', open( file_path ,'rb'))
         # ]
@@ -191,7 +191,7 @@ def sent_video(device_id):
 
         # response = requests.request("POST", url, headers=headers, data = payload, files = files)
 
-        # print(response.text.encode('utf8'))
+        # #print(response.text.encode('utf8'))
 
 
     #remove contents of output folder
@@ -229,7 +229,7 @@ def predict():
     #read is_cached from file
     with open('/home/pi/Person-Detection/yolov5//is_cached.txt', 'r') as f:
         is_cached = f.read()
-        #print(type(bool(is_cached)))
+        ##print(type(bool(is_cached)))
         if("True" in is_cached):
             is_cached = True
 
@@ -260,7 +260,7 @@ def predict():
     Object_detector = OBJ_DETECTION('/home/pi/Person-Detection/yolov5/yolov5n-int8.tflite', Object_classes)
     # Return true if line segments AB and CD intersect
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
-    #print(gstreamer_pipeline(flip_method=0))
+    ##print(gstreamer_pipeline(flip_method=0))
     #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
     cap = cv2.VideoCapture(0)
     serial = getserial()
@@ -303,19 +303,19 @@ def predict():
 
         with open('/home/pi/Person-Detection/yolov5/device_status.txt') as f:
             lines = f.readlines()
-            #print(lines)
+            ##print(lines)
         f.close()
-        #print("Type of lines[0]",type(lines[0]))
+        ##print("Type of lines[0]",type(lines[0]))
         if(lines[0] == "True"):
             status_of_device = 'true'
 
         else:
             status_of_device = 'false'
         
-        print("Status of Device",status_of_device)
+        #print("Status of Device",status_of_device)
         REMOTE_SERVER = "www.google.com"
         if is_connected(REMOTE_SERVER):
-            print("connected")
+            #print("connected")
             cache = False
             with open('/home/pi/Person-Detection/yolov5//is_cache.txt','w') as f:
                 f.write(str(cache))
@@ -330,8 +330,8 @@ def predict():
                 pass
         
             if( is_cached == True):
-                print("Cached")
-                print(device_id)
+                #print("Cached")
+                #print(device_id)
                 video_sent_status = sent_video(device_id)
                 if(video_sent_status == True):
                     is_cached = False
@@ -342,7 +342,7 @@ def predict():
 
 
         else:
-            print("not connected")
+            #print("not connected")
             cache = True
             with open('/home/pi/Person-Detection/yolov5//is_cache.txt', 'w') as f:
                 f.write(str(cache))
@@ -353,8 +353,8 @@ def predict():
         #while cv2.getWindowProperty("CSI Camera", 0) >= 0 :
         ret, frame = cap.read()
         new_time = time.time()
-        #print("Previous Time", prev_time)
-        #print("New Time", new_time)
+        ##print("Previous Time", prev_time)
+        ##print("New Time", new_time)
 
         # if((new_time - prev_time) >= 4):
         #     if is_connected(REMOTE_SERVER):
@@ -366,7 +366,7 @@ def predict():
         #             y = original_status
 
         #         status_of_device = y
-        #     print(status_of_device)
+        #     #print(status_of_device)
         #     #status_of_device = 'true'
 
         #     prev_time = new_time
@@ -381,15 +381,15 @@ def predict():
             number_of_person_detected = 0
 
             for obj in objs:
-                # print(obj)
+                # #print(obj)
                 label = obj['label']
                 if((label == 'person')):
                     number_of_frames_not_detected = 0
                     number_of_person_detected +=1
-                    #print(label)
+                    ##print(label)
                     score = obj['score']
                     [(xmin,ymin),(xmax,ymax)] = obj['bbox']
-                    #print(xmin,ymin,xmax,ymax)
+                    ##print(xmin,ymin,xmax,ymax)
                     (x, y) = (xmin, ymin)
                     (w, h) = ((xmax-xmin),(ymax-ymin))
                     #color = Object_colors[Object_classes.index(label)]
@@ -418,10 +418,10 @@ def predict():
             if(number_of_person_detected == meta_of_number_of_person_detected['Number']):
                 meta_of_number_of_person_detected['frame_number'] += 1
             
-            print("Frames Counter", frames_counter)
-            print("Number of person detected:", meta_of_number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
+            #print("Frames Counter", frames_counter)
+            #print("Number of person detected:", meta_of_number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
             if((meta_of_number_of_person_detected['Number'] > previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
-                print("New Person Detected")
+                #print("New Person Detected")
                 previous_number_of_person_detected['Number'] = meta_of_number_of_person_detected['Number']
                 #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
                 if(video_sent_status == True):
@@ -430,7 +430,7 @@ def predict():
 
 
             elif((meta_of_number_of_person_detected['Number'] < previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
-                print("Person Detected Reduced")
+                #print("Person Detected Reduced")
                 previous_number_of_person_detected['Number'] = meta_of_number_of_person_detected['Number']
                 #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
                 if(video_sent_status == True):
@@ -449,14 +449,14 @@ def predict():
                     frames_counter = frames_counter + 1
                     REMOTE_SERVER = "www.google.com"
                     if is_connected(REMOTE_SERVER):
-                        print("connected")
+                        #print("connected")
                         cache = False
                         with open('/home/pi/Person-Detection/yolov5//is_cache.txt', 'w') as f:
                             f.write(str(cache))
                             f.close()
 
                     else:
-                        print("not connected")
+                        #print("not connected")
                         cache = True
                         with open('/home/pi/Person-Detection/yolov5//is_cache.txt', 'w') as f:
                             f.write(str(cache))
@@ -469,10 +469,10 @@ def predict():
                         for i in range(len(frames)):
                             out.write(frames[i])
                         out.release()
-                        print(device_id)
+                        #print(device_id)
                         video_sent_status = sent_video(device_id)
                         if video_sent_status == True:
-                            print("Video sent")
+                            #print("Video sent")
                         frames = []
 
                     if(cache == True):
@@ -491,7 +491,7 @@ def predict():
                         for i in range(len(frames)):
                             out.write(frames[i])
                         out.release()
-                        print(device_id)
+                        #print(device_id)
                         is_cached = True
                         #write is_cached to a file
                         with open('/home/pi/Person-Detection/yolov5/is_cached.txt', 'w') as f:
@@ -499,7 +499,7 @@ def predict():
                         frames = []
 
 
-            print("Number of Frames not detected" , number_of_frames_not_detected)
+            #print("Number of Frames not detected" , number_of_frames_not_detected)
             if(number_of_frames_not_detected < not_detected_frames_thresh and number_of_person_detected == 0):
                     number_of_frames_not_detected = number_of_frames_not_detected + 1
             elif(number_of_frames_not_detected >= not_detected_frames_thresh and number_of_person_detected == 0):
@@ -508,14 +508,14 @@ def predict():
                         frames_counter = frames_counter + 1
                         REMOTE_SERVER = "www.google.com"
                         if is_connected(REMOTE_SERVER):
-                            print("connected")
+                            #print("connected")
                             cache = False
                             with open('/home/pi/Person-Detection/yolov5/is_cache.txt', 'w') as f:
                                 f.write(str(cache))
                                 f.close()
 
                         else:
-                            print("not connected")
+                            #print("not connected")
                             cache = True
                             with open('/home/pi/Person-Detection/yolov5/is_cache.txt', 'w') as f:
                                 f.write(str(cache))
@@ -528,10 +528,10 @@ def predict():
                             for i in range(len(frames)):
                                 out.write(frames[i])
                             out.release()
-                            print(device_id)
+                            #print(device_id)
                             video_sent_status = sent_video(device_id)
                             if video_sent_status == True:
-                                print("Video sent")
+                                #print("Video sent")
                             frames = []
 
                         if(cache == True):
@@ -550,7 +550,7 @@ def predict():
                             for i in range(len(frames)):
                                 out.write(frames[i])
                             out.release()
-                            print(device_id)
+                            #print(device_id)
                             is_cached = True
                             #write is_cached to a file
                             with open('/home/pi/Person-Detection/yolov5/is_cached.txt', 'w') as f:

@@ -85,8 +85,8 @@ if __name__ == "__main__":
             cc.reg_client()
             #break
         except Exception as e:
-            #pass
-            print(e)
+            pass
+            #print(e)
             
     #serial = getserial()
     # cc = connect()
