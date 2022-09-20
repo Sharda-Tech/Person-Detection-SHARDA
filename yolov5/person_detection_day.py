@@ -276,6 +276,12 @@ def predict():
         with open('/home/pi/Person-Detection/yolov5/device_id.txt', 'r') as f:
             device_id = f.read()
             f.close()
+            
+            
+    with open('/home/pi/Desktop/Client Files/input.txt','w') as f:
+        f.write(device_id)
+        f.write(serial)
+        
 
     # if(prev_time == 0):
 
@@ -301,7 +307,7 @@ def predict():
 
     while cap.isOpened():
 
-        with open('/home/pi/Person-Detection/yolov5/device_status.txt') as f:
+        with open('/home/pi/Desktop/Client Files/test','r') as f:
             lines = f.readlines()
             ##print(lines)
         f.close()
