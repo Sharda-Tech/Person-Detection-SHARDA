@@ -277,9 +277,10 @@ def predict():
             device_id = f.read()
             f.close()
             
-            
+    device_id_temp = device_id[1:-1]
     with open('/home/pi/Desktop/Client Files/input.txt','w') as f:
-        f.write(device_id)
+        f.write(device_id_temp)
+        f.write('\n')
         f.write(serial)
         
 
@@ -318,7 +319,7 @@ def predict():
         else:
             status_of_device = 'false'
         
-        #print("Status of Device",status_of_device)
+        print("Status of Device",status_of_device)
         REMOTE_SERVER = "www.google.com"
         if is_connected(REMOTE_SERVER):
             #print("connected")
