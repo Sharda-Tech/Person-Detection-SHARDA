@@ -278,7 +278,7 @@ def predict():
             f.close()
             
     device_id_temp = device_id[1:-1]
-    with open('/home/pi/Desktop/Client Files/input.txt','w') as f:
+    with open('/home/pi/Desktop/Client/input.txt','w') as f:
         f.write(device_id_temp)
         f.write('\n')
         f.write(serial)
@@ -308,7 +308,7 @@ def predict():
 
     while cap.isOpened():
 
-        with open('/home/pi/Desktop/Client Files/test','r') as f:
+        with open('/home/pi/Desktop/Client/test','r') as f:
             lines = f.readlines()
             ##print(lines)
         f.close()
