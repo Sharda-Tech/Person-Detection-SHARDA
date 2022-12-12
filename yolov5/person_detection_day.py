@@ -325,7 +325,7 @@ def predict():
         if(lines[0] == "True"):
             status_of_device = 'true'
 
-        elif(lines[0] == "False"):
+        else:
             status_of_device = 'false'
         
         
