@@ -4,6 +4,8 @@ import os
 from elements.yolo import OBJ_DETECTION
 from email_sender import send_email
 import requests
+from requests_toolbelt.multipart.encoder import MultipartEncoder
+import datetime
 import time
 from pyembedded.raspberry_pi_tools.raspberrypi import PI
 pi = PI()
@@ -29,8 +31,8 @@ def getserial():
 
 
 def register(serial):
-    myserial =  serial
-    #myserial = "0013"
+    #myserial =  serial
+    myserial = "4545565612"
     url = "http://65.2.177.76/api/assign-hardware-device"
 
     #payload="{\n   \n \"hardwar_id\" :\"devicde_serial_no\"\n      \n        \n}"
@@ -101,22 +103,20 @@ def write_log(detection):
 def send_video_file(device_id,file_path):
 
     url = "http://65.2.177.76/api/add-video"
-    #payload = {'device_id': '1234'
-    device_id = device_id.replace("\"", "")
-    payload = {'device_id': device_id}
-    #payload = "{\'device_id\': " + device_id + "00" + "}"
-    #print(payload)
-    files = [
-    ('file', open( file_path ,'rb'))
-    ]
-    headers = {
-    'Cookie': 'ci_session=sn7n11lsss9vdlrej79sq6s1o0c5mm3r'
+    now = datetime.datetime.now(datetime.timezone.utc)
+    date_time_str = now.isoformat()
+    data = {
+        'device_id' : str(797833),
+        'video_file': ('vv.mp4', open(file_path, 'rb'), 'text/plain')
     }
+
+    multipart_data = MultipartEncoder(data)
 
     try:
 
-        response = requests.request("POST", url, headers=headers, data = payload, files = files)
-        print(response.text)
+        server = requests.post(url, data=multipart_data, headers={'Content-Type': multipart_data.content_type})
+        output = server.text
+        print('The response from the server is: \n', output)
         
         return True
 
@@ -218,7 +218,7 @@ def predict():
     #Object_colors = list(np.random.rand(80,3)*255)
     Object_detector = OBJ_DETECTION('/home/pi/Person-Detection-SHARDA/yolov5/yolov5n-int8.tflite', Object_classes)
     
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture('./output.avi')
     serial = getserial()
     REMOTE_SERVER = "www.google.com"
     if is_connected(REMOTE_SERVER):
@@ -374,7 +374,8 @@ def predict():
             if(video_sent_status == False and previous_number_of_person_detected['Number'] > 0):
                 if(frames_counter == 30):
                     #play sound
-                    play_sound(40)
+                    #play_sound(40)
+                    pass
                 if(frames_counter < 31):
                     frames_counter = frames_counter + 1
                     frames.append(frame)
@@ -498,11 +499,12 @@ def predict():
         if(time.time() - record_time >= 1):
             record_time = time.time()
             write_log(number_of_person_detected)
-
-        #cv2.imshow("CSI Camera", frame)
-        #keyCode = cv2.waitKey(30)
-        #if keyCode == ord('q'):
-                #break      
+        
+        frame = cv2.resize(frame,(640,480))
+        cv2.imshow("CSI Camera", frame)
+        keyCode = cv2.waitKey(30)
+        if keyCode == ord('q'):
+                break      
     #cap.release()
     #cv2.destroyAllWindows()
 
