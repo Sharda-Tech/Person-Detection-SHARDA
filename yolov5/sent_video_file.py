@@ -1,20 +1,18 @@
 import requests
-def sent_video(device_id):
-    url = "http://as99.zvastica.solutions/appapi/submitviolence"
-    #payload = {'device_id': '1234'
-    device_id = device_id.replace("\"", "")
-    payload = {'device_id': device_id}
-    #payload = "{\'device_id\': " + device_id + "00" + "}"
-    print(payload)
-    files = [
-    ('file', open('./output.mp4','rb'))
-    ]
-    headers = {
-    'Cookie': 'ci_session=sn7n11lsss9vdlrej79sq6s1o0c5mm3r'
-    }
+from requests_toolbelt.multipart.encoder import MultipartEncoder
+import datetime
 
-    response = requests.request("POST", url, headers=headers, data = payload, files = files)
+url = 'http://65.2.177.76/api/add-video'
+now = datetime.datetime.now(datetime.timezone.utc)
+date_time_str = now.isoformat()
+data = {
+    'device_id' : str(797833),
+    'video_file': ('vv.mp4', open('./a5HofBMQ76eetCor3LCydTiDrzFbvXzHksEI9G4t.mp4', 'rb'), 'text/plain')
+}
 
-    print(response.text.encode('utf8'))
+multipart_data = MultipartEncoder(data)
 
-    return True
+server = requests.post(url, data=multipart_data, headers={'Content-Type': multipart_data.content_type})
+output = server.text
+
+print('The response from the server is: \n', output)

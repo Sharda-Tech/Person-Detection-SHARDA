@@ -15,7 +15,7 @@ class OBJ_DETECTION():
         self.classes = classes
         #self.yolo_model = attempt_load(weights=model_path, map_location=device)
         self.yolo_model = DetectMultiBackend(model_path, device=device, dnn=dnn, data=data, fp16=half)
-        self.input_width = 320
+        self.input_width = 640
 
     def detect(self,main_img):
         classes = None
@@ -25,7 +25,7 @@ class OBJ_DETECTION():
         iou_thres=0.45
         height, width = main_img.shape[:2]
         #new_height = int((((self.input_width/width)*height)//32)*32)
-        new_height = 320
+        new_height = 480
         img = cv2.resize(main_img, (self.input_width,new_height))
         img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
         img = np.moveaxis(img,-1,0)

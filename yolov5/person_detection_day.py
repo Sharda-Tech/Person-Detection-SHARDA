@@ -10,7 +10,6 @@ pi = PI()
 from check_internet_connectivity import is_connected
 from sent_status_every_12_hours import check_if_12_hours
 from logger import log_data
-from sound import play_sound
 import func_timeout
 
 
@@ -32,34 +31,26 @@ def getserial():
 def register(serial):
     myserial =  serial
     #myserial = "0013"
-    url = "http://as99.zvastica.solutions/appapi/adddevicebyhardware"
+    url = "http://65.2.177.76/api/assign-hardware-device"
 
     #payload="{\n   \n \"hardwar_id\" :\"devicde_serial_no\"\n      \n        \n}"
-    payload = "{ \n \n \"hardwar_id\" : \"" + myserial + "\" \n \n \n}"
-    #print(payload)
+    payload = "{ \n \"hardware_number\" : \"" + myserial + "\" \n}"
+    print(payload)
     headers = {
-    'Content-Type': 'application/json',
-    'Cookie': 'ci_session=jsunnmfv9mlfgs7cbcu0nlt8rg2op8up'
+    'Content-Type': 'application/json'
     }
 
     response = requests.request("POST", url, headers=headers, data=payload)
 
-    #print(response.text)
-
-    #split string using ','
-    str = response.text.split(',')
-    for i in str:
-        ##print(i)
-        k = i.split(':')   
-        if(k[0] == '{"device_id"'):
-            ##print("Device is not registered")
-            #print("Device id is", k[1])
-            #save the device id in a text file
-            device_id = k[1]
-            with open('/home/pi/Person-Detection/yolov5/device_id.txt', 'w') as f:
-                f.write(device_id)
-                f.close()
-            return "Device id written to file"
+    
+    response = response.json()
+    print(response)
+    device_id = str(response['my_devices_detail'][0]['id'])
+    print('device id',device_id)
+    with open('./device_id.txt', 'w') as f:
+        f.write(device_id)
+        f.close()
+    return "Device id written to file"
 
 
 def request_status(device_id):
@@ -73,21 +64,9 @@ def request_status(device_id):
 
   response = requests.request("POST", url, headers=headers, data = payload)
 
-  ##print(response.text.encode('utf8'))
-
-  #convert byte to string
-
-  #print(response.text)
-
-  #split string using ','
-
   str = response.text.split(',')
 
-  ##print(str[1])
-
   status = str[1].split(':')
-
-  ##print(status[1])
 
   return status[1]
 
@@ -95,14 +74,14 @@ def write_log(detection):
     
     try:
     
-        file_path = '/home/pi/Person-Detection/yolov5/log.txt'
+        file_path = '/home/pi/Person-Detection-SHARDA/yolov5/log.txt'
         #get file size
         fileSize = os.path.getsize(file_path)
         filesize_GB =  (fileSize/(1024*1024*1024))
         if filesize_GB > 1:
             #remove label.txt
             os.remove(file_path)
-        with open('/home/pi/Person-Detection/yolov5/log.txt', 'a') as f:
+        with open('/home/pi/Person-Detection-SHARDA/yolov5/log.txt', 'a') as f:
             #write the date and time
             f.write(time.strftime("%d/%m/%Y %H:%M:%S"))
             f.write('\n')
@@ -121,7 +100,7 @@ def write_log(detection):
 
 def send_video_file(device_id,file_path):
 
-    url = "http://as99.zvastica.solutions/appapi/submitviolence"
+    url = "http://65.2.177.76/api/add-video"
     #payload = {'device_id': '1234'
     device_id = device_id.replace("\"", "")
     payload = {'device_id': device_id}
@@ -137,7 +116,7 @@ def send_video_file(device_id,file_path):
     try:
 
         response = requests.request("POST", url, headers=headers, data = payload, files = files)
-        #print(response.text.encode('utf8'))
+        print(response.text)
         
         return True
 
@@ -150,10 +129,10 @@ def sent_video(device_id):
 
     max_wait = 60
 
-    for file in os.listdir('/home/pi/Person-Detection/yolov5//output'):
+    for file in os.listdir('/home/pi/Person-Detection-SHARDA/yolov5//output'):
         
 
-        file_path = os.path.join('/home/pi/Person-Detection/yolov5//output', file)
+        file_path = os.path.join('/home/pi/Person-Detection-SHARDA/yolov5//output', file)
 
 
         try:
@@ -170,33 +149,14 @@ def sent_video(device_id):
             return False
 
     #check if output dir is empty
-    if not os.listdir('/home/pi/Person-Detection/yolov5//output'):
+    if not os.listdir('/home/pi/Person-Detection-SHARDA/yolov5//output'):
         #print("No files to send")
         return True
             
-        
-
-        # url = "http://as99.zvastica.solutions/appapi/submitviolence"
-        # #payload = {'device_id': '1234'
-        # device_id = device_id.replace("\"", "")
-        # payload = {'device_id': device_id}
-        # #payload = "{\'device_id\': " + device_id + "00" + "}"
-        # #print(payload)
-        # files = [
-        # ('file', open( file_path ,'rb'))
-        # ]
-        # headers = {
-        # 'Cookie': 'ci_session=sn7n11lsss9vdlrej79sq6s1o0c5mm3r'
-        # }
-
-        # response = requests.request("POST", url, headers=headers, data = payload, files = files)
-
-        # #print(response.text.encode('utf8'))
-
 
     #remove contents of output folder
-    for file in os.listdir('/home/pi/Person-Detection/yolov5//output'):
-        file_path = os.path.join('/home/pi/Person-Detection/yolov5//output', file)
+    for file in os.listdir('/home/pi/Person-Detection-SHARDA/yolov5//output'):
+        file_path = os.path.join('/home/pi/Person-Detection-SHARDA/yolov5//output', file)
         os.remove(file_path)
     
 
@@ -210,7 +170,6 @@ def predict():
 
     video_sent_status = False
     number_of_person_detected = 0
-    previous_number_of_person_detected = {}
     previous_number_of_person_detected = {'Number' : 0 , 'Time' : time.time()}
     meta_of_number_of_person_detected = {'Number' : 0 , 'frame_number' : 0 , 'number_of_frames_not_detected' : 0}
     frames_counter = 0
@@ -221,13 +180,13 @@ def predict():
 
 
     #if is_cache does not exist, create it
-    if not os.path.exists('/home/pi/Person-Detection/yolov5/is_cache.txt'):
-        with open('/home/pi/Person-Detection/yolov5/is_cache.txt', 'w') as f:
+    if not os.path.exists('/home/pi/Person-Detection-SHARDA/yolov5/is_cache.txt'):
+        with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cache.txt', 'w') as f:
             f.write('')
             f.close()
     
     #read is_cached from file
-    with open('/home/pi/Person-Detection/yolov5//is_cached.txt', 'r') as f:
+    with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cached.txt', 'r') as f:
         is_cached = f.read()
         ##print(type(bool(is_cached)))
         if("True" in is_cached):
@@ -241,7 +200,7 @@ def predict():
     if is_cached == '':
         is_cached = False
         #write is_cached to file
-        with open('/home/pi/Person-Detection/yolov5//is_cached.txt', 'w') as f:
+        with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cached.txt', 'w') as f:
             f.write(str(is_cached))
             f.close()
 
@@ -257,11 +216,8 @@ def predict():
                     'hair drier', 'toothbrush' ]
 
     #Object_colors = list(np.random.rand(80,3)*255)
-    Object_detector = OBJ_DETECTION('/home/pi/Person-Detection/yolov5/yolov5n-int8.tflite', Object_classes)
-    # Return true if line segments AB and CD intersect
-    # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
-    ##print(gstreamer_pipeline(flip_method=0))
-    #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
+    Object_detector = OBJ_DETECTION('/home/pi/Person-Detection-SHARDA/yolov5/yolov5n-int8.tflite', Object_classes)
+    
     cap = cv2.VideoCapture(0)
     serial = getserial()
     REMOTE_SERVER = "www.google.com"
@@ -273,7 +229,7 @@ def predict():
         
     if(registration_status == "Device id written to file"):
         #read the device id from the text file
-        with open('/home/pi/Person-Detection/yolov5/device_id.txt', 'r') as f:
+        with open('/home/pi/Person-Detection-SHARDA/yolov5/device_id.txt', 'r') as f:
             device_id = f.read()
             f.close()
             
@@ -283,27 +239,6 @@ def predict():
         f.write('\n')
         f.write(serial)
         
-
-    # if(prev_time == 0):
-
-    #     # status_of_device = request_status(device_id)
-    #     # #status_of_device = 'false'
-
-    #     if is_connected(REMOTE_SERVER):
-    #             try:
-    #                 y = request_status(device_id)
-
-    #             except:
-    #                 y = 'false'
-
-    #             status_of_device = y
-
-    #     else:
-
-    #         status_of_device = 'false'
-
-    #     prev_time = new_time
-    #     new_time = time.time()
     with open('/home/pi/Desktop/Client/test','r') as f:
         lines = f.readlines()
         ##print(lines)
@@ -334,7 +269,7 @@ def predict():
         if is_connected(REMOTE_SERVER):
             #print("connected")
             cache = False
-            with open('/home/pi/Person-Detection/yolov5//is_cache.txt','w') as f:
+            with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt','w') as f:
                 f.write(str(cache))
                 f.close
             try:
@@ -343,7 +278,8 @@ def predict():
                 check_if_12_hours(device_id)
 
             except:
-
+                
+                print("Error as ", e , "In log Data Module or Check if 12 hours")
                 pass
         
             if( is_cached == True):
@@ -353,7 +289,7 @@ def predict():
                 if(video_sent_status == True):
                     is_cached = False
                 #write is_cached to file
-                with open('/home/pi/Person-Detection/yolov5//is_cached.txt', 'w') as f:
+                with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cached.txt', 'w') as f:
                     f.write(str(is_cached))
                     f.close()
 
@@ -361,34 +297,13 @@ def predict():
         else:
             #print("not connected")
             cache = True
-            with open('/home/pi/Person-Detection/yolov5//is_cache.txt', 'w') as f:
+            with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt', 'w') as f:
                 f.write(str(cache))
                 f.close()
         
-        #window_handle = cv2.namedWindow("CSI Camera", cv2.WINDOW_AUTOSIZE)
-        # Window
-        #while cv2.getWindowProperty("CSI Camera", 0) >= 0 :
         ret, frame = cap.read()
         new_time = time.time()
-        ##print("Previous Time", prev_time)
-        ##print("New Time", new_time)
-
-        # if((new_time - prev_time) >= 4):
-        #     if is_connected(REMOTE_SERVER):
-        #         original_status = status_of_device
-        #         try:
-        #             y = request_status(device_id)
-
-        #         except:
-        #             y = original_status
-
-        #         status_of_device = y
-        #     #print(status_of_device)
-        #     #status_of_device = 'true'
-
-        #     prev_time = new_time
-        #     new_time = time.time()
-
+    
         if ret and status_of_device == 'true':
             # detection process
             objs = Object_detector.detect(frame)
@@ -400,11 +315,12 @@ def predict():
             for obj in objs:
                 # #print(obj)
                 label = obj['label']
-                if((label == 'person')):
+                score = obj['score']
+                if((label == 'person') and score > 0.5 ):
                     number_of_frames_not_detected = 0
                     number_of_person_detected +=1
                     ##print(label)
-                    score = obj['score']
+                    
                     [(xmin,ymin),(xmax,ymax)] = obj['bbox']
                     ##print(xmin,ymin,xmax,ymax)
                     (x, y) = (xmin, ymin)
@@ -468,20 +384,20 @@ def predict():
                     if is_connected(REMOTE_SERVER):
                         #print("connected")
                         cache = False
-                        with open('/home/pi/Person-Detection/yolov5//is_cache.txt', 'w') as f:
+                        with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt', 'w') as f:
                             f.write(str(cache))
                             f.close()
 
                     else:
                         #print("not connected")
                         cache = True
-                        with open('/home/pi/Person-Detection/yolov5//is_cache.txt', 'w') as f:
+                        with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt', 'w') as f:
                             f.write(str(cache))
                             f.close()
                     if(cache == False):
                         #write a list of frames in a video
                         current_file_number = 0
-                        output_file_save_name = '/home/pi/Person-Detection/yolov5/output/output_' + str(current_file_number) + '.mp4'
+                        output_file_save_name = '/home/pi/Person-Detection-SHARDA/yolov5/output/output_' + str(current_file_number) + '.mp4'
                         out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 10, (frame.shape[1],frame.shape[0]))
                         for i in range(len(frames)):
                             out.write(frames[i])
@@ -495,7 +411,7 @@ def predict():
                     if(cache == True):
                         current_file_number = 0
                         #find the folders in the cache folder
-                        for file in os.listdir('/home/pi/Person-Detection/yolov5/output'):
+                        for file in os.listdir('/home/pi/Person-Detection-SHARDA/yolov5/output'):
                             if file.endswith(".mp4"):
                                 file_number = file.split("_")[1]
                                 file_number = file_number.split(".")[0]
@@ -503,7 +419,7 @@ def predict():
                                 if(int(file_number) > current_file_number):
                                     current_file_number = int(file_number)
 
-                        output_file_save_name = "/home/pi/Person-Detection/yolov5/output/output_" + str(current_file_number + 1) + ".mp4"
+                        output_file_save_name = "/home/pi/Person-Detection-SHARDA/yolov5/output/output_" + str(current_file_number + 1) + ".mp4"
                         out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 10, (frame.shape[1],frame.shape[0]))
                         for i in range(len(frames)):
                             out.write(frames[i])
@@ -511,7 +427,7 @@ def predict():
                         #print(device_id)
                         is_cached = True
                         #write is_cached to a file
-                        with open('/home/pi/Person-Detection/yolov5/is_cached.txt', 'w') as f:
+                        with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cached.txt', 'w') as f:
                             f.write(str(is_cached))
                         frames = []
 
@@ -527,20 +443,20 @@ def predict():
                         if is_connected(REMOTE_SERVER):
                             #print("connected")
                             cache = False
-                            with open('/home/pi/Person-Detection/yolov5/is_cache.txt', 'w') as f:
+                            with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cache.txt', 'w') as f:
                                 f.write(str(cache))
                                 f.close()
 
                         else:
                             #print("not connected")
                             cache = True
-                            with open('/home/pi/Person-Detection/yolov5/is_cache.txt', 'w') as f:
+                            with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cache.txt', 'w') as f:
                                 f.write(str(cache))
                                 f.close()
                         if(cache == False):
                             #write a list of frames in a video
                             current_file_number = 0
-                            output_file_save_name = '/home/pi/Person-Detection/yolov5/output/output_' + str(current_file_number) + '.mp4'
+                            output_file_save_name = '/home/pi/Person-Detection-SHARDA/yolov5/output/output_' + str(current_file_number) + '.mp4'
                             out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 10, (frame.shape[1],frame.shape[0]))
                             for i in range(len(frames)):
                                 out.write(frames[i])
@@ -554,7 +470,7 @@ def predict():
                         if(cache == True):
                             current_file_number = 0
                             #find the folders in the cache folder
-                            for file in os.listdir('/home/pi/Person-Detection/yolov5/output'):
+                            for file in os.listdir('/home/pi/Person-Detection-SHARDA/yolov5/output'):
                                 if file.endswith(".mp4"):
                                     file_number = file.split("_")[1]
                                     file_number = file_number.split(".")[0]
@@ -562,7 +478,7 @@ def predict():
                                     if(int(file_number) > current_file_number):
                                         current_file_number = int(file_number)
 
-                            output_file_save_name = "/home/pi/Person-Detection/yolov5/output/output_" + str(current_file_number + 1) + ".mp4"
+                            output_file_save_name = "/home/pi/Person-Detection-SHARDA/yolov5/output/output_" + str(current_file_number + 1) + ".mp4"
                             out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 10, (frame.shape[1],frame.shape[0]))
                             for i in range(len(frames)):
                                 out.write(frames[i])
@@ -570,7 +486,7 @@ def predict():
                             #print(device_id)
                             is_cached = True
                             #write is_cached to a file
-                            with open('/home/pi/Person-Detection/yolov5/is_cached.txt', 'w') as f:
+                            with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cached.txt', 'w') as f:
                                 f.write(str(is_cached))
                             
                     frames_counter = 0

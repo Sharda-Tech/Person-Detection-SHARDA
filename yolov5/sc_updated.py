@@ -1,6 +1,7 @@
 import socketio
 import requests
-from person_detection_day import getserial
+import traceback
+# from person_detection_day import getserial
 sio = socketio.Client()
 import time
 
@@ -8,17 +9,18 @@ import time
 class connect():
     def __init__(self):
         #self.serial = '1122'
-        self.serial = getserial()
+        # self.serial = getserial()
         try:
-            self.device_id = self.register()
+            # self.device_id = self.register()
+            self.device_id = 797833
         except:
             print("Do Not Know the ID please connect to the Internet")
             with open('./device_id.txt', 'r') as f:
                 self.device_id = f.read()
                 self.device_id = self.device_id[1:-1]
                 f.close()
-        self.id = self.serial
-        self.name = self.device_id
+        # self.id = self.serial
+        # self.name = self.device_id
 
 
 
@@ -63,12 +65,13 @@ class connect():
 
     #@sio.on('connect')
     def reg_client(self):
-        print("Id is ", self.id, "Name is", self.name)
+        print("Hi")
+        # print("Id is ", self.id, "Name is", self.name)
         try:
-            y = sio.emit('storeClientInfo', {'customId': self.id, 'name': self.name})
-            print(y)
-        except:
-            pass
+            y = sio.emit({'device_number': self.device_id})
+        except Exception as e:
+            traceback.print_exc()
+        
             
         
         print('Done')
@@ -78,26 +81,26 @@ if __name__ == "__main__":
 
     
 
-    while (True):
-        try:
-            k = sio.connect('http://156.67.216.28:8800/')
-            cc = connect()
-            cc.reg_client()
-            #break
-        except Exception as e:
-            if e == 'Already connected':
-                print("Running Through")
-                cc = connect()
-                cc.reg_client()
-            pass
-            #print(e)
+    #while (True):
+        # try:
+        #     k = sio.connect('http://65.2.177.76/api/device-status')
+        #     cc = connect()
+        #     cc.reg_client()
+        #     #break
+        # except Exception as e:
+        #     if e == 'Already connected':
+        #         print("Running Through")
+        #         cc = connect()
+        #         cc.reg_client()
+        #     pass
+        #     #print(e)
             
     #serial = getserial()
-    # cc = connect()
-    # prev_time = 0
-    # while(True):
-    #     current_time = time.time()
-    #     if(current_time - prev_time > 10):
-    #         cc.reg_client()
-    #         prev_time = current_time
+    cc = connect()
+    prev_time = 0
+    while(True):
+        current_time = time.time()
+        if(current_time - prev_time > 10):
+            cc.reg_client()
+            prev_time = current_time
 
