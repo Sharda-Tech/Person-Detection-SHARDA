@@ -31,8 +31,8 @@ def getserial():
 
 
 def register(serial):
-    #myserial =  serial
-    myserial = "4545565612"
+    myserial =  serial
+    #myserial = "45455656128"
     url = "http://65.2.177.76/api/assign-hardware-device"
 
     #payload="{\n   \n \"hardwar_id\" :\"devicde_serial_no\"\n      \n        \n}"
@@ -47,7 +47,7 @@ def register(serial):
     
     response = response.json()
     print(response)
-    device_id = str(response['my_devices_detail'][0]['id'])
+    device_id = str(response['my_devices_detail'][0]['device_number'])
     print('device id',device_id)
     with open('./device_id.txt', 'w') as f:
         f.write(device_id)
@@ -106,7 +106,7 @@ def send_video_file(device_id,file_path):
     now = datetime.datetime.now(datetime.timezone.utc)
     date_time_str = now.isoformat()
     data = {
-        'device_id' : str(797833),
+        'device_number' : str(device_id),
         'video_file': ('vv.mp4', open(file_path, 'rb'), 'text/plain')
     }
 
