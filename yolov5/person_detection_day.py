@@ -66,12 +66,12 @@ def request_status(device_number):
 
   response = requests.request("POST", url, headers=headers, data = payload)
   
-  print("Response", response)
-  str = response.text.split(',')
+  print("Response", response.json())
+  str = response.json()
 
-  status = str[1].split(':')
+  status = str['my_devices_detail'][0]['device_status']
 
-  return status[1]
+  return status
 
 def write_log(detection):
     
@@ -235,10 +235,10 @@ def predict():
             f.close()
             
     device_id_temp = device_id[1:-1]
-    with open('/home/pi/Desktop/Client/input.txt','w') as f:
-        f.write(device_id_temp)
-        f.write('\n')
-        f.write(serial)
+    #with open('/home/pi/Desktop/Client/input.txt','w') as f:
+    #    f.write(device_id_temp)
+    #    f.write('\n')
+    #    f.write(serial)
         
     # with open('/home/pi/Desktop/Client/test','r') as f:
     #     lines = f.readlines()
@@ -252,7 +252,13 @@ def predict():
     
     print("Device ID",device_id)
     
-    status_of_device = request_status(device_id)
+    sd = request_status(device_id)
+    
+    if(sd == '1'):
+         status_of_device = 'true'
+
+    elif(sd == '0'):
+         status_of_device = 'false'
     
     print("Status",status_of_device)
     
@@ -269,7 +275,13 @@ def predict():
         # elif(lines[0] == "False"):
         #     status_of_device = 'false'
         
-        status_of_device = request_status(device_id)
+        sd = request_status(device_id)
+        
+        if(sd == 1):
+             status_of_device = 'true'
+
+        elif(sd == 0):
+             status_of_device = 'false'
         
         print("Status of Device",status_of_device)
         REMOTE_SERVER = "www.google.com"
