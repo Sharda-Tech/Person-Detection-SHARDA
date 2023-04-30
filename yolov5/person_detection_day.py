@@ -55,17 +55,18 @@ def register(serial):
     return "Device id written to file"
 
 
-def request_status(device_id):
-  url = "http://as99.zvastica.solutions/appapi/checkdevicestatusbyhw"
+def request_status(device_number):
+  url = "http://65.2.177.76/api/device-status"
 
   #payload = "{\n    \"device_id\":\"2\"\n }"
-  payload = "{ \n \n \"device_id\" : " + device_id + " \n \n \n}"
+  payload = "{ \n \n \"device_number\" : " + device_number + " \n \n \n}"
   headers = {
     'Content-Type': 'application/json'
   }
 
   response = requests.request("POST", url, headers=headers, data = payload)
-
+  
+  print("Response", response)
   str = response.text.split(',')
 
   status = str[1].split(':')
@@ -239,30 +240,36 @@ def predict():
         f.write('\n')
         f.write(serial)
         
-    with open('/home/pi/Desktop/Client/test','r') as f:
-        lines = f.readlines()
-        ##print(lines)
-    f.close()
-    if(lines[0] == "True"):
-        status_of_device = 'true'
+    # with open('/home/pi/Desktop/Client/test','r') as f:
+    #     lines = f.readlines()
+    #     ##print(lines)
+    # f.close()
+    # if(lines[0] == "True"):
+    #     status_of_device = 'true'
 
-    else:
-        status_of_device = 'false'
+    # else:
+    #     status_of_device = 'false'
     
-
+    print("Device ID",device_id)
+    
+    status_of_device = request_status(device_id)
+    
+    print("Status",status_of_device)
+    
     while cap.isOpened():
 
-        with open('/home/pi/Desktop/Client/test','r') as f:
-            lines = f.readlines()
-            ##print(lines)
-        f.close()
-        ##print("Type of lines[0]",type(lines[0]))
-        if(lines[0] == "True"):
-            status_of_device = 'true'
+        # with open('/home/pi/Desktop/Client/test','r') as f:
+        #     lines = f.readlines()
+        #     ##print(lines)
+        # f.close()
+        # ##print("Type of lines[0]",type(lines[0]))
+        # if(lines[0] == "True"):
+        #     status_of_device = 'true'
 
-        elif(lines[0] == "False"):
-            status_of_device = 'false'
+        # elif(lines[0] == "False"):
+        #     status_of_device = 'false'
         
+        status_of_device = request_status(device_id)
         
         print("Status of Device",status_of_device)
         REMOTE_SERVER = "www.google.com"
