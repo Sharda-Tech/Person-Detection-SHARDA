@@ -281,10 +281,10 @@ def predict():
         try:
             sd = request_status(device_id)
             
-            if(sd == 1):
+            if(sd == '1'):
                 status_of_device = 'true'
 
-            elif(sd == 0):
+            elif(sd == '0'):
                 status_of_device = 'false'
             
             print("Status of Device",status_of_device)
@@ -524,7 +524,7 @@ def predict():
                 write_log(number_of_person_detected)
             
             frame = cv2.resize(frame,(640,480))
-            cv2.imshow("CSI Camera", frame)
+            #cv2.imshow("CSI Camera", frame)
             keyCode = cv2.waitKey(30)
             if keyCode == ord('q'):
                     break      
