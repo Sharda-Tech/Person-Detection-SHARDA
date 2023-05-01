@@ -291,7 +291,7 @@ def predict():
 
                 elif(sd == '0'):
                     status_of_device = 'false'
-                
+                status_time_start = time.time()
             print("Status of Device",status_of_device)
             REMOTE_SERVER = "www.google.com"
             if is_connected(REMOTE_SERVER):
