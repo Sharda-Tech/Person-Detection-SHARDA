@@ -13,6 +13,8 @@ from check_internet_connectivity import is_connected
 from sent_status_every_12_hours import check_if_12_hours
 from logger import log_data
 import func_timeout
+import traceback
+import logging
 
 
 def getserial():
@@ -164,7 +166,9 @@ def sent_video(device_id):
     return True
 
 def predict():
-
+    
+    
+    logging.basicConfig(filename='/home/pi/Person-Detection-SHARDA/yolov5/logs.log', level=logging.DEBUG)
     prev_time = 0
     new_time = time.time()
     record_time = time.time()
@@ -274,203 +278,144 @@ def predict():
 
         # elif(lines[0] == "False"):
         #     status_of_device = 'false'
-        
-        sd = request_status(device_id)
-        
-        if(sd == 1):
-             status_of_device = 'true'
-
-        elif(sd == 0):
-             status_of_device = 'false'
-        
-        print("Status of Device",status_of_device)
-        REMOTE_SERVER = "www.google.com"
-        if is_connected(REMOTE_SERVER):
-            #print("connected")
-            cache = False
-            with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt','w') as f:
-                f.write(str(cache))
-                f.close
-            try:
-
-                log_data(device_id)
-                # check_if_12_hours(device_id)
-
-            except Exception as e:
-                
-                print("Error as ", e , "In log Data Module or Check if 12 hours")
-                pass
-        
-            if( is_cached == True):
-                #print("Cached")
-                #print(device_id)
-                video_sent_status = sent_video(device_id)
-                if(video_sent_status == True):
-                    is_cached = False
-                #write is_cached to file
-                with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cached.txt', 'w') as f:
-                    f.write(str(is_cached))
-                    f.close()
-
-
-        else:
-            #print("not connected")
-            cache = True
-            with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt', 'w') as f:
-                f.write(str(cache))
-                f.close()
-        
-        ret, frame = cap.read()
-        new_time = time.time()
-    
-        if ret and status_of_device == 'true':
-            # detection process
-            objs = Object_detector.detect(frame)
-            dets = []
-            # plotting
+        try:
+            sd = request_status(device_id)
             
-            number_of_person_detected = 0
+            if(sd == 1):
+                status_of_device = 'true'
 
-            for obj in objs:
-                # #print(obj)
-                label = obj['label']
-                score = obj['score']
-                if((label == 'person') and score > 0.5 ):
-                    number_of_frames_not_detected = 0
-                    number_of_person_detected +=1
-                    ##print(label)
+            elif(sd == 0):
+                status_of_device = 'false'
+            
+            print("Status of Device",status_of_device)
+            REMOTE_SERVER = "www.google.com"
+            if is_connected(REMOTE_SERVER):
+                #print("connected")
+                cache = False
+                with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt','w') as f:
+                    f.write(str(cache))
+                    f.close
+                try:
+
+                    log_data(device_id)
+                    # check_if_12_hours(device_id)
+
+                except Exception as e:
                     
-                    [(xmin,ymin),(xmax,ymax)] = obj['bbox']
-                    ##print(xmin,ymin,xmax,ymax)
-                    (x, y) = (xmin, ymin)
-                    (w, h) = ((xmax-xmin),(ymax-ymin))
-                    #color = Object_colors[Object_classes.index(label)]
-                    frame = cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (255,0,0), 2) 
-                    frame = cv2.putText(frame, f'{label} ({str(score)})', (xmin,ymin), cv2.FONT_HERSHEY_SIMPLEX , 0.75, (0,255,255), 1, cv2.LINE_AA)
-
-
-                
-
-
-
-            
-            if(number_of_person_detected > meta_of_number_of_person_detected['Number'] or number_of_person_detected < meta_of_number_of_person_detected['Number']):
-                if(number_of_person_detected == 0):
-                    meta_of_number_of_person_detected['number_of_frames_not_detected'] +=1
-
-                    if(meta_of_number_of_person_detected['number_of_frames_not_detected'] > not_detected_frames_thresh):
-                        meta_of_number_of_person_detected['Number'] = number_of_person_detected
-                
-                        meta_of_number_of_person_detected['frame_number'] = 1
-                if(number_of_person_detected > 0):
-                    meta_of_number_of_person_detected['number_of_frames_not_detected'] = 0
-                    meta_of_number_of_person_detected['Number'] = number_of_person_detected
-                    meta_of_number_of_person_detected['frame_number'] +=1
-
-            if(number_of_person_detected == meta_of_number_of_person_detected['Number']):
-                meta_of_number_of_person_detected['frame_number'] += 1
-            
-            #print("Frames Counter", frames_counter)
-            #print("Number of person detected:", meta_of_number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
-            if((meta_of_number_of_person_detected['Number'] > previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
-                #print("New Person Detected")
-                previous_number_of_person_detected['Number'] = meta_of_number_of_person_detected['Number']
-                #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
-                if(video_sent_status == True):
-                    video_sent_status = False
-                    frames_counter = 0
-
-
-            elif((meta_of_number_of_person_detected['Number'] < previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
-                #print("Person Detected Reduced")
-                previous_number_of_person_detected['Number'] = meta_of_number_of_person_detected['Number']
-                #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
-                if(video_sent_status == True):
-                    video_sent_status = False
-                    frames_counter = 0
-
-
-            if(video_sent_status == False and previous_number_of_person_detected['Number'] > 0):
-                if(frames_counter == 30):
-                    #play sound
-                    #play_sound(40)
+                    print("Error as ", e , "In log Data Module or Check if 12 hours")
                     pass
-                if(frames_counter < 31):
-                    frames_counter = frames_counter + 1
-                    frames.append(frame)
-                elif(frames_counter == 31):
-                    frames_counter = frames_counter + 1
-                    REMOTE_SERVER = "www.google.com"
-                    if is_connected(REMOTE_SERVER):
-                        #print("connected")
-                        cache = False
-                        with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt', 'w') as f:
-                            f.write(str(cache))
-                            f.close()
-
-                    else:
-                        #print("not connected")
-                        cache = True
-                        with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt', 'w') as f:
-                            f.write(str(cache))
-                            f.close()
-                    if(cache == False):
-                        #write a list of frames in a video
-                        current_file_number = 0
-                        output_file_save_name = '/home/pi/Person-Detection-SHARDA/yolov5/output/output_' + str(current_file_number) + '.mp4'
-                        out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 10, (frame.shape[1],frame.shape[0]))
-                        for i in range(len(frames)):
-                            out.write(frames[i])
-                        out.release()
-                        #print(device_id)
-                        video_sent_status = sent_video(device_id)
-                        #if video_sent_status == True:
-                            #print("Video sent")
-                        frames = []
-
-                    if(cache == True):
-                        current_file_number = 0
-                        #find the folders in the cache folder
-                        for file in os.listdir('/home/pi/Person-Detection-SHARDA/yolov5/output'):
-                            if file.endswith(".mp4"):
-                                file_number = file.split("_")[1]
-                                file_number = file_number.split(".")[0]
-
-                                if(int(file_number) > current_file_number):
-                                    current_file_number = int(file_number)
-
-                        output_file_save_name = "/home/pi/Person-Detection-SHARDA/yolov5/output/output_" + str(current_file_number + 1) + ".mp4"
-                        out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 10, (frame.shape[1],frame.shape[0]))
-                        for i in range(len(frames)):
-                            out.write(frames[i])
-                        out.release()
-                        #print(device_id)
-                        is_cached = True
-                        #write is_cached to a file
-                        with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cached.txt', 'w') as f:
-                            f.write(str(is_cached))
-                        frames = []
+            
+                if( is_cached == True):
+                    #print("Cached")
+                    #print(device_id)
+                    video_sent_status = sent_video(device_id)
+                    if(video_sent_status == True):
+                        is_cached = False
+                    #write is_cached to file
+                    with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cached.txt', 'w') as f:
+                        f.write(str(is_cached))
+                        f.close()
 
 
-            #print("Number of Frames not detected" , number_of_frames_not_detected)
-            if(number_of_frames_not_detected < not_detected_frames_thresh and number_of_person_detected == 0):
-                    number_of_frames_not_detected = number_of_frames_not_detected + 1
-            elif(number_of_frames_not_detected >= not_detected_frames_thresh and number_of_person_detected == 0):
-                    video_sent_status = False
-                    if(frames_counter >= 10):
+            else:
+                #print("not connected")
+                cache = True
+                with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt', 'w') as f:
+                    f.write(str(cache))
+                    f.close()
+            
+            ret, frame = cap.read()
+            new_time = time.time()
+        
+            if ret and status_of_device == 'true':
+                # detection process
+                objs = Object_detector.detect(frame)
+                dets = []
+                # plotting
+                
+                number_of_person_detected = 0
+
+                for obj in objs:
+                    # #print(obj)
+                    label = obj['label']
+                    score = obj['score']
+                    if((label == 'person') and score > 0.5 ):
+                        number_of_frames_not_detected = 0
+                        number_of_person_detected +=1
+                        ##print(label)
+                        
+                        [(xmin,ymin),(xmax,ymax)] = obj['bbox']
+                        ##print(xmin,ymin,xmax,ymax)
+                        (x, y) = (xmin, ymin)
+                        (w, h) = ((xmax-xmin),(ymax-ymin))
+                        #color = Object_colors[Object_classes.index(label)]
+                        frame = cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (255,0,0), 2) 
+                        frame = cv2.putText(frame, f'{label} ({str(score)})', (xmin,ymin), cv2.FONT_HERSHEY_SIMPLEX , 0.75, (0,255,255), 1, cv2.LINE_AA)
+
+
+                    
+
+
+
+                
+                if(number_of_person_detected > meta_of_number_of_person_detected['Number'] or number_of_person_detected < meta_of_number_of_person_detected['Number']):
+                    if(number_of_person_detected == 0):
+                        meta_of_number_of_person_detected['number_of_frames_not_detected'] +=1
+
+                        if(meta_of_number_of_person_detected['number_of_frames_not_detected'] > not_detected_frames_thresh):
+                            meta_of_number_of_person_detected['Number'] = number_of_person_detected
+                    
+                            meta_of_number_of_person_detected['frame_number'] = 1
+                    if(number_of_person_detected > 0):
+                        meta_of_number_of_person_detected['number_of_frames_not_detected'] = 0
+                        meta_of_number_of_person_detected['Number'] = number_of_person_detected
+                        meta_of_number_of_person_detected['frame_number'] +=1
+
+                if(number_of_person_detected == meta_of_number_of_person_detected['Number']):
+                    meta_of_number_of_person_detected['frame_number'] += 1
+                
+                #print("Frames Counter", frames_counter)
+                #print("Number of person detected:", meta_of_number_of_person_detected, "Previous number of person detected:", previous_number_of_person_detected)
+                if((meta_of_number_of_person_detected['Number'] > previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
+                    #print("New Person Detected")
+                    previous_number_of_person_detected['Number'] = meta_of_number_of_person_detected['Number']
+                    #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
+                    if(video_sent_status == True):
+                        video_sent_status = False
+                        frames_counter = 0
+
+
+                elif((meta_of_number_of_person_detected['Number'] < previous_number_of_person_detected['Number']) and meta_of_number_of_person_detected['frame_number'] > 10):
+                    #print("Person Detected Reduced")
+                    previous_number_of_person_detected['Number'] = meta_of_number_of_person_detected['Number']
+                    #previous_number_of_person_detected['Time'] = number_of_person_detected['Time']
+                    if(video_sent_status == True):
+                        video_sent_status = False
+                        frames_counter = 0
+
+
+                if(video_sent_status == False and previous_number_of_person_detected['Number'] > 0):
+                    if(frames_counter == 30):
+                        #play sound
+                        #play_sound(40)
+                        pass
+                    if(frames_counter < 31):
+                        frames_counter = frames_counter + 1
+                        frames.append(frame)
+                    elif(frames_counter == 31):
                         frames_counter = frames_counter + 1
                         REMOTE_SERVER = "www.google.com"
                         if is_connected(REMOTE_SERVER):
                             #print("connected")
                             cache = False
-                            with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cache.txt', 'w') as f:
+                            with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt', 'w') as f:
                                 f.write(str(cache))
                                 f.close()
 
                         else:
                             #print("not connected")
                             cache = True
-                            with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cache.txt', 'w') as f:
+                            with open('/home/pi/Person-Detection-SHARDA/yolov5//is_cache.txt', 'w') as f:
                                 f.write(str(cache))
                                 f.close()
                         if(cache == False):
@@ -508,22 +453,86 @@ def predict():
                             #write is_cached to a file
                             with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cached.txt', 'w') as f:
                                 f.write(str(is_cached))
-                            
-                    frames_counter = 0
-                    frames = []
-                    number_of_person_detected = 0
-                    previous_number_of_person_detected['Number'] = 0
+                            frames = []
 
 
-        if(time.time() - record_time >= 1):
-            record_time = time.time()
-            write_log(number_of_person_detected)
+                #print("Number of Frames not detected" , number_of_frames_not_detected)
+                if(number_of_frames_not_detected < not_detected_frames_thresh and number_of_person_detected == 0):
+                        number_of_frames_not_detected = number_of_frames_not_detected + 1
+                elif(number_of_frames_not_detected >= not_detected_frames_thresh and number_of_person_detected == 0):
+                        video_sent_status = False
+                        if(frames_counter >= 10):
+                            frames_counter = frames_counter + 1
+                            REMOTE_SERVER = "www.google.com"
+                            if is_connected(REMOTE_SERVER):
+                                #print("connected")
+                                cache = False
+                                with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cache.txt', 'w') as f:
+                                    f.write(str(cache))
+                                    f.close()
+
+                            else:
+                                #print("not connected")
+                                cache = True
+                                with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cache.txt', 'w') as f:
+                                    f.write(str(cache))
+                                    f.close()
+                            if(cache == False):
+                                #write a list of frames in a video
+                                current_file_number = 0
+                                output_file_save_name = '/home/pi/Person-Detection-SHARDA/yolov5/output/output_' + str(current_file_number) + '.mp4'
+                                out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 10, (frame.shape[1],frame.shape[0]))
+                                for i in range(len(frames)):
+                                    out.write(frames[i])
+                                out.release()
+                                #print(device_id)
+                                video_sent_status = sent_video(device_id)
+                                #if video_sent_status == True:
+                                    #print("Video sent")
+                                frames = []
+
+                            if(cache == True):
+                                current_file_number = 0
+                                #find the folders in the cache folder
+                                for file in os.listdir('/home/pi/Person-Detection-SHARDA/yolov5/output'):
+                                    if file.endswith(".mp4"):
+                                        file_number = file.split("_")[1]
+                                        file_number = file_number.split(".")[0]
+
+                                        if(int(file_number) > current_file_number):
+                                            current_file_number = int(file_number)
+
+                                output_file_save_name = "/home/pi/Person-Detection-SHARDA/yolov5/output/output_" + str(current_file_number + 1) + ".mp4"
+                                out = cv2.VideoWriter(output_file_save_name,cv2.VideoWriter_fourcc(*'avc1'), 10, (frame.shape[1],frame.shape[0]))
+                                for i in range(len(frames)):
+                                    out.write(frames[i])
+                                out.release()
+                                #print(device_id)
+                                is_cached = True
+                                #write is_cached to a file
+                                with open('/home/pi/Person-Detection-SHARDA/yolov5/is_cached.txt', 'w') as f:
+                                    f.write(str(is_cached))
+                                
+                        frames_counter = 0
+                        frames = []
+                        number_of_person_detected = 0
+                        previous_number_of_person_detected['Number'] = 0
+
+
+            if(time.time() - record_time >= 1):
+                record_time = time.time()
+                write_log(number_of_person_detected)
+            
+            frame = cv2.resize(frame,(640,480))
+            cv2.imshow("CSI Camera", frame)
+            keyCode = cv2.waitKey(30)
+            if keyCode == ord('q'):
+                    break      
+        except Exception as e:
+            traceback.print_exc()
+            logging.error("An error occurred: ", exc_info=True)
+            pass
         
-        frame = cv2.resize(frame,(640,480))
-        cv2.imshow("CSI Camera", frame)
-        keyCode = cv2.waitKey(30)
-        if keyCode == ord('q'):
-                break      
     #cap.release()
     #cv2.destroyAllWindows()
 
