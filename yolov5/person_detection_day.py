@@ -296,7 +296,7 @@ def predict():
                 log_data(device_id)
                 # check_if_12_hours(device_id)
 
-            except:
+            except Exception as e:
                 
                 print("Error as ", e , "In log Data Module or Check if 12 hours")
                 pass
