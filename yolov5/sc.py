@@ -7,7 +7,7 @@ sio = socketio.Client()
 def func(msg):
     print("Message is",msg)
     print("Writting")
-    with open('./device_status.txt', 'w') as f:
+    with open('/home/pi/Person-Detection-SHARDA/yolov5/device_status.txt', 'w') as f:
         f.writelines(msg)
     f.close()
 

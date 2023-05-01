@@ -15,7 +15,7 @@ class connect():
             self.device_id = 797833
         except:
             print("Do Not Know the ID please connect to the Internet")
-            with open('./device_id.txt', 'r') as f:
+            with open('/home/pi/Person-Detection-SHARDA/yolov5/device_id.txt', 'r') as f:
                 self.device_id = f.read()
                 self.device_id = self.device_id[1:-1]
                 f.close()
