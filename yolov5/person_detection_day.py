@@ -266,6 +266,10 @@ def predict():
     
     print("Status",status_of_device)
     
+    
+    status_time_thres = 10
+    status_time_start = 0
+    
     while cap.isOpened():
 
         # with open('/home/pi/Desktop/Client/test','r') as f:
@@ -281,12 +285,13 @@ def predict():
         try:
             sd = request_status(device_id)
             
-            if(sd == '1'):
-                status_of_device = 'true'
+            if((time.time() - status_time_start) > 10):
+                if(sd == '1'):
+                    status_of_device = 'true'
 
-            elif(sd == '0'):
-                status_of_device = 'false'
-            
+                elif(sd == '0'):
+                    status_of_device = 'false'
+                
             print("Status of Device",status_of_device)
             REMOTE_SERVER = "www.google.com"
             if is_connected(REMOTE_SERVER):
