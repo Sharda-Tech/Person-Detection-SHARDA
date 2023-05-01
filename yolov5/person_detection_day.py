@@ -294,7 +294,7 @@ def predict():
             try:
 
                 log_data(device_id)
-                check_if_12_hours(device_id)
+                # check_if_12_hours(device_id)
 
             except:
                 
