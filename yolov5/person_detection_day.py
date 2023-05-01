@@ -283,9 +283,10 @@ def predict():
         # elif(lines[0] == "False"):
         #     status_of_device = 'false'
         try:
-            sd = request_status(device_id)
+            
             
             if((time.time() - status_time_start) > 10):
+                sd = request_status(device_id)
                 if(sd == '1'):
                     status_of_device = 'true'
 
