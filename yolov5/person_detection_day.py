@@ -49,7 +49,7 @@ def register(serial):
     print(response)
     device_id = str(response['my_devices_detail'][0]['device_number'])
     print('device id',device_id)
-    with open('./device_id.txt', 'w') as f:
+    with open('/home/pi/Person-Detection-SHARDA/yolov5/device_id.txt', 'w') as f:
         f.write(device_id)
         f.close()
     return "Device id written to file"
