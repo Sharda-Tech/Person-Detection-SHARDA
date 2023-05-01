@@ -219,7 +219,7 @@ def predict():
     #Object_colors = list(np.random.rand(80,3)*255)
     Object_detector = OBJ_DETECTION('/home/pi/Person-Detection-SHARDA/yolov5/yolov5n-int8.tflite', Object_classes)
     
-    cap = cv2.VideoCapture('./output.avi')
+    cap = cv2.VideoCapture('/home/pi/Person-Detection-SHARDA/yolov5/output.avi')
     serial = getserial()
     REMOTE_SERVER = "www.google.com"
     if is_connected(REMOTE_SERVER):
